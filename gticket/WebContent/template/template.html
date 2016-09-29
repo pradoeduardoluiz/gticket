@@ -9,29 +9,31 @@
 	<h:outputStylesheet name="/css/dashboard.css" />
 </h:head>
 <h:body>
-	<ui:insert name="topo">
+	<b:row>
+		<b:column tiny-screen="12" medium-screen="12" large-screen="12">
+			<ui:insert name="topo">
+				<b:navBar brand="Gticket" brandHref="#">
+					<b:navbarLinks>
+						<b:navLink value="Home" href="#"></b:navLink>
+						<b:navLink value="Link" href="#"></b:navLink>
+						<b:navLink value="Link" href="#"></b:navLink>
+						<b:dropMenu value="Dropdown">
+							<b:navLink value="Action" href="#"></b:navLink>
+							<b:navLink value="Another action" href="#"></b:navLink>
+							<b:navLink value="Something else here" href="#"></b:navLink>
+							<b:navLink></b:navLink>
+							<b:navLink header="Nav header"></b:navLink>
+							<b:navLink value="Separated link" href="#"></b:navLink>
+							<b:navLink value="One more separated link" href="#"></b:navLink>
+						</b:dropMenu>
+					</b:navbarLinks>
+				</b:navBar>
+			</ui:insert>
+		</b:column>
+	</b:row>
 
-		<b:navBar brand="Gticket" brandHref="#">
-			<b:navbarLinks>
-				<b:navLink value="Home" href="#"></b:navLink>
-				<b:navLink value="Link" href="#"></b:navLink>
-				<b:navLink value="Link" href="#"></b:navLink>
-				<b:dropMenu value="Dropdown">
-					<b:navLink value="Action" href="#"></b:navLink>
-					<b:navLink value="Another action" href="#"></b:navLink>
-					<b:navLink value="Something else here" href="#"></b:navLink>
-					<b:navLink></b:navLink>
-					<b:navLink header="Nav header"></b:navLink>
-					<b:navLink value="Separated link" href="#"></b:navLink>
-					<b:navLink value="One more separated link" href="#"></b:navLink>
-				</b:dropMenu>
-			</b:navbarLinks>
-		</b:navBar>
-	</ui:insert>
-
-	<ui:insert name="esquerdo">
-
-		<div class="col-sm-3 col-md-2 ">
+	<b:column medium-screen="2">
+		<ui:insert name="esquerdo">
 
 			<ul class="nav nav-sidebar">
 				<li><a href="javascript:;" data-toggle="collapse"
@@ -55,47 +57,18 @@
 					</ul></li>
 
 			</ul>
+		</ui:insert>
+	</b:column>
 
-		</div>
-
-
-		<!-- <div class="container-fluid">
-
-			<div class="row">
-				<div class="col-sm-3 col-md-2 sidebar">
-					<ul class="nav nav-sidebar">
-						<li><a href="javascript:;" data-toggle="collapse"
-							data-target="#administracao"> <i class="fa fa-fw fa-arrows-v"></i><span
-								class="glyphicon glyphicon-cog" aria-hidden="true" />
-								Administração <i class="fa fa-fw fa-caret-down"></i></a>
-
-							<ul id="administracao" class=" collapse ">
-								<li class="nav"><span class="glyphicon glyphicon-user"
-									aria-hidden="true" /> <p:link outcome="lista_usuarios"
-										value="Usuários" /></li>
-							</ul></li>
-						<li><a href="javascript:;" data-toggle="collapse"
-							data-target="#clientes"> <i class="fa fa-fw fa-arrows-v"></i><span
-								class="glyphicon glyphicon-cog" aria-hidden="true" /> Clientes
-								e relacionados <i class="fa fa-fw fa-caret-down"></i></a>
-
-							<ul id="clientes" class=" collapse ">
-								<li class="nav"><span class="glyphicon glyphicon-user"
-									aria-hidden="true" /> <p:link outcome="home" value="Clientes" /></li>
-							</ul></li>
-
-					</ul>
-
-				</div>
-
-			</div>
-
-		</div> -->
-
-	</ui:insert>
-	<ui:insert name="conteudo">Conteudo</ui:insert>
-	<ui:insert name="rodape">
-	</ui:insert>
+	<b:column medium-screen="10">
+		<ui:insert name="conteudo">Conteudo</ui:insert>
+	</b:column>
+	<b:row>
+		<b:column tiny-screen="12" medium-screen="12" large-screen="12">
+			<ui:insert name="rodape">
+			</ui:insert>
+		</b:column>
+	</b:row>
 
 </h:body>
 </html>

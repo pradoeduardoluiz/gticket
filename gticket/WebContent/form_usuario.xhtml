@@ -14,125 +14,123 @@
 	<ui:composition template="template/template.html">
 
 		<ui:define name="conteudo">
-			<div class="container-fluid">
-				<b:container>
-					<b:panel title="Cadastro de Usuário">
-						<h:form id="formUsuario">
-							<b:row>
-								<b:column medium-screen="2">
-									<h:outputLabel value="Id" for="idUsuario"
-										rendered="#{not empty usuarioMB.usuario.id}" />
-								</b:column>
-								<b:column medium-screen="4">
-									<b:inputText id="idUsuario" value="#{usuarioMB.usuario.id}"
-										readonly="true" rendered="#{not empty usuarioMB.usuario.id}" />
-									<h:inputHidden value="#{usuarioMB.usuario.id}" />
-								</b:column>
-							</b:row>
-							<b:row>
-								<b:column medium-screen="2">
-									<h:outputLabel value="Nome" for="nomeUsuario" />
-								</b:column>
-								<b:column medium-screen="4">
-									<b:inputText id="nomeUsuario" value="#{usuarioMB.usuario.nome}"
-										placeholder="Nome" required="true"
-										required-message="Campo Nome é Obrigatório!" />
-								</b:column>
-							</b:row>
-							<b:row>
-								<b:column medium-screen="2">
-									<h:outputLabel value="CPF" for="cpfUsuario" />
-								</b:column>
-								<b:column medium-screen="4" style="height:44px">
-									<p:inputMask id="cpfUsuario" value="#{usuarioMB.usuario.cpf}"
-										mask="999.999.999-99" placeholder="CPF" required="true"
-										styleClass="form-control"
-										requiredMessage="Campo CPF é Obrigatório!" />
-								</b:column>
-							</b:row>
-							<b:row>
-								<b:column medium-screen="2">
-									<h:outputLabel value="RG" for="rgUsuario" />
-								</b:column>
-								<b:column medium-screen="4">
-									<b:inputText id="rgUsuario" value="#{usuarioMB.usuario.rg}"
-										placeholder="RG" required="true"
-										required-message="Campo RG é Obrigatório" />
-								</b:column>
-							</b:row>
-							<b:row style="height:44px">
-								<b:column medium-screen="2">
-									<h:outputLabel value="Data de Nascimento"
-										for="dataNascimentoUsuario" />
-								</b:column>
-								<b:column medium-screen="4">
-									<b:dateTimePicker id="dataNascimentoUsuario"
-										value="#{usuarioMB.usuario.dataNascimento}" show-date="true"
-										show-time="false" required="true" format="DD-MM-YYYY"
-										required-message="Campo Data de Nascimento é Obrigatório!" />
-								</b:column>
-							</b:row>
-							<b:row>
-								<b:column medium-screen="2">
-									<h:outputLabel value="Email" for="emailUsuario" />
-								</b:column>
-								<b:column medium-screen="4">
-									<b:inputText id="emailUsuario"
-										value="#{usuarioMB.usuario.email}" placeholder="Email"
-										required="true" required-message="Campo Email é Obrigatório!" />
-								</b:column>
-							</b:row>
-							<b:row>
-								<b:column medium-screen="2">
-									<h:outputLabel value="Senha" for="senhaUsuario"
-										rendered="#{usuarioMB.editarId==null}" />
-								</b:column>
-								<b:column medium-screen="4">
-									<b:inputSecret id="senhaUsuario"
-										value="#{usuarioMB.usuario.senha}" placeholder="Senha"
-										required="true" rendered="#{usuarioMB.editarId==null}"
-										required-message="Campo Senha é Obrigatório!" />
-									<h:inputHidden value="#{usuarioMB.usuario.senha}" />
-								</b:column>
-							</b:row>
-							<b:row>
-								<b:column medium-screen="2">
-									<h:outputLabel value="Confirmação de Senha"
-										for="confirmacaoSenhaUsuario"
-										rendered="#{usuarioMB.editarId==null}" />
-								</b:column>
-								<b:column medium-screen="4">
-									<b:inputSecret id="confirmacaoSenhaUsuario"
-										value="#{usuarioMB.usuario.confirmacaoDeSenha}"
-										placeholder="Confirmação de Senha" required="true"
-										rendered="#{usuarioMB.editarId==null}"
-										required-message="Campo Confirmação de Senha é Obrigatório!" />
-									<h:inputHidden value="#{usuarioMB.usuario.confirmacaoDeSenha}" />
-								</b:column>
-							</b:row>
-							<b:row>
-								<b:column medium-screen="2">
-									<h:outputLabel value="Observação" for="observacaoUsuario" />
-								</b:column>
-								<b:column medium-screen="4">
-									<b:inputTextarea id="observacaoUsuario"
-										value="#{usuarioMB.usuario.obsercacao}" />
-								</b:column>
-							</b:row>
-							<b:row>
-								<b:column medium-screen="2" offset="2">
-									<b:commandButton look="primary btn-block" value="Salvar"
-										action="#{usuarioMB.salvar}" />
-								</b:column>
-								<b:column medium-screen="2">
-									<b:commandButton look="danger btn-block" value="Voltar" />
-								</b:column>
-							</b:row>
-						</h:form>
-						<b:messages />
-					</b:panel>
-				</b:container>
-			</div>
+			<b:container fluid="true">
+				<b:panel title="Cadastro de Usuário">
+					<h:form id="formUsuario">
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Id" for="idUsuario"
+									rendered="#{not empty usuarioMB.usuario.id}" />
+							</b:column>
+							<b:column medium-screen="4">
+								<b:inputText id="idUsuario" value="#{usuarioMB.usuario.id}"
+									readonly="true" rendered="#{not empty usuarioMB.usuario.id}" />
+								<h:inputHidden value="#{usuarioMB.usuario.id}" />
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Nome" for="nomeUsuario" />
+							</b:column>
+							<b:column medium-screen="4">
+								<b:inputText id="nomeUsuario" value="#{usuarioMB.usuario.nome}"
+									placeholder="Nome" required="true"
+									required-message="Campo Nome é Obrigatório!" />
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="CPF" for="cpfUsuario" />
+							</b:column>
+							<b:column medium-screen="4" style="height:44px">
+								<p:inputMask id="cpfUsuario" value="#{usuarioMB.usuario.cpf}"
+									mask="999.999.999-99" placeholder="CPF" required="true"
+									styleClass="form-control"
+									requiredMessage="Campo CPF é Obrigatório!" />
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="RG" for="rgUsuario" />
+							</b:column>
+							<b:column medium-screen="4">
+								<b:inputText id="rgUsuario" value="#{usuarioMB.usuario.rg}"
+									placeholder="RG" required="true"
+									required-message="Campo RG é Obrigatório" />
+							</b:column>
+						</b:row>
+						<b:row style="height:44px">
+							<b:column medium-screen="2">
+								<h:outputLabel value="Data de Nascimento"
+									for="dataNascimentoUsuario" />
+							</b:column>
+							<b:column medium-screen="4">
+								<b:dateTimePicker id="dataNascimentoUsuario"
+									value="#{usuarioMB.usuario.dataNascimento}" show-date="true"
+									show-time="false" required="true" format="DD-MM-YYYY"
+									required-message="Campo Data de Nascimento é Obrigatório!" />
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Email" for="emailUsuario" />
+							</b:column>
+							<b:column medium-screen="4">
+								<b:inputText id="emailUsuario"
+									value="#{usuarioMB.usuario.email}" placeholder="Email"
+									required="true" required-message="Campo Email é Obrigatório!" />
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Senha" for="senhaUsuario"
+									rendered="#{usuarioMB.editarId==null}" />
+							</b:column>
+							<b:column medium-screen="4">
+								<b:inputSecret id="senhaUsuario"
+									value="#{usuarioMB.usuario.senha}" placeholder="Senha"
+									required="true" rendered="#{usuarioMB.editarId==null}"
+									required-message="Campo Senha é Obrigatório!" />
+								<h:inputHidden value="#{usuarioMB.usuario.senha}" />
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Confirmação de Senha"
+									for="confirmacaoSenhaUsuario"
+									rendered="#{usuarioMB.editarId==null}" />
+							</b:column>
+							<b:column medium-screen="4">
+								<b:inputSecret id="confirmacaoSenhaUsuario"
+									value="#{usuarioMB.usuario.confirmacaoDeSenha}"
+									placeholder="Confirmação de Senha" required="true"
+									rendered="#{usuarioMB.editarId==null}"
+									required-message="Campo Confirmação de Senha é Obrigatório!" />
+								<h:inputHidden value="#{usuarioMB.usuario.confirmacaoDeSenha}" />
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Observação" for="observacaoUsuario" />
+							</b:column>
+							<b:column medium-screen="4">
+								<b:inputTextarea id="observacaoUsuario"
+									value="#{usuarioMB.usuario.obsercacao}" />
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="2" offset="2">
+								<b:commandButton look="primary btn-block" value="Salvar"
+									action="#{usuarioMB.salvar}" />
+							</b:column>
+							<b:column medium-screen="2">
+								<b:commandButton look="danger btn-block" value="Voltar" />
+							</b:column>
+						</b:row>
+					</h:form>
+					<b:messages />
+				</b:panel>
+			</b:container>
 		</ui:define>
 
 	</ui:composition>
