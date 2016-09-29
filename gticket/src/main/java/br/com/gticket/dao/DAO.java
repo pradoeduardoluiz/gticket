@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 
 import br.com.gticket.util.JpaUtil;
 
-public abstract class Dao {
+public abstract class DAO {
 
 	EntityManager getEntityManager() {
 		EntityManager entityManager = JpaUtil.getEntityManager();

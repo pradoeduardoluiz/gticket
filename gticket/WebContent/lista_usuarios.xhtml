@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:body>
+
+	<ui:composition template="template/template.html">
+
+		<ui:define name="conteudo">
+
+			<div class="container-fluid">
+
+				<h1>Lista de Usuários</h1>
+
+				<b:container>
+
+					<h:form>
+						<b:dataTable value="#{usuarioMB.usuarios}" var="usuario"
+							customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
+
+							<b:dataTableColumn value="#{usuario.id}" />
+							<b:dataTableColumn value="#{usuario.nome}" />
+
+							<h:column>
+								<f:facet name="header">Ações</f:facet>
+								<h:link styleClass="btn btn-default" outcome="/form_usuario"
+									value="Editar">
+									<f:param name="id" value="#{usuario.id}" />
+								</h:link>
+								<span/>
+								<h:commandLink
+									onclick="return confirm('Tem certeza da exclusão do usuário #{usuario.nome}');"
+									styleClass="btn btn-danger"
+									action="#{usuarioMB.excluir(usuario.id)}" value="Excluir" />
+							</h:column>
+
+						</b:dataTable>
+
+					</h:form>
+
+					<span class="glyphicon glyphicon-plus" aria-hidden="true" />
+					<h:link outcome="form_usuario" value="Adicionar usuário" />
+
+				</b:container>
+
+
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

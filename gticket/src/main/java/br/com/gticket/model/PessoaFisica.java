@@ -2,13 +2,21 @@ package br.com.gticket.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+
+@Entity(name = "pessoa_fisica")
+@PrimaryKeyJoinColumn(name = "id")
 public abstract class PessoaFisica extends Pessoa {
 
 	private String nome;
-	private Integer cpf;
-	private Integer rg;
+	private String cpf;
+	private String rg;
 	private Date dataNascimento;
 	private String email;
+
+	public PessoaFisica() {
+	}
 
 	public String getNome() {
 		return nome;
@@ -18,19 +26,19 @@ public abstract class PessoaFisica extends Pessoa {
 		this.nome = nome;
 	}
 
-	public Integer getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(Integer cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
-	public Integer getRg() {
+	public String getRg() {
 		return rg;
 	}
 
-	public void setRg(Integer rg) {
+	public void setRg(String rg) {
 		this.rg = rg;
 	}
 

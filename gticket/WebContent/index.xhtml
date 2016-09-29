@@ -1,20 +1,28 @@
-<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:b="http://bootsfaces.net/ui">
 
 <h:head>
-
-	<title><ui:insert name="title">Login</ui:insert></title>
-	<h:outputStylesheet name="grid/grid.css" library="primefaces" />
+	<title>Login</title>
 	<h:outputStylesheet name="/css/login.css" />
 </h:head>
+
 <h:body>
-
-	<h1>Hello World</h1>
-	
+	<b:container>
+		<h:form styleClass="form-signin" prependId="false">
+			<b:panel>
+				<h2 class="form-signin-heading">Acessar GTicket</h2>
+				<b:inputText id="email" placeholder="Email" required="true"
+					required-message="Campo Email é obrigatório">
+				</b:inputText>
+				<b:inputSecret id="senha" placeholder="Senha">
+				</b:inputSecret>
+				<b:commandButton look="primary btn-block" value="Acessar"
+					icon="log-in" size="lg" />
+			</b:panel>
+		</h:form>
+		<b:messages />
+	</b:container>
 </h:body>
-
 </html>

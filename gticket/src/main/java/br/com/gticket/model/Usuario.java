@@ -4,20 +4,17 @@ import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Transient;
 
+@Entity(name = "usuario")
+@PrimaryKeyJoinColumn(name = "id")
 public class Usuario extends PessoaFisica {
 
-	private String login;
 	private String senha;
 	@Transient
 	private String confirmacaoDeSenha;
+	@Transient
 	private Perfil perfil;
 
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
+	public Usuario() {
 	}
 
 	public String getSenha() {

@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<h:outputStylesheet name="/css/dashboard.css" />
+</h:head>
+<h:body>
+	<ui:insert name="topo">
+
+		<b:navBar brand="Gticket" brandHref="#">
+			<b:navbarLinks>
+				<b:navLink value="Home" href="#"></b:navLink>
+				<b:navLink value="Link" href="#"></b:navLink>
+				<b:navLink value="Link" href="#"></b:navLink>
+				<b:dropMenu value="Dropdown">
+					<b:navLink value="Action" href="#"></b:navLink>
+					<b:navLink value="Another action" href="#"></b:navLink>
+					<b:navLink value="Something else here" href="#"></b:navLink>
+					<b:navLink></b:navLink>
+					<b:navLink header="Nav header"></b:navLink>
+					<b:navLink value="Separated link" href="#"></b:navLink>
+					<b:navLink value="One more separated link" href="#"></b:navLink>
+				</b:dropMenu>
+			</b:navbarLinks>
+		</b:navBar>
+	</ui:insert>
+
+	<ui:insert name="esquerdo">
+
+		<div class="col-sm-3 col-md-2 ">
+
+			<ul class="nav nav-sidebar">
+				<li><a href="javascript:;" data-toggle="collapse"
+					data-target="#administracao"><span
+						class="glyphicon glyphicon-cog" aria-hidden="true" />
+						Administração <i class="fa fa-fw fa-caret-down"></i></a>
+
+					<ul id="administracao" class=" collapse ">
+						<li class="nav"><span class="glyphicon glyphicon-user"
+							aria-hidden="true" /> <h:link outcome="lista_usuarios"
+								value="Usuários" /></li>
+					</ul></li>
+				<li><a href="javascript:;" data-toggle="collapse"
+					data-target="#clientes"> <span class="glyphicon glyphicon-cog"
+						aria-hidden="true" /> Clientes e Relacionados <i
+						class="fa fa-fw fa-caret-down"></i></a>
+
+					<ul id="clientes" class=" collapse ">
+						<li class="nav"><span class="glyphicon glyphicon-user"
+							aria-hidden="true" /> <h:link outcome="home" value="Clientes" /></li>
+					</ul></li>
+
+			</ul>
+
+		</div>
+
+
+		<!-- <div class="container-fluid">
+
+			<div class="row">
+				<div class="col-sm-3 col-md-2 sidebar">
+					<ul class="nav nav-sidebar">
+						<li><a href="javascript:;" data-toggle="collapse"
+							data-target="#administracao"> <i class="fa fa-fw fa-arrows-v"></i><span
+								class="glyphicon glyphicon-cog" aria-hidden="true" />
+								Administração <i class="fa fa-fw fa-caret-down"></i></a>
+
+							<ul id="administracao" class=" collapse ">
+								<li class="nav"><span class="glyphicon glyphicon-user"
+									aria-hidden="true" /> <p:link outcome="lista_usuarios"
+										value="Usuários" /></li>
+							</ul></li>
+						<li><a href="javascript:;" data-toggle="collapse"
+							data-target="#clientes"> <i class="fa fa-fw fa-arrows-v"></i><span
+								class="glyphicon glyphicon-cog" aria-hidden="true" /> Clientes
+								e relacionados <i class="fa fa-fw fa-caret-down"></i></a>
+
+							<ul id="clientes" class=" collapse ">
+								<li class="nav"><span class="glyphicon glyphicon-user"
+									aria-hidden="true" /> <p:link outcome="home" value="Clientes" /></li>
+							</ul></li>
+
+					</ul>
+
+				</div>
+
+			</div>
+
+		</div> -->
+
+	</ui:insert>
+	<ui:insert name="conteudo">Conteudo</ui:insert>
+	<ui:insert name="rodape">
+	</ui:insert>
+
+</h:body>
+</html>

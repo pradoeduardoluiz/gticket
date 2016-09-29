@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+<h:body>
+	<f:metadata>
+		<f:viewParam name="id" value="#{usuarioMB.editarId}" />
+		<f:event listener="#{usuarioMB.carregarUsuario}" type="preRenderView" />
+	</f:metadata>
+
+	<ui:composition template="template/template.html">
+
+		<ui:define name="conteudo">
+			<div class="container-fluid">
+				<b:container>
+					<b:panel title="Cadastro de Usuário">
+						<h:form id="formUsuario">
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Id" for="idUsuario"
+										rendered="#{not empty usuarioMB.usuario.id}" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:inputText id="idUsuario" value="#{usuarioMB.usuario.id}"
+										readonly="true" rendered="#{not empty usuarioMB.usuario.id}" />
+									<h:inputHidden value="#{usuarioMB.usuario.id}" />
+								</b:column>
+							</b:row>
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Nome" for="nomeUsuario" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:inputText id="nomeUsuario" value="#{usuarioMB.usuario.nome}"
+										placeholder="Nome" required="true"
+										required-message="Campo Nome é Obrigatório!" />
+								</b:column>
+							</b:row>
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="CPF" for="cpfUsuario" />
+								</b:column>
+								<b:column medium-screen="4" style="height:44px">
+									<p:inputMask id="cpfUsuario" value="#{usuarioMB.usuario.cpf}"
+										mask="999.999.999-99" placeholder="CPF" required="true"
+										styleClass="form-control"
+										requiredMessage="Campo CPF é Obrigatório!" />
+								</b:column>
+							</b:row>
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="RG" for="rgUsuario" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:inputText id="rgUsuario" value="#{usuarioMB.usuario.rg}"
+										placeholder="RG" required="true"
+										required-message="Campo RG é Obrigatório" />
+								</b:column>
+							</b:row>
+							<b:row style="height:44px">
+								<b:column medium-screen="2">
+									<h:outputLabel value="Data de Nascimento"
+										for="dataNascimentoUsuario" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:dateTimePicker id="dataNascimentoUsuario"
+										value="#{usuarioMB.usuario.dataNascimento}" show-date="true"
+										show-time="false" required="true" format="DD-MM-YYYY"
+										required-message="Campo Data de Nascimento é Obrigatório!" />
+								</b:column>
+							</b:row>
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Email" for="emailUsuario" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:inputText id="emailUsuario"
+										value="#{usuarioMB.usuario.email}" placeholder="Email"
+										required="true" required-message="Campo Email é Obrigatório!" />
+								</b:column>
+							</b:row>
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Senha" for="senhaUsuario"
+										rendered="#{usuarioMB.editarId==null}" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:inputSecret id="senhaUsuario"
+										value="#{usuarioMB.usuario.senha}" placeholder="Senha"
+										required="true" rendered="#{usuarioMB.editarId==null}"
+										required-message="Campo Senha é Obrigatório!" />
+									<h:inputHidden value="#{usuarioMB.usuario.senha}" />
+								</b:column>
+							</b:row>
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Confirmação de Senha"
+										for="confirmacaoSenhaUsuario"
+										rendered="#{usuarioMB.editarId==null}" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:inputSecret id="confirmacaoSenhaUsuario"
+										value="#{usuarioMB.usuario.confirmacaoDeSenha}"
+										placeholder="Confirmação de Senha" required="true"
+										rendered="#{usuarioMB.editarId==null}"
+										required-message="Campo Confirmação de Senha é Obrigatório!" />
+									<h:inputHidden value="#{usuarioMB.usuario.confirmacaoDeSenha}" />
+								</b:column>
+							</b:row>
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Observação" for="observacaoUsuario" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:inputTextarea id="observacaoUsuario"
+										value="#{usuarioMB.usuario.obsercacao}" />
+								</b:column>
+							</b:row>
+							<b:row>
+								<b:column medium-screen="2" offset="2">
+									<b:commandButton look="primary btn-block" value="Salvar"
+										action="#{usuarioMB.salvar}" />
+								</b:column>
+								<b:column medium-screen="2">
+									<b:commandButton look="danger btn-block" value="Voltar" />
+								</b:column>
+							</b:row>
+						</h:form>
+						<b:messages />
+					</b:panel>
+				</b:container>
+			</div>
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>
+
+<!-- <div class="panel panel-default">
+				<div class="panel-heading">
+					<h2 class="panel-title">
+						<strong>Cadastro de Usuários</strong>
+					</h2>
+				</div>
+
+				<div class="panel-body">
+
+					<h:form styleClass="form-horizontal">
+
+						<p:messages autoUpdate="true" />
+
+						<div class="form-group"></div>
+
+						<h:inputHidden value="#{usuarioMB.usuario.id}" />
+
+						<div class="form-group"></div>
+
+						
+
+						<div class="form-group">
+							<h:outputLabel value="RG" for="rgUsuario"
+								styleClass="col-md-2 control-label" />
+							<div class="col-md-2">
+								<p:inputText id="rgUsuario" value="#{usuarioMB.usuario.rg}"
+									size="60" styleClass="form-control" placeholder="RG"
+									required="true" label="RG" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<h:outputLabel value="Data de Nascimento"
+								for="dataNascimentoUsuario" styleClass="col-md-2 control-label" />
+							<div class="col-md-2">
+								<p:calendar id="dataNascimentoUsuario"
+									value="#{usuarioMB.usuario.dataNascimento}" showOn="button"
+									required="true" locale="pt_BR" pattern="dd-MM-yyyy" mask="true"
+									label="Data de Nascimento" size="10" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<h:outputLabel value="Email" for="emailUsuario"
+								styleClass="col-md-2 control-label" />
+							<div class="col-md-2">
+								<p:inputText id="emailUsuario"
+									value="#{usuarioMB.usuario.email}" size="60"
+									styleClass="form-control" placeholder="Email" required="true"
+									label="Email" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<h:outputLabel value="Senha" for="senhaUsuario"
+								styleClass="col-md-2 control-label"
+								rendered="#{usuarioMB.editarId==null}" />
+							<div class="col-md-2">
+								<p:password id="senhaUsuario" value="#{usuarioMB.usuario.senha}"
+									size="60" styleClass="form-control" placeholder="Senha"
+									required="true" feedback="true" label="Senha"
+									rendered="#{usuarioMB.editarId==null}" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<h:outputLabel value="Confirmação de Senha"
+								for="confirmacaoSenhaUsuario"
+								styleClass="col-md-2 control-label"
+								rendered="#{usuarioMB.editarId==null}" />
+							<div class="col-md-2">
+								<p:password id="confirmacaoSenhaUsuario"
+									value="#{usuarioMB.usuario.confirmacaoDeSenha}" size="60"
+									styleClass="form-control" placeholder="Confirmação de Senha"
+									required="true" label="Confirmação de Senha"
+									rendered="#{usuarioMB.editarId==null}" />
+							</div>
+						</div>
+
+						<div class="form-group">
+
+							<label class="col-md-2 control-label"> </label>
+
+							<div class="col-md-2">
+								<h:commandButton value="Salvar" styleClass="btn btn-success"
+									style="width:100px" action="#{usuarioMB.salvar}" ajax="false"
+									validateClient="true" />
+								<h:commandButton value="Cancelar" styleClass="btn btn-danger"
+									style="width:100px" action="#{usuarioMB.limpar}" ajax="false" />
+							</div>
+						</div>
+
+					</h:form>
+				</div>
+			</div>
+			</b:container> -->
