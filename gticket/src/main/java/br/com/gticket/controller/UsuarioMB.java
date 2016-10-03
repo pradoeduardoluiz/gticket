@@ -1,23 +1,30 @@
 package br.com.gticket.controller;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 
 import br.com.gticket.bo.UsuarioBo;
+import br.com.gticket.model.Perfil;
 import br.com.gticket.model.Usuario;
 
 @ManagedBean
-public class UsuarioMB {
+@ViewScoped
+public class UsuarioMB implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Usuario usuario;
 	private UsuarioBo bo;
 	private Integer editarId;
 	private List<Usuario> usuarios;
+	private Perfil[] perfis;
 
 	@PostConstruct
 	public void init() {
@@ -26,12 +33,21 @@ public class UsuarioMB {
 	}
 
 	public void limpar() {
+		System.out.println(usuario.getId());
 	}
 
-	public String salvar() {
+	public void salvar() {
 
 		try {
 			bo.salvar(usuario);
+
+			usuario = null;
+
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, " ",
+							"Cadastro Salvo com Sucesso!"));
+
 		} catch (Exception e) {
 
 			FacesContext.getCurrentInstance().addMessage(
@@ -41,9 +57,6 @@ public class UsuarioMB {
 
 			e.printStackTrace();
 		}
-
-		usuarios = null;
-		return "/lista_usuarios";
 
 	}
 
@@ -59,6 +72,11 @@ public class UsuarioMB {
 		bo.excluirUsuario(id);
 
 		return "/lista_usuarios";
+	}
+
+	public String editar(Integer id) {
+		usuario = bo.buscarPorId(id);
+		return "/form_usuario";
 	}
 
 	public Usuario getUsuario() {
@@ -96,6 +114,15 @@ public class UsuarioMB {
 
 	public void setEditarId(Integer editarId) {
 		this.editarId = editarId;
+	}
+
+	public Perfil[] getPerfis() {
+		perfis = Perfil.values();
+		return perfis;
+	}
+
+	public void setPerfis(Perfil[] perfis) {
+		this.perfis = perfis;
 	}
 
 }

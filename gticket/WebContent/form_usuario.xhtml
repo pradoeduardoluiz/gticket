@@ -18,18 +18,18 @@
 				<b:panel title="Cadastro de Usuário">
 					<h:form id="formUsuario">
 						<b:row>
-							<b:column medium-screen="2">
+							<b:column medium-screen="1">
 								<h:outputLabel value="Id" for="idUsuario"
-									rendered="#{not empty usuarioMB.usuario.id}" />
+									rendered="#{usuarioMB.usuario.id!=null}" />
 							</b:column>
 							<b:column medium-screen="4">
 								<b:inputText id="idUsuario" value="#{usuarioMB.usuario.id}"
-									readonly="true" rendered="#{not empty usuarioMB.usuario.id}" />
+									readonly="true" rendered="#{usuarioMB.usuario.id!=null}" />
 								<h:inputHidden value="#{usuarioMB.usuario.id}" />
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="2">
+							<b:column medium-screen="1">
 								<h:outputLabel value="Nome" for="nomeUsuario" />
 							</b:column>
 							<b:column medium-screen="4">
@@ -39,7 +39,7 @@
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="2">
+							<b:column medium-screen="1">
 								<h:outputLabel value="CPF" for="cpfUsuario" />
 							</b:column>
 							<b:column medium-screen="4" style="height:44px">
@@ -50,7 +50,7 @@
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="2">
+							<b:column medium-screen="1">
 								<h:outputLabel value="RG" for="rgUsuario" />
 							</b:column>
 							<b:column medium-screen="4">
@@ -59,12 +59,12 @@
 									required-message="Campo RG é Obrigatório" />
 							</b:column>
 						</b:row>
-						<b:row style="height:44px">
-							<b:column medium-screen="2">
+						<b:row>
+							<b:column medium-screen="1">
 								<h:outputLabel value="Data de Nascimento"
 									for="dataNascimentoUsuario" />
 							</b:column>
-							<b:column medium-screen="4">
+							<b:column medium-screen="4" style="height:44px">
 								<b:dateTimePicker id="dataNascimentoUsuario"
 									value="#{usuarioMB.usuario.dataNascimento}" show-date="true"
 									show-time="false" required="true" format="DD-MM-YYYY"
@@ -72,7 +72,7 @@
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="2">
+							<b:column medium-screen="1">
 								<h:outputLabel value="Email" for="emailUsuario" />
 							</b:column>
 							<b:column medium-screen="4">
@@ -82,7 +82,20 @@
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="2">
+							<b:column medium-screen="1">
+								<h:outputLabel value="Perfil" for="perfilUsuario" />
+							</b:column>
+							<b:column medium-screen="4">
+								<b:selectOneMenu id="perfilUsuario"
+									value="#{usuarioMB.usuario.perfil}" required="true"
+									requiredMessage="Selecione um perfil válido!">
+									<f:selectItem itemLabel="Selecione..." itemValue="" />
+									<f:selectItems value="#{usuarioMB.perfis}" var="perfil" />
+								</b:selectOneMenu>
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="1">
 								<h:outputLabel value="Senha" for="senhaUsuario"
 									rendered="#{usuarioMB.editarId==null}" />
 							</b:column>
@@ -91,11 +104,12 @@
 									value="#{usuarioMB.usuario.senha}" placeholder="Senha"
 									required="true" rendered="#{usuarioMB.editarId==null}"
 									required-message="Campo Senha é Obrigatório!" />
-								<h:inputHidden value="#{usuarioMB.usuario.senha}" />
+								<h:inputHidden value="#{usuarioMB.usuario.senha}"
+									rendered="#{usuarioMB.usuario.id!=null}" />
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="2">
+							<b:column medium-screen="1">
 								<h:outputLabel value="Confirmação de Senha"
 									for="confirmacaoSenhaUsuario"
 									rendered="#{usuarioMB.editarId==null}" />
@@ -106,11 +120,12 @@
 									placeholder="Confirmação de Senha" required="true"
 									rendered="#{usuarioMB.editarId==null}"
 									required-message="Campo Confirmação de Senha é Obrigatório!" />
-								<h:inputHidden value="#{usuarioMB.usuario.confirmacaoDeSenha}" />
+								<h:inputHidden value="#{usuarioMB.usuario.confirmacaoDeSenha}"
+									rendered="#{usuarioMB.usuario.id!=null}" />
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="2">
+							<b:column medium-screen="1">
 								<h:outputLabel value="Observação" for="observacaoUsuario" />
 							</b:column>
 							<b:column medium-screen="4">
@@ -119,12 +134,13 @@
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="2" offset="2">
-								<b:commandButton look="primary btn-block" value="Salvar"
+							<b:column medium-screen="1" offset="2">
+								<b:commandButton look="success btn-block" value="Salvar"
 									action="#{usuarioMB.salvar}" />
 							</b:column>
-							<b:column medium-screen="2">
-								<b:commandButton look="danger btn-block" value="Voltar" />
+							<b:column medium-screen="1">
+								<b:button value="Voltar" outcome="lista_usuarios"
+									look="danger btn-block" />
 							</b:column>
 						</b:row>
 					</h:form>
@@ -138,99 +154,3 @@
 </h:body>
 </html>
 
-<!-- <div class="panel panel-default">
-				<div class="panel-heading">
-					<h2 class="panel-title">
-						<strong>Cadastro de Usuários</strong>
-					</h2>
-				</div>
-
-				<div class="panel-body">
-
-					<h:form styleClass="form-horizontal">
-
-						<p:messages autoUpdate="true" />
-
-						<div class="form-group"></div>
-
-						<h:inputHidden value="#{usuarioMB.usuario.id}" />
-
-						<div class="form-group"></div>
-
-						
-
-						<div class="form-group">
-							<h:outputLabel value="RG" for="rgUsuario"
-								styleClass="col-md-2 control-label" />
-							<div class="col-md-2">
-								<p:inputText id="rgUsuario" value="#{usuarioMB.usuario.rg}"
-									size="60" styleClass="form-control" placeholder="RG"
-									required="true" label="RG" />
-							</div>
-						</div>
-
-						<div class="form-group">
-							<h:outputLabel value="Data de Nascimento"
-								for="dataNascimentoUsuario" styleClass="col-md-2 control-label" />
-							<div class="col-md-2">
-								<p:calendar id="dataNascimentoUsuario"
-									value="#{usuarioMB.usuario.dataNascimento}" showOn="button"
-									required="true" locale="pt_BR" pattern="dd-MM-yyyy" mask="true"
-									label="Data de Nascimento" size="10" />
-							</div>
-						</div>
-
-						<div class="form-group">
-							<h:outputLabel value="Email" for="emailUsuario"
-								styleClass="col-md-2 control-label" />
-							<div class="col-md-2">
-								<p:inputText id="emailUsuario"
-									value="#{usuarioMB.usuario.email}" size="60"
-									styleClass="form-control" placeholder="Email" required="true"
-									label="Email" />
-							</div>
-						</div>
-
-						<div class="form-group">
-							<h:outputLabel value="Senha" for="senhaUsuario"
-								styleClass="col-md-2 control-label"
-								rendered="#{usuarioMB.editarId==null}" />
-							<div class="col-md-2">
-								<p:password id="senhaUsuario" value="#{usuarioMB.usuario.senha}"
-									size="60" styleClass="form-control" placeholder="Senha"
-									required="true" feedback="true" label="Senha"
-									rendered="#{usuarioMB.editarId==null}" />
-							</div>
-						</div>
-
-						<div class="form-group">
-							<h:outputLabel value="Confirmação de Senha"
-								for="confirmacaoSenhaUsuario"
-								styleClass="col-md-2 control-label"
-								rendered="#{usuarioMB.editarId==null}" />
-							<div class="col-md-2">
-								<p:password id="confirmacaoSenhaUsuario"
-									value="#{usuarioMB.usuario.confirmacaoDeSenha}" size="60"
-									styleClass="form-control" placeholder="Confirmação de Senha"
-									required="true" label="Confirmação de Senha"
-									rendered="#{usuarioMB.editarId==null}" />
-							</div>
-						</div>
-
-						<div class="form-group">
-
-							<label class="col-md-2 control-label"> </label>
-
-							<div class="col-md-2">
-								<h:commandButton value="Salvar" styleClass="btn btn-success"
-									style="width:100px" action="#{usuarioMB.salvar}" ajax="false"
-									validateClient="true" />
-								<h:commandButton value="Cancelar" styleClass="btn btn-danger"
-									style="width:100px" action="#{usuarioMB.limpar}" ajax="false" />
-							</div>
-						</div>
-
-					</h:form>
-				</div>
-			</div>
-			</b:container> -->
