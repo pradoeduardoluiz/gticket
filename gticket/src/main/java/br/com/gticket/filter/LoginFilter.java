@@ -39,7 +39,7 @@ public class LoginFilter implements Filter {
 
 		} else {
 
-			redirect("../index.xhtml", response);
+			redirect("../index.xhtml?erro=true", response);
 
 		}
 

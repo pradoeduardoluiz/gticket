@@ -20,13 +20,14 @@ public class LoginMB implements Serializable {
 
 	private String email;
 	private String senha;
+	private boolean erro;
 
 	private Usuario usuarioLogado;
 	private UsuarioBo bo;
 
 	@PostConstruct
 	public void init() {
-
+		erro = false;
 		email = "";
 		senha = "";
 		usuarioLogado = new Usuario();
@@ -42,7 +43,6 @@ public class LoginMB implements Serializable {
 			return "/logged/home";
 
 		} catch (ValorInvalidoException e) {
-			// TODO Auto-generated catch block
 
 			FacesUtil.addErrorMessage(e.getMessage());
 
@@ -50,6 +50,15 @@ public class LoginMB implements Serializable {
 		}
 
 		return null;
+	}
+
+	public void erroLogin() {
+
+		if (erro) {
+			erro = false;
+			FacesUtil.addErrorMessage("É necessário logar no sistema!");
+		}
+
 	}
 
 	public String getEmail() {
@@ -74,6 +83,14 @@ public class LoginMB implements Serializable {
 
 	public void setUsuarioLogado(Usuario usuarioLogado) {
 		this.usuarioLogado = usuarioLogado;
+	}
+
+	public boolean isErro() {
+		return erro;
+	}
+
+	public void setErro(boolean erro) {
+		this.erro = erro;
 	}
 
 }

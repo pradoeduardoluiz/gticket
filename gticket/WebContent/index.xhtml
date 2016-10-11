@@ -9,6 +9,12 @@
 </h:head>
 
 <h:body>
+
+	<f:metadata>
+		<f:viewParam name="erro" value="#{loginMB.erro}" />
+		<f:event listener="#{loginMB.erroLogin}" type="preRenderView" />
+	</f:metadata>
+
 	<b:container>
 		<h:form styleClass="form-signin" prependId="false">
 			<b:panel>
@@ -17,7 +23,8 @@
 					required="true" required-message="Campo Email é obrigatório">
 				</b:inputText>
 				<b:inputSecret id="senha" value="#{loginMB.senha}"
-					placeholder="Senha">
+					placeholder="Senha" required="true"
+					required-message="Campo Senha é obrigatório">
 				</b:inputSecret>
 				<b:commandButton look="primary btn-block" value="Acessar"
 					icon="log-in" size="lg" action="#{loginMB.login}" />
