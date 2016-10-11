@@ -6,17 +6,23 @@
 	xmlns:b="http://bootsfaces.net/ui">
 
 <h:head>
+	<h:outputStylesheet name="/lib/bootstrap/css/bootstrap.css" />
 	<h:outputStylesheet name="/css/dashboard.css" />
 </h:head>
 <h:body>
+
 	<b:row>
 		<b:column tiny-screen="12" medium-screen="12" large-screen="12">
 			<ui:insert name="topo">
+
 				<b:navBar brand="Gticket" brandHref="#">
-					<b:navbarLinks>
-						<b:navLink value="Home" href="#"></b:navLink>
-						<b:navLink value="Link" href="#"></b:navLink>
-						<b:navLink value="Link" href="#"></b:navLink>
+
+					<!-- Following line is needed for TBS 3.0.1 (panel content overflow issue) -->
+					<b:navbarLinks pull="right">
+						<b:navLink value="    " href="#"></b:navLink>
+					</b:navbarLinks>
+
+					<b:navbarLinks pull="right" styleClass="hidden-xs">
 						<b:dropMenu value="Dropdown">
 							<b:navLink value="Action" href="#"></b:navLink>
 							<b:navLink value="Another action" href="#"></b:navLink>
@@ -28,6 +34,7 @@
 						</b:dropMenu>
 					</b:navbarLinks>
 				</b:navBar>
+
 			</ui:insert>
 		</b:column>
 	</b:row>
@@ -59,7 +66,6 @@
 			</ul>
 		</ui:insert>
 	</b:column>
-
 	<b:column medium-screen="10">
 		<ui:insert name="conteudo">Conteudo</ui:insert>
 	</b:column>

@@ -111,7 +111,7 @@ public class UsuarioBo {
 		return usuario.getId() == null || usuario.getId() == 0;
 	}
 
-	public List listarUsuarios() {
+	public List<Usuario> listarUsuarios() {
 		return dao.listarUsuarios();
 	}
 
@@ -125,4 +125,25 @@ public class UsuarioBo {
 
 	}
 
+	public Usuario login(String email, String senha)
+			throws ValorInvalidoException {
+		// TODO Auto-generated method stub
+
+		Usuario usuarioLogado;
+
+		if (!dao.buscarPorEmail(email)) {
+			throw new ValorInvalidoException("Email não cadastrado!");
+		}
+
+		usuarioLogado = dao.validaLogin(email,
+				CriptografaSenha.encryptPassword(senha));
+
+		if (usuarioLogado == null) {
+
+			throw new ValorInvalidoException("Email ou senha inválidos!");
+		}
+
+		return usuarioLogado;
+
+	}
 }

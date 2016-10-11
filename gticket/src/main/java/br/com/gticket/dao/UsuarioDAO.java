@@ -1,12 +1,10 @@
 package br.com.gticket.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import br.com.gticket.model.Perfil;
 import br.com.gticket.model.Usuario;
 
 public class UsuarioDAO extends DAO {
@@ -17,13 +15,13 @@ public class UsuarioDAO extends DAO {
 
 	}
 
-	public List listarUsuarios() {
+	public List<Usuario> listarUsuarios() {
 		// TODO Auto-generated method stub
 
 		Query query = getEntityManager().createQuery("From usuario",
 				Usuario.class);
 
-		return query.getResultList();
+		return (List<Usuario>) query.getResultList();
 	}
 
 	public Usuario buscarPorId(Integer id) {
@@ -88,5 +86,30 @@ public class UsuarioDAO extends DAO {
 			return false;
 		}
 		return true;
+	}
+
+	public void login(Usuario usuario) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public Usuario validaLogin(String email, String senha) {
+		// TODO Auto-generated method stub
+
+		Query query = getEntityManager().createQuery(
+				"From usuario where email=:email and senha=:senha",
+				Usuario.class);
+		query.setParameter("email", email);
+		query.setParameter("senha", senha);
+
+		try {
+
+			return (Usuario) query.getSingleResult();
+
+		} catch (NoResultException e) {
+
+			return null;
+
+		}
 	}
 }

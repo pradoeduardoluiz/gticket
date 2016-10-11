@@ -13,13 +13,14 @@
 		<h:form styleClass="form-signin" prependId="false">
 			<b:panel>
 				<h2 class="form-signin-heading">Acessar GTicket</h2>
-				<b:inputText id="email" placeholder="Email" required="true"
-					required-message="Campo Email é obrigatório">
+				<b:inputText id="email" value="#{loginMB.email}" placeholder="Email"
+					required="true" required-message="Campo Email é obrigatório">
 				</b:inputText>
-				<b:inputSecret id="senha" placeholder="Senha">
+				<b:inputSecret id="senha" value="#{loginMB.senha}"
+					placeholder="Senha">
 				</b:inputSecret>
 				<b:commandButton look="primary btn-block" value="Acessar"
-					icon="log-in" size="lg" />
+					icon="log-in" size="lg" action="#{loginMB.login}" />
 			</b:panel>
 		</h:form>
 		<b:messages />

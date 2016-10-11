@@ -13,6 +13,7 @@ import javax.faces.event.ComponentSystemEvent;
 import br.com.gticket.bo.UsuarioBo;
 import br.com.gticket.model.Perfil;
 import br.com.gticket.model.Usuario;
+import br.com.gticket.util.FacesUtil;
 
 @ManagedBean
 @ViewScoped
@@ -43,17 +44,11 @@ public class UsuarioMB implements Serializable {
 
 			usuario = null;
 
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, " ",
-							"Cadastro Salvo com Sucesso!"));
+			FacesUtil.addInfoMessage("Cadastro Salvo com Sucesso");
 
 		} catch (Exception e) {
 
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, " ", e
-							.getMessage()));
+			FacesUtil.addErrorMessage(e.getMessage());
 
 			e.printStackTrace();
 		}

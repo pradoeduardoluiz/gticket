@@ -7,7 +7,7 @@
 
 <h:body>
 
-	<ui:composition template="template/template.html">
+	<ui:composition template="../template/template.html">
 
 		<ui:define name="conteudo">
 
@@ -25,8 +25,8 @@
 
 						<h:column>
 							<f:facet name="header">Ações</f:facet>
-							<h:link styleClass="btn btn-default" outcome="/form_usuario"
-								value="Editar">
+							<h:link styleClass="btn btn-default"
+								outcome="/logged/form_usuario" value="Editar">
 								<f:param name="id" value="#{usuario.id}" />
 							</h:link>
 							<span />
