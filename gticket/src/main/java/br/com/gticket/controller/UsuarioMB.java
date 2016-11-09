@@ -10,7 +10,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 
-import br.com.gticket.bo.UsuarioBo;
+import br.com.gticket.bo.UsuarioBO;
 import br.com.gticket.model.Perfil;
 import br.com.gticket.model.Usuario;
 import br.com.gticket.util.FacesUtil;
@@ -22,7 +22,7 @@ public class UsuarioMB implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Usuario usuario;
-	private UsuarioBo bo;
+	private UsuarioBO bo;
 	private Integer editarId;
 	private List<Usuario> usuarios;
 	private Perfil[] perfis;
@@ -30,7 +30,7 @@ public class UsuarioMB implements Serializable {
 	@PostConstruct
 	public void init() {
 		usuario = new Usuario();
-		bo = new UsuarioBo();
+		bo = new UsuarioBO();
 	}
 
 	public void limpar() {
@@ -95,11 +95,11 @@ public class UsuarioMB implements Serializable {
 		this.usuarios = usuarios;
 	}
 
-	public UsuarioBo getBo() {
+	public UsuarioBO getBo() {
 		return bo;
 	}
 
-	public void setBo(UsuarioBo bo) {
+	public void setBo(UsuarioBO bo) {
 		this.bo = bo;
 	}
 

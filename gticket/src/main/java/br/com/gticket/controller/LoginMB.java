@@ -6,9 +6,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import br.com.gticket.bo.UsuarioBo;
+import br.com.gticket.bo.UsuarioBO;
+import br.com.gticket.bo.exception.ValorInvalidoException;
 import br.com.gticket.model.Usuario;
-import br.com.gticket.model.exception.ValorInvalidoException;
 import br.com.gticket.util.FacesUtil;
 import br.com.gticket.util.SessionUtil;
 
@@ -23,7 +23,7 @@ public class LoginMB implements Serializable {
 	private boolean erro;
 
 	private Usuario usuarioLogado;
-	private UsuarioBo bo;
+	private UsuarioBO bo;
 
 	@PostConstruct
 	public void init() {
@@ -31,7 +31,7 @@ public class LoginMB implements Serializable {
 		email = "";
 		senha = "";
 		usuarioLogado = new Usuario();
-		bo = new UsuarioBo();
+		bo = new UsuarioBO();
 
 	}
 

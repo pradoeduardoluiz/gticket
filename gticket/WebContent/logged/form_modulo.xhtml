@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:body>
+	<ui:composition template="../template/template.html">
+
+		<ui:define name="conteudo">
+			<b:container fluid="true">
+				<b:panel title="Cadastro de Módulos">
+					<h:form id="formModulo">
+						<b:row>
+							<b:column medium-screen="1">
+								<h:outputLabel value="Id" for="idModulo"
+									rendered="#{moduloMB.modulo.id!=null}" />
+							</b:column>
+							<b:column medium-screen="4">
+								<b:inputText id="idModulo" value="#{moduloMB.modulo.id}"
+									readonly="true" rendered="#{moduloMB.modulo.id!=null}" />
+								<h:inputHidden value="#{moduloMB.modulo.id}" />
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="1">
+								<h:outputLabel value="Nome" for="nomeModulo" />
+							</b:column>
+							<b:column medium-screen="4">
+								<b:inputText id="nomeModulo" value="#{moduloMB.modulo.nome}"
+									placeholder="Nome do módulo" required="true"
+									required-message="Campo Nome é Obrigatório!" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="1">
+								<h:outputLabel value="Descrição" for="descricaoModulo" />
+							</b:column>
+							<b:column medium-screen="4">
+								<b:inputTextarea id="descricaoModulo"
+									value="#{moduloMB.modulo.descricao}"
+									placeholder="Descrição breve do módulo" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="1" offset="2">
+								<b:commandButton look="success btn-block" value="Salvar"
+									action="#{moduloMB.salvar}" />
+							</b:column>
+							<b:column medium-screen="1">
+								<b:button value="Voltar" outcome="lista_modulos"
+									look="danger btn-block" />
+							</b:column>
+						</b:row>
+					</h:form>
+					<b:messages />
+				</b:panel>
+			</b:container>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

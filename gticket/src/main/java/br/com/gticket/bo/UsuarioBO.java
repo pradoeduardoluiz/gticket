@@ -3,18 +3,18 @@ package br.com.gticket.bo;
 import java.util.Date;
 import java.util.List;
 
+import br.com.gticket.bo.exception.ValorEmBrancoException;
+import br.com.gticket.bo.exception.ValorInvalidoException;
+import br.com.gticket.bo.exception.ValorZeradoException;
 import br.com.gticket.dao.UsuarioDAO;
 import br.com.gticket.model.Usuario;
-import br.com.gticket.model.exception.ValorEmBrancoException;
-import br.com.gticket.model.exception.ValorInvalidoException;
-import br.com.gticket.model.exception.ValorZeradoException;
 import br.com.gticket.util.CriptografaSenha;
 
-public class UsuarioBo {
+public class UsuarioBO {
 
 	private UsuarioDAO dao;
 
-	public UsuarioBo() {
+	public UsuarioBO() {
 
 		dao = new UsuarioDAO();
 	}

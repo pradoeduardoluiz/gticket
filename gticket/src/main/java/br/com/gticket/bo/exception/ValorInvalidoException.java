@@ -1,4 +1,4 @@
-package br.com.gticket.model.exception;
+package br.com.gticket.bo.exception;
 
 public class ValorInvalidoException extends Exception {
 

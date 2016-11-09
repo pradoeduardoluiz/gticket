@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:body>
+
+	<ui:composition template="../template/template.html">
+
+		<ui:define name="conteudo">
+
+			<h1>Lista de Módulos</h1>
+
+			<b:container fluid="true">
+
+				<h:form>
+					<b:dataTable value="#{modulooMB.modulos}" var="modulo"
+						customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
+
+						<b:dataTableColumn value="#{modulo.id}" />
+						<b:dataTableColumn value="#{modulo.nome}" />
+
+						<h:column>
+							<f:facet name="header">Ações</f:facet>
+							<h:link styleClass="btn btn-default"
+								outcome="/logged/form_modulo" value="Editar">
+								<f:param name="id" value="#{modulo.id}" />
+							</h:link>
+							<span />
+							<h:commandLink
+								onclick="return confirm('Tem certeza da exclusão do Modulo #{Modulo.nome}');"
+								styleClass="btn btn-danger"
+								action="#{usuarioMB.excluir(modulo.id)}" value="Excluir" />
+						</h:column>
+
+					</b:dataTable>
+
+				</h:form>
+
+				<span class="glyphicon glyphicon-plus" aria-hidden="true" />
+				<h:link outcome="form_modulo" value="Adicionar Modulo" />
+
+			</b:container>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
