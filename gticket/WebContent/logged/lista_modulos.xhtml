@@ -16,7 +16,7 @@
 			<b:container fluid="true">
 
 				<h:form>
-					<b:dataTable value="#{modulooMB.modulos}" var="modulo"
+					<b:dataTable value="#{moduloMB.modulos}" var="modulo"
 						customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
 
 						<b:dataTableColumn value="#{modulo.id}" />
@@ -32,7 +32,7 @@
 							<h:commandLink
 								onclick="return confirm('Tem certeza da exclusão do Modulo #{Modulo.nome}');"
 								styleClass="btn btn-danger"
-								action="#{usuarioMB.excluir(modulo.id)}" value="Excluir" />
+								action="#{moduloMB.excluir(modulo.id)}" value="Excluir" />
 						</h:column>
 
 					</b:dataTable>

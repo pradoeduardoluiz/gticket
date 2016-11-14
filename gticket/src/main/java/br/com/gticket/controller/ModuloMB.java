@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ComponentSystemEvent;
 
 import br.com.gticket.bo.ModuloBO;
 import br.com.gticket.model.Modulo;
@@ -19,7 +20,7 @@ public class ModuloMB implements Serializable {
 
 	private Modulo modulo;
 	private ModuloBO bo;
-	private Integer editaId;
+	private Integer editarId;
 	private List<Modulo> modulos;
 
 	@PostConstruct
@@ -47,6 +48,20 @@ public class ModuloMB implements Serializable {
 
 	}
 
+	public String excluir(Integer id) {
+		bo.excluir(id);
+
+		return "/lista_usuarios";
+	}
+
+	public void carregarModulo(ComponentSystemEvent event) {
+		if (editarId == null) {
+			return;
+		}
+
+		modulo = bo.buscarPorId(editarId);
+	}
+
 	public Modulo getModulo() {
 		return modulo;
 	}
@@ -55,16 +70,16 @@ public class ModuloMB implements Serializable {
 		this.modulo = modulo;
 	}
 
-	public Integer getEditaId() {
-		return editaId;
+	public Integer getEditarId() {
+		return editarId;
 	}
 
-	public void setEditaId(Integer editaId) {
-		this.editaId = editaId;
+	public void setEditarId(Integer editarId) {
+		this.editarId = editarId;
 	}
 
 	public List<Modulo> getModulos() {
-		return modulos;
+		return bo.listar();
 	}
 
 	public void setModulos(List<Modulo> modulos) {

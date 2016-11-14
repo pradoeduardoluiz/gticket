@@ -18,7 +18,7 @@
 				<b:panel title="Cadastro de Usuário">
 					<h:form id="formUsuario">
 						<b:row>
-							<b:column medium-screen="1">
+							<b:column medium-screen="2">
 								<h:outputLabel value="Id" for="idUsuario"
 									rendered="#{usuarioMB.usuario.id!=null}" />
 							</b:column>
@@ -29,7 +29,7 @@
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="1">
+							<b:column medium-screen="2">
 								<h:outputLabel value="Nome" for="nomeUsuario" />
 							</b:column>
 							<b:column medium-screen="4">
@@ -39,7 +39,7 @@
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="1">
+							<b:column medium-screen="2">
 								<h:outputLabel value="CPF" for="cpfUsuario" />
 							</b:column>
 							<b:column medium-screen="4" style="height:44px">
@@ -50,7 +50,7 @@
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="1">
+							<b:column medium-screen="2">
 								<h:outputLabel value="RG" for="rgUsuario" />
 							</b:column>
 							<b:column medium-screen="4">
@@ -60,7 +60,7 @@
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="1">
+							<b:column medium-screen="2">
 								<h:outputLabel value="Data de Nascimento"
 									for="dataNascimentoUsuario" />
 							</b:column>
@@ -72,7 +72,7 @@
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="1">
+							<b:column medium-screen="2">
 								<h:outputLabel value="Email" for="emailUsuario" />
 							</b:column>
 							<b:column medium-screen="4">
@@ -82,7 +82,7 @@
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="1">
+							<b:column medium-screen="2">
 								<h:outputLabel value="Perfil" for="perfilUsuario" />
 							</b:column>
 							<b:column medium-screen="4">
@@ -95,7 +95,7 @@
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="1">
+							<b:column medium-screen="2">
 								<h:outputLabel value="Senha" for="senhaUsuario"
 									rendered="#{usuarioMB.editarId==null}" />
 							</b:column>
@@ -109,7 +109,7 @@
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="1">
+							<b:column medium-screen="2">
 								<h:outputLabel value="Confirmação de Senha"
 									for="confirmacaoSenhaUsuario"
 									rendered="#{usuarioMB.editarId==null}" />
@@ -125,7 +125,7 @@
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="1">
+							<b:column medium-screen="2">
 								<h:outputLabel value="Observação" for="observacaoUsuario" />
 							</b:column>
 							<b:column medium-screen="4">
@@ -134,11 +134,11 @@
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="1" offset="2">
+							<b:column medium-screen="2" offset="2">
 								<b:commandButton look="success btn-block" value="Salvar"
 									action="#{usuarioMB.salvar}" />
 							</b:column>
-							<b:column medium-screen="1">
+							<b:column medium-screen="2">
 								<b:button value="Voltar" outcome="lista_usuarios"
 									look="danger btn-block" />
 							</b:column>

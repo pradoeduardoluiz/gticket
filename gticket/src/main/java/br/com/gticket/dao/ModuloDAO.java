@@ -32,6 +32,7 @@ public class ModuloDAO extends DAO {
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Modulo> listar() {
 
 		Query query = getEntityManager().createQuery("From modulo",

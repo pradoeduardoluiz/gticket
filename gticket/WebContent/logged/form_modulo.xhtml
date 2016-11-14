@@ -6,6 +6,12 @@
 	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
 
 <h:body>
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{moduloMB.editarId}" />
+		<f:event listener="#{moduloMB.carregarModulo}" type="preRenderView" />
+	</f:metadata>
+
 	<ui:composition template="../template/template.html">
 
 		<ui:define name="conteudo">
@@ -13,7 +19,7 @@
 				<b:panel title="Cadastro de Módulos">
 					<h:form id="formModulo">
 						<b:row>
-							<b:column medium-screen="1">
+							<b:column medium-screen="2">
 								<h:outputLabel value="Id" for="idModulo"
 									rendered="#{moduloMB.modulo.id!=null}" />
 							</b:column>
@@ -24,7 +30,7 @@
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="1">
+							<b:column medium-screen="2">
 								<h:outputLabel value="Nome" for="nomeModulo" />
 							</b:column>
 							<b:column medium-screen="4">
@@ -35,7 +41,7 @@
 						</b:row>
 
 						<b:row>
-							<b:column medium-screen="1">
+							<b:column medium-screen="2">
 								<h:outputLabel value="Descrição" for="descricaoModulo" />
 							</b:column>
 							<b:column medium-screen="4">
@@ -46,11 +52,11 @@
 						</b:row>
 
 						<b:row>
-							<b:column medium-screen="1" offset="2">
+							<b:column medium-screen="2" offset="2">
 								<b:commandButton look="success btn-block" value="Salvar"
 									action="#{moduloMB.salvar}" />
 							</b:column>
-							<b:column medium-screen="1">
+							<b:column medium-screen="2">
 								<b:button value="Voltar" outcome="lista_modulos"
 									look="danger btn-block" />
 							</b:column>

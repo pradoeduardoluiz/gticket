@@ -12,6 +12,10 @@ public class ModuloBO implements ValidaFormulario {
 
 	private ModuloDAO dao;
 
+	public ModuloBO() {
+		dao = new ModuloDAO();
+	}
+
 	public void salvar(Modulo modulo) throws ValorEmBrancoException,
 			ValorInvalidoException {
 

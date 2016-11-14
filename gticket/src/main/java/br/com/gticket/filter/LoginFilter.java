@@ -39,7 +39,11 @@ public class LoginFilter implements Filter {
 
 		} else {
 
-			redirect("../index.xhtml?erro=true", response);
+			if (req.getRequestURI().contains("/logged/")) {
+				redirect("../index.xhtml?erro=true", response);
+			} else {
+				redirect("index.xhtml?erro=true", response);
+			}
 
 		}
 
