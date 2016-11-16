@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:body>
+
+	<ui:composition template="../template/template.html">
+
+		<ui:define name="conteudo">
+
+			<h1>Lista de Clientes</h1>
+
+			<b:container fluid="true">
+
+				<h:form>
+					<b:dataTable value="#{clienteMB.clientes}" var="cliente"
+						customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
+
+						<b:dataTableColumn value="#{cliente.id}" />
+						<b:dataTableColumn value="#{cliente.razaoSocial}" />
+						<b:dataTableColumn value="#{cliente.nomeFantasia}" />
+
+						<h:column>
+							<f:facet name="header">Ações</f:facet>
+							<h:link styleClass="btn btn-default"
+								outcome="/logged/form_cliente" value="Editar">
+								<f:param name="id" value="#{cliente.id}" />
+							</h:link>
+							<span />
+							<h:commandLink
+								onclick="return confirm('Tem certeza da exclusão do cliente #{cliente.nome}');"
+								styleClass="btn btn-danger"
+								action="#{clienteMB.excluir(cliente.id)}" value="Excluir" />
+						</h:column>
+
+					</b:dataTable>
+
+				</h:form>
+
+				<span class="glyphicon glyphicon-plus" aria-hidden="true" />
+				<h:link outcome="form_cliente" value="Adicionar cliente" />
+
+			</b:container>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

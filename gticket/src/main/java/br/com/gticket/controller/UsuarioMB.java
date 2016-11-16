@@ -33,10 +33,6 @@ public class UsuarioMB implements Serializable {
 		bo = new UsuarioBO();
 	}
 
-	public void limpar() {
-		System.out.println(usuario.getId());
-	}
-
 	public void salvar() {
 
 		try {

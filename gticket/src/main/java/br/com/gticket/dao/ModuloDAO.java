@@ -15,7 +15,7 @@ public class ModuloDAO extends DAO {
 
 	}
 
-	public boolean buscarPorNome(String nome) {
+	public boolean buscarPorNome(String nome, Integer id) {
 
 		Query query = getEntityManager().createQuery(
 				"From modulo where nome=:nome", Modulo.class);
@@ -29,6 +29,12 @@ public class ModuloDAO extends DAO {
 
 			return false;
 		}
+
+		if (modulo.getId() == id) {
+			return false;
+
+		}
+
 		return true;
 	}
 

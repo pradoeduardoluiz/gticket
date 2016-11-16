@@ -1,20 +1,23 @@
 package br.com.gticket.bo;
 
-import java.util.Date;
-
 import br.com.gticket.bo.exception.ValorEmBrancoException;
+import br.com.gticket.bo.exception.ValorInvalidoException;
+import br.com.gticket.bo.exception.ValorZeradoException;
 
 public interface ValidaFormulario {
 
 	abstract void validaCamposObrigatorios(Object object)
-			throws ValorEmBrancoException;
+			throws ValorEmBrancoException, ValorZeradoException,
+			ValorInvalidoException;
+
+	abstract void validaCamposNaInclusao(Object object)
+			throws ValorEmBrancoException, ValorZeradoException,
+			ValorInvalidoException;
+
+	abstract void validaCamposUnicos(Object object)
+			throws ValorEmBrancoException, ValorZeradoException,
+			ValorInvalidoException;
 
 	abstract boolean inclusao(Object object);
-
-	abstract boolean campoVazio(String string);
-
-	abstract boolean campoVazio(Date data);
-
-	abstract boolean campoVazio(Integer integer);
 
 }

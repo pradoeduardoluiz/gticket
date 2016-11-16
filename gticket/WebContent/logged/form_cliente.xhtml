@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:body>
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{clienteMB.editarId}" />
+		<f:event listener="#{clienteMB.carregarCliente}" type="preRenderView" />
+	</f:metadata>
+
+	<ui:composition template="../template/template.html">
+
+		<ui:define name="conteudo">
+			<b:container fluid="true">
+				<b:panel title="Cadastro de Cliente">
+
+					<h:form id="formCliente">
+
+						<b:panel title="Dados Cadastrais">
+
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Id" for="idcliente"
+										rendered="#{clienteMB.cliente.id!=null}" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:inputText id="idcliente" value="#{clienteMB.cliente.id}"
+										readonly="true" rendered="#{clienteMB.cliente.id!=null}" />
+									<h:inputHidden value="#{clienteMB.cliente.id}" />
+								</b:column>
+							</b:row>
+
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Razão Social" for="razaoSocial" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:inputText id="razaoSocial"
+										value="#{clienteMB.cliente.razaoSocial}"
+										placeholder="Razão Social" required="true"
+										required-message="Campo Razão Social é Obrigatório!" />
+								</b:column>
+							</b:row>
+
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Nome Fantasia" for="nomeFantasia" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:inputText id="nomeFantasia"
+										value="#{clienteMB.cliente.nomeFantasia}"
+										placeholder="Nome Fantasia" required="true"
+										required-message="Campo Nome Fantasia é Obrigatório!" />
+								</b:column>
+							</b:row>
+
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="CNPJ" for="cnpj" />
+								</b:column>
+								<b:column medium-screen="4" style="height:44px">
+									<p:inputMask id="cnpj" value="#{clienteMB.cliente.cnpj}"
+										mask="99.999.999/9999-99" placeholder="CNPJ" required="true"
+										styleClass="form-control"
+										requiredMessage="Campo CNPJ é Obrigatório!" />
+								</b:column>
+							</b:row>
+
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Telefone 1" for="telefone1" />
+								</b:column>
+								<b:column medium-screen="4" style="height:44px">
+									<p:inputMask id="telefone1"
+										value="#{clienteMB.cliente.telefone1}" mask="(99) 9999-9999"
+										placeholder="Telefone Comercial" required="true"
+										styleClass="form-control"
+										requiredMessage="Campo Telefone 1 é Obrigatório!" />
+								</b:column>
+							</b:row>
+
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Telefone 2" for="telefone2" />
+								</b:column>
+								<b:column medium-screen="4" style="height:44px">
+									<p:inputMask id="telefone2"
+										value="#{clienteMB.cliente.telefone2}" mask="(99) 9999-9999"
+										placeholder="Telefone Comercial" styleClass="form-control" />
+								</b:column>
+							</b:row>
+
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Fax" for="fax" />
+								</b:column>
+								<b:column medium-screen="4" style="height:44px">
+									<p:inputMask id="fax" value="#{clienteMB.cliente.fax}"
+										mask="(99) 9999-9999" placeholder="Fax" required="true"
+										styleClass="form-control" />
+								</b:column>
+							</b:row>
+
+							<b:row>
+								<b:column medium-screen="2" style="height:44px">
+									<h:outputLabel value="Cep" for="cep" />
+								</b:column>
+								<b:column medium-screen="4">
+									<p:inputMask id="cep" value="#{clienteMB.cliente.endereco.cep}"
+										mask="99999-999" placeholder="CEP" required="true"
+										styleClass="form-control"
+										requiredMessage="Campo CEP é Obrigatório!" ng-model="number" />
+								</b:column>
+							</b:row>
+
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Rua" for="rua" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:inputText id="rua" value="#{clienteMB.cliente.endereco.rua}"
+										placeholder="Rua/Avenida/Rodovia" required="true"
+										required-message="Campo Rua é Obrigatório!" />
+								</b:column>
+							</b:row>
+
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Número" for="numero" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:inputText id="numero"
+										value="#{clienteMB.cliente.endereco.numero}"
+										placeholder="Número do Endereço" required="true"
+										required-message="Campo Número é Obrigatório!" />
+								</b:column>
+							</b:row>
+
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Complemento" for="complemento" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:inputText id="complemento"
+										value="#{clienteMB.cliente.endereco.complemento}"
+										placeholder="Complemento" />
+								</b:column>
+							</b:row>
+
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Bairro" for="bairro" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:inputText id="bairro"
+										value="#{clienteMB.cliente.endereco.bairro}"
+										placeholder="Bairro" />
+								</b:column>
+							</b:row>
+
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Cidade" for="cidade" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:inputText id="cidade"
+										value="#{clienteMB.cliente.endereco.cidade}"
+										placeholder="Cidade" />
+								</b:column>
+							</b:row>
+
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Estado" for="estado" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:selectOneMenu id="estado"
+										value="#{clienteMB.cliente.endereco.estado}" required="true"
+										requiredMessage="Selecione um estado válido!">
+										<f:selectItem itemLabel="Selecione..." itemValue="" />
+										<f:selectItems value="#{clienteMB.estados}" var="estado" />
+									</b:selectOneMenu>
+								</b:column>
+							</b:row>
+
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Observação" for="observacao" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:inputTextarea id="observacao"
+										value="#{clienteMB.cliente.obsercacao}" />
+								</b:column>
+							</b:row>
+
+						</b:panel>
+
+						<b:panel title="Dados de Contrato">
+
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Número de Contrato" for="numeroContrato" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:inputText id="numeroContrato"
+										value="#{clienteMB.cliente.contrato.numeroContrato}"
+										placeholder="Número do Contrato" required="true"
+										required-message="Campo Número do Contrato é Obrigatório!"
+										type="number" min="1" />
+								</b:column>
+							</b:row>
+
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Número de Licenças" for="numeroDeLicecas" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:inputText id="numeroDeLicecas"
+										value="#{clienteMB.cliente.contrato.numeroDeLicecas}"
+										placeholder="Número do Licenças" required="true"
+										required-message="Campo Número do Licenças é Obrigatório!"
+										type="number" min="1" />
+								</b:column>
+							</b:row>
+
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Número de Filiais" for="numeroDeFiliais" />
+								</b:column>
+								<b:column medium-screen="4">
+									<b:inputText id="numeroDeFiliais"
+										value="#{clienteMB.cliente.contrato.numeroDeFiliais}"
+										placeholder="Número de Filiais" required="true"
+										required-message="Campo Número do Filiais é Obrigatório!"
+										type="number" min="1" />
+								</b:column>
+							</b:row>
+
+							<b:row>
+								<b:column medium-screen="2">
+
+								</b:column>
+								<b:column medium-screen="4">
+									<b:selectBooleanCheckbox
+										value="#{clienteMB.cliente.contrato.clientePremium}"
+										caption="Cliente Premium" />
+								</b:column>
+
+							</b:row>
+
+							<b:row>
+								<b:column medium-screen="2">
+
+								</b:column>
+								<b:column medium-screen="4">
+									<b:selectBooleanCheckbox
+										value="#{clienteMB.cliente.contrato.contratoRecebido}"
+										caption="Contrato Recebido" />
+								</b:column>
+							</b:row>
+
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Data de inicio do contrato"
+										for="dataInicioContrato" />
+								</b:column>
+								<b:column medium-screen="4" style="height:44px">
+									<b:dateTimePicker id="dataInicioContrato"
+										value="#{clienteMB.cliente.contrato.dataInicio}"
+										show-date="true" show-time="false" required="true"
+										format="DD-MM-YYYY"
+										required-message="Campo Data de Inicio de Contrato é Obrigatório!" />
+								</b:column>
+							</b:row>
+
+							<b:row>
+								<b:column medium-screen="2">
+									<h:outputLabel value="Data de termino do contrato"
+										for="dataTerminoContrato" />
+								</b:column>
+								<b:column medium-screen="4" style="height:44px">
+									<b:dateTimePicker id="dataTerminoContrato"
+										value="#{clienteMB.cliente.contrato.dataTermino}"
+										show-date="true" show-time="false" format="DD-MM-YYYY" />
+								</b:column>
+							</b:row>
+
+						</b:panel>
+
+						<b:row>
+							<b:column medium-screen="2" offset="2">
+								<b:commandButton look="success btn-block" value="Salvar"
+									action="#{clienteMB.salvar}" />
+							</b:column>
+							<b:column medium-screen="2">
+								<b:button value="Voltar" outcome="lista_clientes"
+									look="danger btn-block" />
+							</b:column>
+						</b:row>
+
+					</h:form>
+					<b:messages />
+				</b:panel>
+			</b:container>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

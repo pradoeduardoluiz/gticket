@@ -1,14 +1,14 @@
 package br.com.gticket.bo;
 
-import java.util.Date;
 import java.util.List;
 
 import br.com.gticket.bo.exception.ValorEmBrancoException;
 import br.com.gticket.bo.exception.ValorInvalidoException;
+import br.com.gticket.bo.exception.ValorZeradoException;
 import br.com.gticket.dao.ModuloDAO;
 import br.com.gticket.model.Modulo;
 
-public class ModuloBO implements ValidaFormulario {
+public class ModuloBO extends BO implements ValidaFormulario {
 
 	private ModuloDAO dao;
 
@@ -17,16 +17,14 @@ public class ModuloBO implements ValidaFormulario {
 	}
 
 	public void salvar(Modulo modulo) throws ValorEmBrancoException,
-			ValorInvalidoException {
+			ValorInvalidoException, ValorZeradoException {
 
 		validaCamposObrigatorios(modulo);
+		validaCamposUnicos(modulo);
 
 		if (inclusao(modulo)) {
 
-			if (dao.buscarPorNome(modulo.getNome())) {
-				throw new ValorInvalidoException(
-						"Já existe módulo com este nome cadastrado!");
-			}
+			validaCamposNaInclusao(modulo);
 
 		}
 
@@ -59,36 +57,6 @@ public class ModuloBO implements ValidaFormulario {
 	}
 
 	@Override
-	public boolean campoVazio(String campo) {
-		// TODO Auto-generated method stub
-
-		if (campo == null || campo.isEmpty()) {
-			return true;
-		}
-		return false;
-
-	}
-
-	@Override
-	public boolean campoVazio(Date campo) {
-		if (campo == null) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean campoVazio(Integer campo) {
-		// TODO Auto-generated method stub
-
-		if (campo == null || campo == 0) {
-			return true;
-		}
-		return false;
-
-	}
-
-	@Override
 	public boolean inclusao(Object objeto) {
 
 		Modulo moduloValidado = (Modulo) objeto;
@@ -107,6 +75,29 @@ public class ModuloBO implements ValidaFormulario {
 
 	public void excluir(Integer id) {
 		dao.excluir(id);
+	}
+
+	@Override
+	public void validaCamposNaInclusao(Object object)
+			throws ValorInvalidoException, ValorEmBrancoException {
+		// TODO Auto-generated method stub
+
+		Modulo modulo = (Modulo) object;
+
+	}
+
+	@Override
+	public void validaCamposUnicos(Object object)
+			throws ValorEmBrancoException, ValorZeradoException,
+			ValorInvalidoException {
+
+		Modulo modulo = (Modulo) object;
+
+		if (dao.buscarPorNome(modulo.getNome(), modulo.getId())) {
+			throw new ValorInvalidoException(
+					"Já existe módulo com este nome cadastrado!");
+		}
+
 	}
 
 }

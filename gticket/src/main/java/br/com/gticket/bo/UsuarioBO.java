@@ -10,7 +10,7 @@ import br.com.gticket.dao.UsuarioDAO;
 import br.com.gticket.model.Usuario;
 import br.com.gticket.util.CriptografaSenha;
 
-public class UsuarioBO {
+public class UsuarioBO extends BO implements ValidaFormulario {
 
 	private UsuarioDAO dao;
 
@@ -23,28 +23,11 @@ public class UsuarioBO {
 			ValorInvalidoException, ValorZeradoException {
 
 		validaCamposObrigatorios(usuario);
+		validaCamposUnicos(usuario);
 
 		if (inclusao(usuario)) {
 
-			if (dao.buscarPorNome(usuario.getNome())) {
-				throw new ValorInvalidoException(
-						"Já existe usuário com este nome cadastrado!");
-			}
-
-			if (dao.buscarPorCpf(usuario.getCpf())) {
-				throw new ValorInvalidoException(
-						"Já existe usuário com este CPF cadastrado!");
-			}
-
-			if (dao.buscarPorEmail(usuario.getEmail())) {
-				throw new ValorInvalidoException(
-						"Já existe usuário com este e-email cadastrado!");
-			}
-
-			if (!usuario.getConfirmacaoDeSenha().equals(usuario.getSenha())) {
-				throw new ValorInvalidoException(
-						"Senha e Confirmação se senha devem ser iguais!");
-			}
+			validaCamposNaInclusao(usuario);
 
 			usuario.setSenha(CriptografaSenha.encryptPassword(usuario
 					.getSenha()));
@@ -53,62 +36,6 @@ public class UsuarioBO {
 
 		dao.salvar(usuario);
 
-	}
-
-	private void validaCamposObrigatorios(Usuario usuario)
-			throws ValorEmBrancoException, ValorZeradoException {
-
-		if (campoVazio(usuario.getNome())) {
-			throw new ValorEmBrancoException("Campo Nome é Obrigatório!");
-		}
-
-		if (campoVazio(usuario.getCpf())) {
-			throw new ValorEmBrancoException("Campo CPF é Obrigatório!");
-		}
-
-		if (campoVazio(usuario.getRg())) {
-			throw new ValorEmBrancoException("Campo RG é Obrigatório!");
-		}
-
-		if (campoVazio(usuario.getDataNascimento())) {
-			throw new ValorZeradoException(
-					"Campo Data de Nascimento é Obrigatório!");
-		}
-
-		if (campoVazio(usuario.getEmail())) {
-			throw new ValorEmBrancoException("Campo Email é Obrigatório!");
-		}
-
-		if (inclusao(usuario)) {
-			if (campoVazio(usuario.getSenha())) {
-				throw new ValorEmBrancoException("Campo Senha é Obrigatório!");
-			}
-
-			if (campoVazio(usuario.getConfirmacaoDeSenha())) {
-				throw new ValorEmBrancoException(
-						"Campo Confirmação de Senha é Obrigatório!");
-			}
-		}
-
-	}
-
-	private boolean campoVazio(Date data) {
-
-		if (data == null) {
-			return true;
-		}
-		return false;
-	}
-
-	private boolean campoVazio(String campo) {
-		if (campo == null || campo.isEmpty()) {
-			return true;
-		}
-		return false;
-	}
-
-	private boolean inclusao(Usuario usuario) {
-		return usuario.getId() == null || usuario.getId() == 0;
 	}
 
 	public List<Usuario> listarUsuarios() {
@@ -144,6 +71,91 @@ public class UsuarioBO {
 		}
 
 		return usuarioLogado;
+
+	}
+
+	@Override
+	public void validaCamposObrigatorios(Object object)
+			throws ValorEmBrancoException, ValorZeradoException {
+
+		Usuario usuario = (Usuario) object;
+
+		if (campoVazio(usuario.getNome())) {
+			throw new ValorEmBrancoException("Campo Nome é Obrigatório!");
+		}
+
+		if (campoVazio(usuario.getCpf())) {
+			throw new ValorEmBrancoException("Campo CPF é Obrigatório!");
+		}
+
+		if (campoVazio(usuario.getRg())) {
+			throw new ValorEmBrancoException("Campo RG é Obrigatório!");
+		}
+
+		if (campoVazio(usuario.getDataNascimento())) {
+			throw new ValorZeradoException(
+					"Campo Data de Nascimento é Obrigatório!");
+		}
+
+		if (campoVazio(usuario.getEmail())) {
+			throw new ValorEmBrancoException("Campo Email é Obrigatório!");
+		}
+
+		if (inclusao(usuario)) {
+			if (campoVazio(usuario.getSenha())) {
+				throw new ValorEmBrancoException("Campo Senha é Obrigatório!");
+			}
+
+			if (campoVazio(usuario.getConfirmacaoDeSenha())) {
+				throw new ValorEmBrancoException(
+						"Campo Confirmação de Senha é Obrigatório!");
+			}
+		}
+
+	}
+
+	@Override
+	public void validaCamposNaInclusao(Object object)
+			throws ValorInvalidoException, ValorEmBrancoException {
+
+		Usuario usuario = (Usuario) object;
+
+		if (!usuario.getConfirmacaoDeSenha().equals(usuario.getSenha())) {
+			throw new ValorInvalidoException(
+					"Senha e Confirmação se senha devem ser iguais!");
+		}
+
+	}
+
+	@Override
+	public boolean inclusao(Object object) {
+
+		Usuario usuario = (Usuario) object;
+
+		return usuario.getId() == null || usuario.getId() == 0;
+	}
+
+	@Override
+	public void validaCamposUnicos(Object object)
+			throws ValorEmBrancoException, ValorZeradoException,
+			ValorInvalidoException {
+
+		Usuario usuario = (Usuario) object;
+
+		if (dao.buscarPorNome(usuario.getNome(), usuario.getId())) {
+			throw new ValorInvalidoException(
+					"Já existe usuário com este nome cadastrado!");
+		}
+
+		if (dao.buscarPorCpf(usuario.getCpf(), usuario.getId())) {
+			throw new ValorInvalidoException(
+					"Já existe usuário com este CPF cadastrado!");
+		}
+
+		if (dao.buscarPorEmail(usuario.getEmail(), usuario.getId())) {
+			throw new ValorInvalidoException(
+					"Já existe usuário com este e-email cadastrado!");
+		}
 
 	}
 }

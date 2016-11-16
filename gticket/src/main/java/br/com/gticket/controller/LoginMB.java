@@ -38,6 +38,7 @@ public class LoginMB implements Serializable {
 	public String login() {
 
 		try {
+
 			usuarioLogado = bo.login(email, senha);
 			SessionUtil.setParam("usuarioLogado", usuarioLogado);
 			return "/logged/home";

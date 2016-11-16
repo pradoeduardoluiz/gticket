@@ -34,7 +34,7 @@ public class UsuarioDAO extends DAO {
 		getEntityManager().remove(usuario);
 	}
 
-	public boolean buscarPorNome(String nome) {
+	public boolean buscarPorNome(String nome, Integer id) {
 		// TODO Auto-generated method stub
 
 		Query query = getEntityManager().createQuery(
@@ -49,11 +49,17 @@ public class UsuarioDAO extends DAO {
 
 			return false;
 		}
+
+		if (usuario.getId() == id) {
+			return false;
+		}
+
 		return true;
 
 	}
 
 	public boolean buscarPorEmail(String email) {
+		// TODO Auto-generated method stub
 
 		Query query = getEntityManager().createQuery(
 				"From usuario where email=:email", Usuario.class);
@@ -67,11 +73,35 @@ public class UsuarioDAO extends DAO {
 
 			return false;
 		}
+
 		return true;
 
 	}
 
-	public boolean buscarPorCpf(String cpf) {
+	public boolean buscarPorEmail(String email, Integer id) {
+
+		Query query = getEntityManager().createQuery(
+				"From usuario where email=:email", Usuario.class);
+		query.setParameter("email", email);
+
+		Usuario usuario = null;
+
+		try {
+			usuario = (Usuario) query.getSingleResult();
+		} catch (NoResultException e) {
+
+			return false;
+		}
+
+		if (usuario.getId() == id) {
+			return false;
+		}
+
+		return true;
+
+	}
+
+	public boolean buscarPorCpf(String cpf, Integer id) {
 
 		Query query = getEntityManager().createQuery(
 				"From usuario where cpf=:cpf", Usuario.class);
@@ -85,12 +115,12 @@ public class UsuarioDAO extends DAO {
 
 			return false;
 		}
+
+		if (usuario.getId() == id) {
+			return false;
+		}
+
 		return true;
-	}
-
-	public void login(Usuario usuario) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public Usuario validaLogin(String email, String senha) {
@@ -112,4 +142,5 @@ public class UsuarioDAO extends DAO {
 
 		}
 	}
+
 }
