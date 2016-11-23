@@ -34,36 +34,16 @@ public class UsuarioDAO extends DAO {
 		getEntityManager().remove(usuario);
 	}
 
-	public boolean buscarPorNome(String nome, Integer id) {
-		// TODO Auto-generated method stub
+	public boolean jaExisteRegistroComValor(String valorDocampo, Integer id,
+			String nomeDoCampo) {
 
-		Query query = getEntityManager().createQuery(
-				"From usuario where nome=:nome", Usuario.class);
-		query.setParameter("nome", nome);
+		String strQuery = "From usuario where campo=:campo";
 
-		Usuario usuario = null;
+		strQuery = strQuery.replaceAll("campo", nomeDoCampo);
 
-		try {
-			usuario = (Usuario) query.getSingleResult();
-		} catch (NoResultException e) {
+		Query query = getEntityManager().createQuery(strQuery, Usuario.class);
 
-			return false;
-		}
-
-		if (usuario.getId() == id) {
-			return false;
-		}
-
-		return true;
-
-	}
-
-	public boolean buscarPorEmail(String email) {
-		// TODO Auto-generated method stub
-
-		Query query = getEntityManager().createQuery(
-				"From usuario where email=:email", Usuario.class);
-		query.setParameter("email", email);
+		query.setParameter(nomeDoCampo, valorDocampo);
 
 		Usuario usuario = null;
 
@@ -74,53 +54,13 @@ public class UsuarioDAO extends DAO {
 			return false;
 		}
 
+		if (id != 0) {
+			if (usuario.getId() == id) {
+				return false;
+			}
+		}
 		return true;
 
-	}
-
-	public boolean buscarPorEmail(String email, Integer id) {
-
-		Query query = getEntityManager().createQuery(
-				"From usuario where email=:email", Usuario.class);
-		query.setParameter("email", email);
-
-		Usuario usuario = null;
-
-		try {
-			usuario = (Usuario) query.getSingleResult();
-		} catch (NoResultException e) {
-
-			return false;
-		}
-
-		if (usuario.getId() == id) {
-			return false;
-		}
-
-		return true;
-
-	}
-
-	public boolean buscarPorCpf(String cpf, Integer id) {
-
-		Query query = getEntityManager().createQuery(
-				"From usuario where cpf=:cpf", Usuario.class);
-		query.setParameter("cpf", cpf);
-
-		Usuario usuario = null;
-
-		try {
-			usuario = (Usuario) query.getSingleResult();
-		} catch (NoResultException e) {
-
-			return false;
-		}
-
-		if (usuario.getId() == id) {
-			return false;
-		}
-
-		return true;
 	}
 
 	public Usuario validaLogin(String email, String senha) {

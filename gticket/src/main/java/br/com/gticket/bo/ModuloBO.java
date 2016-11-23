@@ -93,7 +93,8 @@ public class ModuloBO extends BO implements ValidaFormulario {
 
 		Modulo modulo = (Modulo) object;
 
-		if (dao.buscarPorNome(modulo.getNome(), modulo.getId())) {
+		if (dao.jaExisteRegistroComValor(modulo.getNome(), modulo.getId(),
+				"nome")) {
 			throw new ValorInvalidoException(
 					"Já existe módulo com este nome cadastrado!");
 		}

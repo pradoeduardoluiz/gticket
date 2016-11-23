@@ -7,7 +7,7 @@
 
 <h:body>
 
-	<ui:composition template="../template/template.html">
+	<ui:composition template="../template/template.xhtml">
 
 		<ui:define name="conteudo">
 
@@ -16,31 +16,42 @@
 			<b:container fluid="true">
 
 				<h:form>
+
 					<b:dataTable value="#{moduloMB.modulos}" var="modulo"
+						border="false" select="true"
 						customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
 
-						<b:dataTableColumn value="#{modulo.id}" />
-						<b:dataTableColumn value="#{modulo.nome}" />
+						<b:dataTableColumn label="Nome" value="#{modulo.nome}" />
 
-						<h:column>
-							<f:facet name="header">Ações</f:facet>
-							<h:link styleClass="btn btn-default"
-								outcome="/logged/form_modulo" value="Editar">
+						<b:dataTableColumn label="Editar"
+							content-style="width:5px; text-align:center;">
+
+							<h:link outcome="/logged/form_modulo">
+								<b:iconAwesome name="pencil" size="2x" />
 								<f:param name="id" value="#{modulo.id}" />
 							</h:link>
-							<span />
+
+						</b:dataTableColumn>
+
+						<b:dataTableColumn label="Excluir"
+							content-style="width:5px;text-align:center;">
+
 							<h:commandLink
 								onclick="return confirm('Tem certeza da exclusão do Modulo #{Modulo.nome}');"
-								styleClass="btn btn-danger"
-								action="#{moduloMB.excluir(modulo.id)}" value="Excluir" />
-						</h:column>
+								action="#{moduloMB.excluir(modulo.id)}">
+								<b:iconAwesome name="trash" size="2x" />
+							</h:commandLink>
+
+						</b:dataTableColumn>
 
 					</b:dataTable>
 
 				</h:form>
 
-				<span class="glyphicon glyphicon-plus" aria-hidden="true" />
-				<h:link outcome="form_modulo" value="Adicionar Modulo" />
+				<h:link outcome="form_modulo">
+					<b:iconAwesome name="plus-circle" size="2x"
+						tooltip="Adicionar Modulo" />
+				</h:link>
 
 			</b:container>
 

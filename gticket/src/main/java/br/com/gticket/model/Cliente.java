@@ -1,6 +1,6 @@
 package br.com.gticket.model;
 
-import javax.persistence.Embedded;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -9,11 +9,16 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @PrimaryKeyJoinColumn(name = "id")
 public class Cliente extends PessoaJuridica {
 
-	@OneToOne
+	@OneToOne(cascade = { CascadeType.ALL })
 	private Endereco endereco;
 
-	@OneToOne
+	@OneToOne(cascade = { CascadeType.ALL })
 	private Contrato contrato;
+
+	public Cliente() {
+		endereco = new Endereco();
+		contrato = new Contrato();
+	}
 
 	public Endereco getEndereco() {
 		return endereco;

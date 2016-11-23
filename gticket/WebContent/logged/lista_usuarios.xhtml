@@ -7,7 +7,7 @@
 
 <h:body>
 
-	<ui:composition template="../template/template.html">
+	<ui:composition template="../template/template.xhtml">
 
 		<ui:define name="conteudo">
 
@@ -17,31 +17,41 @@
 
 				<h:form>
 					<b:dataTable value="#{usuarioMB.usuarios}" var="usuario"
+						border="false" select="true"
 						customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
 
-						<b:dataTableColumn value="#{usuario.id}" />
-						<b:dataTableColumn value="#{usuario.nome}" />
-						<b:dataTableColumn value="#{usuario.perfil}" />
+						<b:dataTableColumn label="Nome" value="#{usuario.nome}" />
+						<b:dataTableColumn label="Email" value="#{usuario.email}" />
+						<b:dataTableColumn label="Perfil" value="#{usuario.perfil}" />
 
-						<h:column>
-							<f:facet name="header">Ações</f:facet>
-							<h:link styleClass="btn btn-default"
-								outcome="/logged/form_usuario" value="Editar">
+						<b:dataTableColumn label="Editar"
+							content-style="width:5px;text-align:center;">
+
+							<h:link outcome="/logged/form_usuario">
+								<b:iconAwesome name="pencil" size="2x" />
 								<f:param name="id" value="#{usuario.id}" />
 							</h:link>
-							<span />
+						</b:dataTableColumn>
+
+						<b:dataTableColumn label="Excluir"
+							content-style="width:5px;text-align:center;">
+
 							<h:commandLink
 								onclick="return confirm('Tem certeza da exclusão do usuário #{usuario.nome}');"
-								styleClass="btn btn-danger"
-								action="#{usuarioMB.excluir(usuario.id)}" value="Excluir" />
-						</h:column>
+								action="#{usuarioMB.excluir(usuario.id)}">
+								<b:iconAwesome name="trash" size="2x" />
+							</h:commandLink>
+
+						</b:dataTableColumn>
 
 					</b:dataTable>
 
 				</h:form>
 
-				<span class="glyphicon glyphicon-plus" aria-hidden="true" />
-				<h:link outcome="form_usuario" value="Adicionar usuário" />
+				<h:link outcome="form_usuario">
+					<b:iconAwesome name="plus-circle" size="2x"
+						tooltip="Adicionar usuário" />
+				</h:link>
 
 			</b:container>
 

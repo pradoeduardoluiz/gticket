@@ -11,6 +11,7 @@ public class Contrato {
 
 	@Id
 	@GeneratedValue
+	private Integer id;
 	private Integer numeroContrato;
 	private Integer numeroDeLicencas;
 	private Integer numeroDeFiliais;
@@ -21,6 +22,14 @@ public class Contrato {
 	private Date dataInicio;
 	private Date dataTermino;
 	private String observacao;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public Integer getNumeroContrato() {
 		return numeroContrato;

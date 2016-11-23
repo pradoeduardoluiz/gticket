@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<h:outputStylesheet name="/lib/vendor/bootstrap/css/bootstrap.css" />
+	<h:outputStylesheet name="/lib/vendor/metisMenu/metisMenu.css" />
+	<h:outputStylesheet name="/lib/dist/css/sb-admin-2.css" />
+	<h:outputStylesheet name="/lib/vendor/morrisjs/morris.css" />
+	<h:outputStylesheet
+		name="/lib/vendor/font-awesome/css/font-awesome.css" />
+
+</h:head>
+<h:body>
+
+	<div id="wrapper">
+
+		<ui:insert name="topo">
+
+			<!-- Navigation -->
+			<nav class="navbar navbar-default navbar-static-top"
+				role="navigation" style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">FKN Informática</a>
+			</div>
+			<!-- /.navbar-header -->
+
+			<ul class="nav navbar-top-links navbar-right">
+				<!-- /.dropdown -->
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw"></i>
+						<i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-user">
+						<li><i class="fa fa-user fa-fw"></i> <b:navLink
+								value="Perfil Usuario" outcome="form_usuario">
+								<f:param name="id" value="#{loginMB.usuarioLogado.id}" />
+							</b:navLink></li>
+						<li class="divider"></li>
+						<li><i class="fa fa-sign-out fa-fw"></i> <b:navLink
+								value="Logout" outcome="form_usuario" /></li>
+					</ul> <!-- /.dropdown-user --></li>
+				<!-- /.dropdown -->
+			</ul>
+			<!-- /.navbar-top-links -->
+
+			<div class="navbar-default sidebar" role="navigation">
+				<div class="sidebar-nav navbar-collapse">
+					<ul class="nav" id="side-menu">
+						<li class="sidebar-search">
+							<div class="input-group custom-search-form">
+								<input type="text" class="form-control" placeholder="Search..." />
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button">
+										<i class="fa fa-search"></i>
+									</button>
+								</span>
+							</div> <!-- /input-group -->
+						</li>
+						<li><a href="#"><i class="fa fa-cogs fa-fw"></i>
+								Administração<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><h:link outcome="lista_usuarios" value="Usuários" /></li>
+								<li><h:link outcome="lista_modulos" value="Módulos" /></li>
+							</ul> <!-- /.nav-second-level --></li>
+						<li><a href="#"><i class="fa fa-users fa-fw"></i>
+								Clientes e Relacionados<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><h:link outcome="lista_clientes" value="Clientes" /></li>
+								<li><h:link outcome="lista_clientes"
+										value="Módulos Contratados" /></li>
+								<li><h:link outcome="lista_clientes" value="Contatos" /></li>
+							</ul> <!-- /.nav-second-level --></li>
+					</ul>
+				</div>
+				<!-- /.sidebar-collapse -->
+			</div>
+			<!-- /.navbar-static-side --> </nav>
+
+		</ui:insert>
+
+		<div id="page-wrapper">
+
+			<ui:insert name="conteudo">
+
+			</ui:insert>
+
+		</div>
+		<!-- /#page-wrapper -->
+	</div>
+	<!-- /#wrapper -->
+
+	<ui:insert name="rodape">
+
+		<h:outputScript name="/lib/vendor/bootstrap/js/bootstrap.min.js" />
+		<h:outputScript name="/lib/vendor/metisMenu/metisMenu.min.js" />
+		<h:outputScript name="/lib/vendor/raphael/raphael.min.js" />
+		<h:outputScript name="/lib/vendor/morrisjs/morris.js" />
+		<h:outputScript name="/lib/vendor/data/morris-data.js" />
+		<h:outputScript name="/lib/dist/js/sb-admin-2.min.js" />
+		<h:outputScript name="/lib/jquery.maskedinput.js" />
+		<h:outputScript name="/js/mask.js" />
+
+	</ui:insert>
+
+</h:body>
+</html>

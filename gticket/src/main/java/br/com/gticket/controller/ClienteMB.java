@@ -49,7 +49,7 @@ public class ClienteMB implements Serializable {
 	}
 
 	public List<Cliente> getClientes() {
-		return clientes;
+		return bo.listar();
 	}
 
 	public void setClientes(List<Cliente> clientes) {

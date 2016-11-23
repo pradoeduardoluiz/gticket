@@ -21,7 +21,7 @@
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 
-			<!-- atualiza o banco, gera as tabelas se for preciso -->
+			<!-- atualiza o banco, gera as tabelas se for preciso value="update" value="create-drop" -->
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 
 		</properties>

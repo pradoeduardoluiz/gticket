@@ -15,11 +15,16 @@ public class ModuloDAO extends DAO {
 
 	}
 
-	public boolean buscarPorNome(String nome, Integer id) {
+	public boolean jaExisteRegistroComValor(String valorDocampo, Integer id,
+			String nomeDoCampo) {
 
-		Query query = getEntityManager().createQuery(
-				"From modulo where nome=:nome", Modulo.class);
-		query.setParameter("nome", nome);
+		String strQuery = "From modulo where campo=:campo";
+
+		strQuery = strQuery.replaceAll("campo", nomeDoCampo);
+
+		Query query = getEntityManager().createQuery(strQuery, Modulo.class);
+
+		query.setParameter(nomeDoCampo, valorDocampo);
 
 		Modulo modulo = null;
 
@@ -30,9 +35,11 @@ public class ModuloDAO extends DAO {
 			return false;
 		}
 
-		if (modulo.getId() == id) {
-			return false;
+		if (id != 0) {
+			if (modulo.getId() == id) {
+				return false;
 
+			}
 		}
 
 		return true;

@@ -1,6 +1,8 @@
 package br.com.gticket.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -15,11 +17,20 @@ public class Endereco {
 	private String complemento;
 	private String bairro;
 	private String cidade;
+	@Enumerated(EnumType.STRING)
 	private Estado estado;
-	private Integer cep;
+	private String cep;
 	private Integer latitude;
 	private Integer longitude;
 	private Integer ibge;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getRua() {
 		return rua;
@@ -69,11 +80,11 @@ public class Endereco {
 		this.estado = estado;
 	}
 
-	public Integer getCep() {
+	public String getCep() {
 		return cep;
 	}
 
-	public void setCep(Integer cep) {
+	public void setCep(String cep) {
 		this.cep = cep;
 	}
 

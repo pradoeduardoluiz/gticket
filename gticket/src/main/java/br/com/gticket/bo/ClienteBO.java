@@ -1,11 +1,20 @@
 package br.com.gticket.bo;
 
+import java.util.List;
+
 import br.com.gticket.bo.exception.ValorEmBrancoException;
 import br.com.gticket.bo.exception.ValorInvalidoException;
 import br.com.gticket.bo.exception.ValorZeradoException;
+import br.com.gticket.dao.ClienteDAO;
 import br.com.gticket.model.Cliente;
 
 public class ClienteBO extends BO implements ValidaFormulario {
+
+	private ClienteDAO dao;
+
+	public ClienteBO() {
+		dao = new ClienteDAO();
+	}
 
 	public void salvar(Cliente cliente) throws ValorEmBrancoException,
 			ValorInvalidoException, ValorZeradoException {
@@ -14,10 +23,10 @@ public class ClienteBO extends BO implements ValidaFormulario {
 		validaCamposUnicos(cliente);
 
 		if (inclusao(cliente)) {
-
 			validaCamposNaInclusao(cliente);
-
 		}
+
+		dao.salvar(cliente);
 
 	}
 
@@ -37,13 +46,12 @@ public class ClienteBO extends BO implements ValidaFormulario {
 					"Campo Nome Fantasia é Obrigatório!");
 		}
 
-		if (campoVazio(cliente.getNomeFantasia())) {
-			throw new ValorEmBrancoException(
-					"Campo Nome Fantasia é Obrigatório!");
-		}
-
 		if (campoVazio(cliente.getCnpj())) {
 			throw new ValorEmBrancoException("Campo CNPJ é Obrigatório!");
+		}
+
+		if (!cnpjValido(cliente.getCnpj())) {
+			throw new ValorEmBrancoException("Campo CNPJ é inválido!");
 		}
 
 		if (campoVazio(cliente.getTelefone1())) {
@@ -60,10 +68,6 @@ public class ClienteBO extends BO implements ValidaFormulario {
 
 		if (campoVazio(cliente.getEndereco().getNumero())) {
 			throw new ValorEmBrancoException("Campo Número é Obrigatório!");
-		}
-
-		if (campoVazio(cliente.getEndereco().getComplemento())) {
-			throw new ValorEmBrancoException("Campo Complemento é Obrigatório!");
 		}
 
 		if (campoVazio(cliente.getEndereco().getBairro())) {
@@ -111,7 +115,7 @@ public class ClienteBO extends BO implements ValidaFormulario {
 
 	public Cliente buscarPorId(Integer editarId) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.buscarPorId(editarId);
 	}
 
 	@Override
@@ -129,6 +133,27 @@ public class ClienteBO extends BO implements ValidaFormulario {
 
 		Cliente cliente = (Cliente) object;
 
+		if (dao.jaExisteRegistroComValor(cliente.getRazaoSocial(),
+				cliente.getId(), "razaoSocial")) {
+			throw new ValorInvalidoException(
+					"Já existe cliente com esta Razão Social cadastrada!");
+		}
+
+		if (dao.jaExisteRegistroComValor(cliente.getNomeFantasia(),
+				cliente.getId(), "nomeFantasia")) {
+			throw new ValorInvalidoException(
+					"Já existe cliente com este Nome Fantasia cadastrado!");
+		}
+
+		if (dao.jaExisteRegistroComValor(cliente.getCnpj(), cliente.getId(),
+				"cnpj")) {
+			throw new ValorInvalidoException(
+					"Já existe cliente com este CNPJ cadastrado!");
+		}
+
 	}
 
+	public List<Cliente> listar() {
+		return dao.listar();
+	}
 }

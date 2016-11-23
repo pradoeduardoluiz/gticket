@@ -11,82 +11,60 @@
 		<f:event listener="#{usuarioMB.carregarUsuario}" type="preRenderView" />
 	</f:metadata>
 
-	<ui:composition template="../template/template.html">
+	<ui:composition template="../template/template.xhtml">
 
 		<ui:define name="conteudo">
 			<b:container fluid="true">
 				<b:panel title="Cadastro de Usuário">
-					<h:form id="formUsuario">
+					<b:messages />
+					<h:form id="formUsuario" prependId="false">
 						<b:row>
-							<b:column medium-screen="2">
-								<h:outputLabel value="Id" for="idUsuario"
-									rendered="#{usuarioMB.usuario.id!=null}" />
-							</b:column>
 							<b:column medium-screen="4">
-								<b:inputText id="idUsuario" value="#{usuarioMB.usuario.id}"
-									readonly="true" rendered="#{usuarioMB.usuario.id!=null}" />
 								<h:inputHidden value="#{usuarioMB.usuario.id}" />
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="2">
-								<h:outputLabel value="Nome" for="nomeUsuario" />
-							</b:column>
 							<b:column medium-screen="4">
-								<b:inputText id="nomeUsuario" value="#{usuarioMB.usuario.nome}"
-									placeholder="Nome" required="true"
-									required-message="Campo Nome é Obrigatório!" />
+								<b:inputText label="Nome" id="nomeUsuario"
+									value="#{usuarioMB.usuario.nome}" placeholder="Nome"
+									required="true" required-message="Campo Nome é Obrigatório!" />
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="2">
-								<h:outputLabel value="CPF" for="cpfUsuario" />
-							</b:column>
-							<b:column medium-screen="4" style="height:44px">
-								<p:inputMask id="cpfUsuario" value="#{usuarioMB.usuario.cpf}"
-									mask="999.999.999-99" placeholder="CPF" required="true"
-									styleClass="form-control"
-									requiredMessage="Campo CPF é Obrigatório!" />
+							<b:column medium-screen="4">
+								<b:inputText label="CPF" id="cpf"
+									value="#{usuarioMB.usuario.cpf}" placeholder="CPF"
+									required="true" requiredMessage="Campo CPF é Obrigatório!" />
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="2">
-								<h:outputLabel value="RG" for="rgUsuario" />
-							</b:column>
 							<b:column medium-screen="4">
-								<b:inputText id="rgUsuario" value="#{usuarioMB.usuario.rg}"
+								<b:inputText label="RG" id="rg" value="#{usuarioMB.usuario.rg}"
 									placeholder="RG" required="true"
 									required-message="Campo RG é Obrigatório" />
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="2">
-								<h:outputLabel value="Data de Nascimento"
-									for="dataNascimentoUsuario" />
-							</b:column>
-							<b:column medium-screen="4" style="height:44px">
-								<b:dateTimePicker id="dataNascimentoUsuario"
-									value="#{usuarioMB.usuario.dataNascimento}" show-date="true"
-									show-time="false" required="true" format="DD-MM-YYYY"
+							<b:column medium-screen="4">
+								<label for="input_rg" class="bf-no-message bf-required">Data
+									Nascimento</label>
+								<b:dateTimePicker id="data" label="inline form"
+									render-label="true" value="#{usuarioMB.usuario.dataNascimento}"
+									show-date="true" show-time="false" required="true"
+									format="DD-MM-YYYY"
 									required-message="Campo Data de Nascimento é Obrigatório!" />
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="2">
-								<h:outputLabel value="Email" for="emailUsuario" />
-							</b:column>
 							<b:column medium-screen="4">
-								<b:inputText id="emailUsuario"
+								<b:inputText id="email" label="Email"
 									value="#{usuarioMB.usuario.email}" placeholder="Email"
 									required="true" required-message="Campo Email é Obrigatório!" />
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="2">
-								<h:outputLabel value="Perfil" for="perfilUsuario" />
-							</b:column>
 							<b:column medium-screen="4">
-								<b:selectOneMenu id="perfilUsuario"
+								<b:selectOneMenu id="perfil" label="Perfil"
 									value="#{usuarioMB.usuario.perfil}" required="true"
 									requiredMessage="Selecione um perfil válido!">
 									<f:selectItem itemLabel="Selecione..." itemValue="" />
@@ -95,12 +73,8 @@
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="2">
-								<h:outputLabel value="Senha" for="senhaUsuario"
-									rendered="#{usuarioMB.editarId==null}" />
-							</b:column>
 							<b:column medium-screen="4">
-								<b:inputSecret id="senhaUsuario"
+								<b:inputSecret id="senha" label="Senha"
 									value="#{usuarioMB.usuario.senha}" placeholder="Senha"
 									required="true" rendered="#{usuarioMB.editarId==null}"
 									required-message="Campo Senha é Obrigatório!" />
@@ -109,13 +83,9 @@
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="2">
-								<h:outputLabel value="Confirmação de Senha"
-									for="confirmacaoSenhaUsuario"
-									rendered="#{usuarioMB.editarId==null}" />
-							</b:column>
 							<b:column medium-screen="4">
-								<b:inputSecret id="confirmacaoSenhaUsuario"
+								<b:inputSecret id="confirmacaoSenha"
+									label="Confirmação de Senha"
 									value="#{usuarioMB.usuario.confirmacaoDeSenha}"
 									placeholder="Confirmação de Senha" required="true"
 									rendered="#{usuarioMB.editarId==null}"
@@ -125,16 +95,13 @@
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="2">
-								<h:outputLabel value="Observação" for="observacaoUsuario" />
-							</b:column>
 							<b:column medium-screen="4">
-								<b:inputTextarea id="observacaoUsuario"
+								<b:inputTextarea id="observacao" label="Observação"
 									value="#{usuarioMB.usuario.obsercacao}" />
 							</b:column>
 						</b:row>
 						<b:row>
-							<b:column medium-screen="2" offset="2">
+							<b:column medium-screen="2">
 								<b:commandButton look="success btn-block" value="Salvar"
 									action="#{usuarioMB.salvar}" />
 							</b:column>
@@ -144,7 +111,6 @@
 							</b:column>
 						</b:row>
 					</h:form>
-					<b:messages />
 				</b:panel>
 			</b:container>
 		</ui:define>

@@ -11,9 +11,9 @@ public class PessoaJuridica extends Pessoa {
 	private String razaoSocial;
 	private String nomeFantasia;
 	private String inscricaoEstadual;
-	private Integer telefone1;
-	private Integer telefone2;
-	private Integer fax;
+	private String telefone1;
+	private String telefone2;
+	private String fax;
 
 	public String getCnpj() {
 		return cnpj;
@@ -47,27 +47,27 @@ public class PessoaJuridica extends Pessoa {
 		this.inscricaoEstadual = inscricaoEstadual;
 	}
 
-	public Integer getTelefone1() {
+	public String getTelefone1() {
 		return telefone1;
 	}
 
-	public void setTelefone1(Integer telefone1) {
+	public void setTelefone1(String telefone1) {
 		this.telefone1 = telefone1;
 	}
 
-	public Integer getTelefone2() {
+	public String getTelefone2() {
 		return telefone2;
 	}
 
-	public void setTelefone2(Integer telefone2) {
+	public void setTelefone2(String telefone2) {
 		this.telefone2 = telefone2;
 	}
 
-	public Integer getFax() {
+	public String getFax() {
 		return fax;
 	}
 
-	public void setFax(Integer fax) {
+	public void setFax(String fax) {
 		this.fax = fax;
 	}
 

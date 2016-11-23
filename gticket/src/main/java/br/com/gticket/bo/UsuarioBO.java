@@ -1,6 +1,5 @@
 package br.com.gticket.bo;
 
-import java.util.Date;
 import java.util.List;
 
 import br.com.gticket.bo.exception.ValorEmBrancoException;
@@ -58,7 +57,7 @@ public class UsuarioBO extends BO implements ValidaFormulario {
 
 		Usuario usuarioLogado;
 
-		if (!dao.buscarPorEmail(email)) {
+		if (!dao.jaExisteRegistroComValor(email, 0, "email")) {
 			throw new ValorInvalidoException("Email não cadastrado!");
 		}
 
@@ -99,6 +98,10 @@ public class UsuarioBO extends BO implements ValidaFormulario {
 
 		if (campoVazio(usuario.getEmail())) {
 			throw new ValorEmBrancoException("Campo Email é Obrigatório!");
+		}
+
+		if (!cpfValido(usuario.getCpf())) {
+			throw new ValorEmBrancoException("Campo CPF é inválido!");
 		}
 
 		if (inclusao(usuario)) {
@@ -142,17 +145,20 @@ public class UsuarioBO extends BO implements ValidaFormulario {
 
 		Usuario usuario = (Usuario) object;
 
-		if (dao.buscarPorNome(usuario.getNome(), usuario.getId())) {
+		if (dao.jaExisteRegistroComValor(usuario.getNome(), usuario.getId(),
+				"nome")) {
 			throw new ValorInvalidoException(
 					"Já existe usuário com este nome cadastrado!");
 		}
 
-		if (dao.buscarPorCpf(usuario.getCpf(), usuario.getId())) {
+		if (dao.jaExisteRegistroComValor(usuario.getCpf(), usuario.getId(),
+				"cpf")) {
 			throw new ValorInvalidoException(
 					"Já existe usuário com este CPF cadastrado!");
 		}
 
-		if (dao.buscarPorEmail(usuario.getEmail(), usuario.getId())) {
+		if (dao.jaExisteRegistroComValor(usuario.getEmail(), usuario.getId(),
+				"email")) {
 			throw new ValorInvalidoException(
 					"Já existe usuário com este e-email cadastrado!");
 		}
