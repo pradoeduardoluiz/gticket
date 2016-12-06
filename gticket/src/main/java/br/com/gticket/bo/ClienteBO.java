@@ -2,6 +2,8 @@ package br.com.gticket.bo;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import br.com.gticket.bo.exception.ValorEmBrancoException;
 import br.com.gticket.bo.exception.ValorInvalidoException;
 import br.com.gticket.bo.exception.ValorZeradoException;
@@ -155,5 +157,13 @@ public class ClienteBO extends BO implements ValidaFormulario {
 
 	public List<Cliente> listar() {
 		return dao.listar();
+	}
+
+	public Cliente buscarPorNome(String razaoSocial) throws NoResultException {
+		return dao.buscarPorNome(razaoSocial);
+	}
+
+	public void excluir(Integer id) {
+		dao.excluir(id);
 	}
 }

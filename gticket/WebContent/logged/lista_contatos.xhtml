@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:body>
+
+	<ui:composition template="../template/template.xhtml">
+
+		<ui:define name="conteudo">
+
+			<h1>Lista de Contatos</h1>
+
+			<b:container fluid="true">
+
+				<h:form>
+					<b:dataTable value="#{contatoMB.contatos}" var="contato"
+						border="false" select="true"
+						customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
+
+						<b:dataTableColumn label="Nome" value="#{contato.nome}" />
+						<b:dataTableColumn label="Cliente"
+							value="#{contato.cliente.razaoSocial}" />
+						<b:dataTableColumn label="Email" value="#{contato.email}" />
+						<b:dataTableColumn label="Perfil" value="#{contato.departamento}" />
+
+						<b:dataTableColumn label="Editar"
+							content-style="width:5px;text-align:center;">
+
+							<h:link outcome="/logged/form_contato">
+								<b:iconAwesome name="pencil" size="2x" />
+								<f:param name="id" value="#{contato.id}" />
+							</h:link>
+						</b:dataTableColumn>
+
+						<b:dataTableColumn label="Excluir"
+							content-style="width:5px;text-align:center;">
+
+							<h:commandLink
+								onclick="return confirm('Tem certeza da exclusão do contato #{contato.nome}');"
+								action="#{contatoMB.excluir(contato.id)}">
+								<b:iconAwesome name="trash" size="2x" />
+							</h:commandLink>
+
+
+						</b:dataTableColumn>
+
+					</b:dataTable>
+
+				</h:form>
+
+				<h:link outcome="form_contato">
+					<b:iconAwesome name="plus-circle" size="2x"
+						tooltip="Adicionar Contato" />
+				</h:link>
+
+			</b:container>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

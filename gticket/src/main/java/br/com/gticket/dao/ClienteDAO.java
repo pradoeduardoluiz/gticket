@@ -2,6 +2,7 @@ package br.com.gticket.dao;
 
 import java.util.List;
 
+import javax.naming.spi.DirStateFactory.Result;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
@@ -63,4 +64,22 @@ public class ClienteDAO extends DAO {
 
 	}
 
+	public Cliente buscarPorNome(String razaoSocial) {
+
+		Query query = getEntityManager().createQuery(
+				"From cliente where razaoSocial=:razaoSocial", Cliente.class);
+
+		query.setParameter("razaoSocial", razaoSocial);
+
+		Cliente cliente = null;
+
+		cliente = (Cliente) query.getSingleResult();
+
+		try {
+			cliente = (Cliente) query.getSingleResult();
+			return cliente;
+		} catch (NoResultException e) {
+			throw new NoResultException("Não encontrado cliente com este nome!");
+		}
+	}
 }

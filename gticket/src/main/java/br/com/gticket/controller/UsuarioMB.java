@@ -4,10 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 
 import br.com.gticket.bo.UsuarioBO;
@@ -26,6 +24,7 @@ public class UsuarioMB implements Serializable {
 	private Integer editarId;
 	private List<Usuario> usuarios;
 	private Perfil[] perfis;
+	private Perfil perfil;
 
 	@PostConstruct
 	public void init() {
@@ -38,7 +37,7 @@ public class UsuarioMB implements Serializable {
 		try {
 			bo.salvar(usuario);
 
-			usuario = null;
+			usuario = new Usuario();
 
 			FacesUtil.addInfoMessage("Cadastro Salvo com Sucesso");
 
@@ -114,6 +113,14 @@ public class UsuarioMB implements Serializable {
 
 	public void setPerfis(Perfil[] perfis) {
 		this.perfis = perfis;
+	}
+
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
 	}
 
 }

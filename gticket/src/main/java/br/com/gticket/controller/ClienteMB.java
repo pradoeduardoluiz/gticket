@@ -1,6 +1,8 @@
 package br.com.gticket.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -11,7 +13,6 @@ import javax.faces.event.ComponentSystemEvent;
 import br.com.gticket.bo.ClienteBO;
 import br.com.gticket.model.Cliente;
 import br.com.gticket.model.Estado;
-import br.com.gticket.model.Perfil;
 import br.com.gticket.util.FacesUtil;
 
 @ManagedBean
@@ -25,6 +26,7 @@ public class ClienteMB implements Serializable {
 	private Integer editarId;
 	private List<Cliente> clientes;
 	private Estado[] estados;
+	private String[] buscaCliente;
 
 	@PostConstruct
 	public void init() {
@@ -59,8 +61,9 @@ public class ClienteMB implements Serializable {
 	public void salvar() {
 
 		try {
+
 			bo.salvar(cliente);
-			cliente = null;
+			cliente = new Cliente();
 
 			FacesUtil.addInfoMessage("Cadastro Salvo com Sucesso");
 
@@ -69,6 +72,14 @@ public class ClienteMB implements Serializable {
 			FacesUtil.addErrorMessage(e.getMessage());
 			e.printStackTrace();
 		}
+
+	}
+
+	public String excluir(Integer id) {
+
+		bo.excluir(id);
+
+		return "/lista_clientes";
 
 	}
 
@@ -88,4 +99,26 @@ public class ClienteMB implements Serializable {
 		this.estados = estados;
 	}
 
+	public String[] getBuscaCliente() {
+
+		clientes = bo.listar();
+
+		buscaCliente = new String[clientes.size()];
+		int i = 0;
+
+		for (Cliente cliente : clientes) {
+
+			if (!(cliente.getRazaoSocial() != null)
+					|| !(cliente.getRazaoSocial().equals(""))) {
+
+				buscaCliente[i] = cliente.getRazaoSocial();
+				i++;
+
+			}
+
+		}
+
+		return buscaCliente;
+
+	}
 }

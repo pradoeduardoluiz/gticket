@@ -109,7 +109,7 @@
 
 								<b:row>
 									<b:column medium-screen="4">
-										<b:inputText id="complemento" label="complemento"
+										<b:inputText id="complemento" label="Complemento"
 											value="#{clienteMB.cliente.endereco.complemento}"
 											placeholder="Complemento" />
 									</b:column>
@@ -204,9 +204,6 @@
 
 									<b:row>
 										<b:column medium-screen="4">
-											<h:outputLabel for="dataInicioContrato"
-												value="Data Inicio de Contrato"
-												styleClass="bf-no-message bf-required" />
 											<b:dateTimePicker id="dataInicioContrato"
 												label="Data Inicio de Contrato"
 												value="#{clienteMB.cliente.contrato.dataInicio}"
@@ -218,12 +215,10 @@
 
 									<b:row>
 										<b:column medium-screen="4">
-											<h:outputLabel for="dataInicioContrato"
-												value="Data Fim de Contrato" styleClass="bf-no-message " />
 											<b:dateTimePicker id="dataTerminoContrato"
 												label="Data Fim de Contrato"
 												value="#{clienteMB.cliente.contrato.dataTermino}"
-												show-date="true" show-time="false" format="DD-MM-YYYY" />
+												show-date="true" show-time="false" format="DD/MM/YYYY" />
 										</b:column>
 									</b:row>
 

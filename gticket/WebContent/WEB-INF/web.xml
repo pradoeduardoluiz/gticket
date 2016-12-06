@@ -24,11 +24,6 @@
 		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
 	</listener>
 
-	<context-param>
-		<param-name>BootsFaces_THEME</param-name>
-		<param-value>default</param-value>
-	</context-param>
-
 	<!-- web fonts -->
 	<mime-mapping>
 		<extension>eot</extension>

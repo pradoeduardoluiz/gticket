@@ -34,7 +34,7 @@ public class ModuloMB implements Serializable {
 		try {
 			bo.salvar(modulo);
 
-			modulo = null;
+			modulo = new Modulo();
 
 			FacesUtil.addInfoMessage("Cadastro Salvo com Sucesso");
 

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+<h:body>
+	<f:metadata>
+		<f:viewParam name="id" value="#{contatoMB.editarId}" />
+		<f:event listener="#{contatoMB.carregar}" type="preRenderView" />
+	</f:metadata>
+
+	<ui:composition template="../template/template.xhtml">
+
+		<ui:define name="conteudo">
+			<b:container fluid="true">
+				<b:panel title="Cadastro de Contato">
+					<b:messages />
+					<h:form id="formContato" prependId="false">
+						<b:row>
+							<b:column medium-screen="4">
+								<h:inputHidden value="#{contatoMB.contato.id}" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="4">
+								<b:inputText label="Empresa" id="cliente"
+									value="#{contatoMB.razaoSocialCliente}"
+									placeholder="Nome do empresa do contato" required="true"
+									required-message="Campo Cliente é Obrigatório!"
+									typeahead="true" typeahead-values="#{clienteMB.buscaCliente}"
+									rendered="#{contatoMB.editarId==null}" />
+
+								<b:inputText label="Empresa" id="cliente_contato"
+									disabled="true"
+									value="#{contatoMB.contato.cliente.razaoSocial}"
+									placeholder="Nome do empresa do contato"
+									rendered="#{contatoMB.editarId!=null}" />
+
+							</b:column>
+
+						</b:row>
+						<b:row>
+							<b:column medium-screen="4">
+								<b:inputText label="Nome" id="nome"
+									value="#{contatoMB.contato.nome}" placeholder="Nome"
+									required="true" required-message="Campo Nome é Obrigatório!" />
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="4">
+								<b:selectOneMenu id="departamento" label="Departamento"
+									value="#{contatoMB.contato.departamento}" required="true"
+									requiredMessage="Selecione um departamento válido!">
+									<f:selectItem itemLabel="Selecione..." itemValue="" />
+									<f:selectItems value="#{contatoMB.departamentos}"
+										var="departamento" />
+								</b:selectOneMenu>
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="4">
+								<b:inputText id="telefone" label="Telefone"
+									value="#{contatoMB.contato.telefone}" placeholder="Telefone"
+									required="true" requiredMessage="Campo Telefone é Obrigatório!" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="4">
+								<b:inputText id="celular" label="Celular"
+									value="#{contatoMB.contato.celular}" placeholder="Celular" />
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="4">
+								<b:dateTimePicker id="data" label="Data
+									Nascimento"
+									render-label="true" value="#{contatoMB.contato.dataNascimento}"
+									show-date="true" show-time="false" format="DD/MM/YYYY"
+									required-message="Campo Data de Nascimento é Obrigatório!" />
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="4">
+								<b:inputText id="email" label="Email"
+									value="#{contatoMB.contato.email}" placeholder="Email"
+									required="true" required-message="Campo Email é Obrigatório!" />
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="4">
+								<b:inputTextarea id="observacao" label="Observação"
+									value="#{contatoMB.contato.obsercacao}" />
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="2">
+								<b:commandButton look="success btn-block" value="Salvar"
+									action="#{contatoMB.salvar}" />
+							</b:column>
+							<b:column medium-screen="2">
+								<b:button value="Voltar" outcome="lista_contatos"
+									look="danger btn-block" />
+							</b:column>
+						</b:row>
+					</h:form>
+				</b:panel>
+			</b:container>
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>
+
