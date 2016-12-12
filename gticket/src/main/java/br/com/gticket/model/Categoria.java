@@ -10,7 +10,7 @@ public class Categoria {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	private Integer descricao;
+	private String nome;
 
 	public Integer getId() {
 		return id;
@@ -20,12 +20,12 @@ public class Categoria {
 		this.id = id;
 	}
 
-	public Integer getDescricao() {
-		return descricao;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setDescricao(Integer descricao) {
-		this.descricao = descricao;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }

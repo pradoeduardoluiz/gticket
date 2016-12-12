@@ -8,47 +8,38 @@
 <h:body>
 
 	<f:metadata>
-		<f:viewParam name="id" value="#{moduloMB.editarId}" />
-		<f:event listener="#{moduloMB.carregarModulo}" type="preRenderView" />
+		<f:viewParam name="id" value="#{categoriaMB.editarId}" />
+		<f:event listener="#{categoriaMB.carregar}" type="preRenderView" />
 	</f:metadata>
 
 	<ui:composition template="../template/template.xhtml">
 
 		<ui:define name="conteudo">
-
 			<b:container fluid="true">
-				<b:panel title="Cadastro de Módulos">
+				<b:panel title="Cadastro de Categorias">
 					<b:messages />
-					<h:form id="formModulo" prependId="false">
+					<h:form id="formCategoria" prependId="false">
 						<b:row>
 							<b:column medium-screen="4">
-								<h:inputHidden value="#{moduloMB.modulo.id}" />
+								<h:inputHidden value="#{categoriaMB.categoria.id}" />
 							</b:column>
 						</b:row>
 
 						<b:row>
 							<b:column medium-screen="4">
 								<b:inputText id="nome" name="nome" label="Nome"
-									value="#{moduloMB.modulo.nome}" placeholder="Nome do módulo"
+									value="#{categoriaMB.categoria.nome}" placeholder="Nome do módulo"
 									required="true" required-message="Campo Nome é Obrigatório!" />
-							</b:column>
-						</b:row>
-
-						<b:row>
-							<b:column medium-screen="4">
-								<b:inputTextarea id="descricao" name="descricao"
-									label="Descrição" value="#{moduloMB.modulo.descricao}"
-									placeholder="Descrição breve do módulo" />
 							</b:column>
 						</b:row>
 
 						<b:row>
 							<b:column medium-screen="2">
 								<b:commandButton look="success btn-block" value="Salvar"
-									action="#{moduloMB.salvar}" />
+									action="#{categoriaMB.salvar}" />
 							</b:column>
 							<b:column medium-screen="2">
-								<b:button value="Voltar" outcome="lista_modulos"
+								<b:button value="Voltar" outcome="lista_categorias"
 									look="danger btn-block" />
 							</b:column>
 						</b:row>

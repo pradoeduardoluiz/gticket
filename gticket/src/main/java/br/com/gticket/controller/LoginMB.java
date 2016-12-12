@@ -41,16 +41,25 @@ public class LoginMB implements Serializable {
 
 			usuarioLogado = bo.login(email, senha);
 			SessionUtil.setParam("usuarioLogado", usuarioLogado);
-			return "/logged/home";
+			return "/logged/home?faces-redirect=true";
 
 		} catch (ValorInvalidoException e) {
 
 			FacesUtil.addErrorMessage(e.getMessage());
 
 			e.printStackTrace();
+			return null;
+
 		}
 
-		return null;
+	}
+
+	public String logout() {
+
+		SessionUtil.invalidate();
+
+		return "../index?faces-redirect=true";
+
 	}
 
 	public void erroLogin() {

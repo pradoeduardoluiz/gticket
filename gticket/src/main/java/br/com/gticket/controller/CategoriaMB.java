@@ -8,41 +8,38 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ComponentSystemEvent;
 
-import br.com.gticket.bo.ModuloBO;
-import br.com.gticket.model.Modulo;
+import br.com.gticket.bo.CategoriaBO;
+import br.com.gticket.model.Categoria;
 import br.com.gticket.util.FacesUtil;
 
 @ManagedBean
 @ViewScoped
-public class ModuloMB implements Serializable {
+public class CategoriaMB implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Modulo modulo;
-	private ModuloBO bo;
+	private Categoria categoria;
+	private CategoriaBO bo;
 	private Integer editarId;
-	private List<Modulo> modulos;
+	private List<Categoria> categorias;
 
 	@PostConstruct
 	public void init() {
-		modulo = new Modulo();
-		bo = new ModuloBO();
+		categoria = new Categoria();
+		bo = new CategoriaBO();
 	}
 
 	public void salvar() {
 
 		try {
-			bo.salvar(modulo);
+			bo.salvar(categoria);
 
-			modulo = new Modulo();
+			categoria = new Categoria();
 
 			FacesUtil.addInfoMessage("Cadastro Salvo com Sucesso");
 
 		} catch (Exception e) {
-			// TODO: handle exception
-
 			FacesUtil.addErrorMessage(e.getMessage());
-
 			e.printStackTrace();
 		}
 
@@ -51,23 +48,23 @@ public class ModuloMB implements Serializable {
 	public String excluir(Integer id) {
 		bo.excluir(id);
 
-		return "/lista_modulos";
+		return "/lista_categorias";
 	}
 
-	public void carregarModulo(ComponentSystemEvent event) {
+	public void carregar(ComponentSystemEvent event) {
 		if (editarId == null) {
 			return;
 		}
 
-		modulo = bo.buscarPorId(editarId);
+		categoria = bo.buscarPorId(editarId);
 	}
 
-	public Modulo getModulo() {
-		return modulo;
+	public Categoria getCategoria() {
+		return categoria;
 	}
 
-	public void setModulo(Modulo modulo) {
-		this.modulo = modulo;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	public Integer getEditarId() {
@@ -78,12 +75,12 @@ public class ModuloMB implements Serializable {
 		this.editarId = editarId;
 	}
 
-	public List<Modulo> getModulos() {
+	public List<Categoria> getCategorias() {
 		return bo.listar();
 	}
 
-	public void setModulos(List<Modulo> modulos) {
-		this.modulos = modulos;
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
 	}
 
 }

@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:body>
+
+	<ui:composition template="../template/template.xhtml">
+
+		<ui:define name="conteudo">
+
+			<h1>Lista de Categorias</h1>
+
+			<b:container fluid="true">
+
+				<h:form>
+
+					<b:dataTable value="#{categoriaMB.categorias}" var="categoria"
+						border="false" select="true"
+						customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
+
+						<b:dataTableColumn label="Nome" value="#{categoria.nome}" />
+
+						<b:dataTableColumn label="Editar"
+							content-style="width:5px; text-align:center;">
+
+							<h:link outcome="/logged/form_categoria">
+								<b:iconAwesome name="pencil" size="2x" />
+								<f:param name="id" value="#{categoria.id}" />
+							</h:link>
+
+						</b:dataTableColumn>
+
+						<b:dataTableColumn label="Excluir"
+							content-style="width:5px;text-align:center;">
+
+							<h:commandLink
+								onclick="return confirm('Tem certeza da exclusão do Categoria #{Categoria.nome}');"
+								action="#{categoriaMB.excluir(categoria.id)}">
+								<b:iconAwesome name="trash" size="2x" />
+							</h:commandLink>
+
+						</b:dataTableColumn>
+
+					</b:dataTable>
+
+				</h:form>
+
+				<h:link outcome="form_categoria">
+					<b:iconAwesome name="plus-circle" size="2x"
+						tooltip="Adicionar Categoria" />
+				</h:link>
+
+			</b:container>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
