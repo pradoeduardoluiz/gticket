@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+
+<h:body>
+
+	<ui:composition template="../template/template.xhtml">
+
+		<ui:define name="conteudo">
+
+			<b:container fluid="true">
+				<b:panel title="Cadastro de Ticket Contato">
+					<b:messages />
+
+					<h:form id="formTicketContato" prependId="false">
+
+						<b:row>
+							<b:column medium-screen="2">
+								<b:inputText id="id" label="Ticket" />
+							</b:column>
+
+							<b:column medium-screen="3" offset="5">
+
+								<b:dateTimePicker id="data" label="Data de Inclusão"
+									render-label="true" value="" show-date="true" show-time="true"
+									required="true" format="DD/MM/YYYY HH:mm"
+									enabled-dates="disable" />
+
+							</b:column>
+
+						</b:row>
+
+						<b:row>
+
+							<b:column medium-screen="10">
+
+								<b:inputText label="Empresa" id="cliente"
+									value="#{contatoMB.contato.cliente}"
+									placeholder="Nome do empresa do contato" required="true"
+									required-message="Campo Cliente é Obrigatório!"
+									typeahead="true" typeahead-values="#{clienteMB.clientes}" />
+
+							</b:column>
+						</b:row>
+
+						<b:row>
+
+							<b:column medium-screen="4">
+								<b:selectOneMenu id="contatoTicket" label="Contato"
+									value="#{usuarioMB.usuario.perfil}" required="true"
+									requiredMessage="Selecione um perfil válido!">
+									<f:selectItem itemLabel="Selecione..." itemValue="" />
+									<f:selectItems value="#{usuarioMB.perfis}" var="perfil" />
+								</b:selectOneMenu>
+
+							</b:column>
+
+							<b:column medium-screen="3">
+
+								<b:inputText id="telefone" label="Telefone"
+									value="#{contatoMB.contato.telefone}" placeholder="Telefone"
+									required="true" requiredMessage="Campo Telefone é Obrigatório!" />
+
+							</b:column>
+
+
+							<b:column medium-screen="3">
+
+								<b:inputText id="celular" label="Celular"
+									value="#{contatoMB.contato.celular}" placeholder="Celular" />
+
+							</b:column>
+
+						</b:row>
+
+						<b:row>
+
+							<b:column medium-screen="4">
+								<b:selectOneMenu id="situacao" label="Situação"
+									value="#{usuarioMB.usuario.perfil}" required="true"
+									requiredMessage="Selecione um perfil válido!">
+									<f:selectItem itemLabel="Selecione..." itemValue="" />
+									<f:selectItems value="#{usuarioMB.perfis}" var="perfil" />
+								</b:selectOneMenu>
+
+							</b:column>
+
+							<b:column medium-screen="3">
+								<b:inputText id="categoria" label="Categoria"
+									value="#{contatoMB.contato.telefone}" placeholder="Telefone"
+									required="true" requiredMessage="Campo Telefone é Obrigatório!" />
+							</b:column>
+
+							<b:column medium-screen="3">
+								<b:inputText id="topico" label="Topico"
+									value="#{contatoMB.contato.telefone}" placeholder="Telefone"
+									required="true" requiredMessage="Campo Telefone é Obrigatório!" />
+							</b:column>
+
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="10">
+								<b:inputTextarea id="assunto" label="Assunto"
+									value="#{contatoMB.contato.obsercacao}" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+
+							<b:column medium-screen="3">
+
+								<b:switch value="" label="Ticket Finalizado" offColor="danger"
+									onColor="success" render-label="true" offText="Não"
+									onText="Sim" />
+
+							</b:column>
+
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="10">
+								<b:inputTextarea id="resolucao" label="Resolução"
+									value="#{contatoMB.contato.obsercacao}" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="5">
+								<b:commandButton look="success btn-block" value="Salvar"
+									action="#{contatoMB.salvar}" />
+							</b:column>
+							<b:column medium-screen="5">
+								<b:button value="Voltar" outcome="lista_contatos"
+									look="danger btn-block" />
+							</b:column>
+						</b:row>
+					</h:form>
+
+				</b:panel>
+			</b:container>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

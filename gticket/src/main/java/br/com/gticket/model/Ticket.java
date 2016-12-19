@@ -6,9 +6,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 
 @Entity(name = "ticket")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Ticket {
 
 	@Id
@@ -19,13 +22,15 @@ public class Ticket {
 	@OneToOne(cascade = { CascadeType.ALL })
 	private Contato contato;
 	private String assunto;
-	private String descricao;
-	private String observacao;
 	private SituacaoTicket situacao;
 	@OneToOne(cascade = { CascadeType.ALL })
 	private Categoria categoria;
+	private String topico;
+	@OneToOne(cascade = { CascadeType.ALL })
+	private Usuario usuarioInclusao;
 	private Date dataDeInclusao;
 	private Date dataDeFinalizacao;
+	private Boolean ticketFinalizado;
 
 	public Integer getId() {
 		return id;
@@ -59,20 +64,12 @@ public class Ticket {
 		this.assunto = assunto;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getTopico() {
+		return topico;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public String getObservacao() {
-		return observacao;
-	}
-
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
+	public void setTopico(String topico) {
+		this.topico = topico;
 	}
 
 	public SituacaoTicket getSituacao() {
@@ -91,6 +88,14 @@ public class Ticket {
 		this.categoria = categoria;
 	}
 
+	public Usuario getUsuarioInclusao() {
+		return usuarioInclusao;
+	}
+
+	public void setUsuarioInclusao(Usuario usuarioInclusao) {
+		this.usuarioInclusao = usuarioInclusao;
+	}
+
 	public Date getDataDeInclusao() {
 		return dataDeInclusao;
 	}
@@ -105,6 +110,14 @@ public class Ticket {
 
 	public void setDataDeFinalizacao(Date dataDeFinalizacao) {
 		this.dataDeFinalizacao = dataDeFinalizacao;
+	}
+
+	public Boolean getTicketFinalizado() {
+		return ticketFinalizado;
+	}
+
+	public void setTicketFinalizado(Boolean ticketFinalizado) {
+		this.ticketFinalizado = ticketFinalizado;
 	}
 
 }
