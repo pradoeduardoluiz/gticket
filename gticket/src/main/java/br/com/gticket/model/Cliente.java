@@ -57,5 +57,12 @@ public class Cliente extends PessoaJuridica {
 		contatos.add(contato);
 
 	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString();
+	}
+	
 
 }

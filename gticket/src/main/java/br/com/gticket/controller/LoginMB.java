@@ -58,7 +58,7 @@ public class LoginMB implements Serializable {
 
 		SessionUtil.invalidate();
 
-		return "../index?faces-redirect=true";
+		return "index?faces-redirect=true";
 
 	}
 

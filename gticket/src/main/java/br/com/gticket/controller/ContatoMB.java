@@ -42,17 +42,7 @@ public class ContatoMB implements Serializable {
 
 		try {
 
-			if (contato.getId() == null || contato.getId() == 0) {
-				cliente = boCliente.buscarPorNome(razaoSocialCliente);
-				contato.setCliente(cliente);
-			}
-
 			bo.salvar(contato);
-
-			if (contato.getId() == null || contato.getId() == 0) {
-				cliente.addContato(contato);
-				boCliente.salvar(cliente);
-			}
 
 			FacesUtil.addInfoMessage("Cadastro Salvo com Sucesso");
 

@@ -26,16 +26,16 @@
 
 						<b:row>
 							<b:column medium-screen="4">
-								<b:inputText label="Empresa" id="cliente"
-									value="#{contatoMB.razaoSocialCliente}"
-									placeholder="Nome do empresa do contato" required="true"
-									required-message="Campo Cliente é Obrigatório!"
-									typeahead="true" typeahead-values="#{clienteMB.buscaCliente}"
-									rendered="#{contatoMB.editarId==null}" />
 
-								<b:inputText label="Empresa" id="cliente_contato"
-									disabled="true"
-									value="#{contatoMB.contato.cliente.razaoSocial}"
+								<b:inputText label="Cliente" id="cliente"
+									value="#{contatoMB.contato.cliente}" required="true"
+									required-message="Campo Cliente é Obrigatório!"
+									typeahead="true" typeahead-values="#{clienteMB.clientes}"
+									rendered="#{contatoMB.editarId==null}"
+									converter="clienteConverter" />
+
+								<b:inputText label="Cliente" id="cliente_selecionado"
+									disabled="true" value="#{contatoMB.contato.cliente}"
 									placeholder="Nome do empresa do contato"
 									rendered="#{contatoMB.editarId!=null}" />
 

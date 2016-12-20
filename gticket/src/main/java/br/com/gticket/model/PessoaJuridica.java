@@ -71,4 +71,10 @@ public class PessoaJuridica extends Pessoa {
 		this.fax = fax;
 	}
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return razaoSocial;
+	}
+
 }
