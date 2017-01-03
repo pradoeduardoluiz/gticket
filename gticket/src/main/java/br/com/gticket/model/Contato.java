@@ -44,4 +44,9 @@ public class Contato extends PessoaFisica {
 		this.cliente = cliente;
 	}
 
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
 }

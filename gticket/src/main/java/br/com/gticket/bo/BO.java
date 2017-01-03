@@ -41,6 +41,14 @@ public class BO {
 		return false;
 	}
 
+	protected boolean campoVazio(Object objeto) {
+		if (objeto == null) {
+			return true;
+		}
+
+		return false;
+	}
+
 	protected boolean cpfValido(String strCpf) {
 
 		String cpf = strCpf.replace(".", "").replace("-", "");

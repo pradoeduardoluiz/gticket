@@ -76,4 +76,9 @@ public abstract class PessoaFisica extends Pessoa {
 		this.celular = celular;
 	}
 
+	@Override
+	public String toString() {
+		return this.nome;
+	}
+
 }

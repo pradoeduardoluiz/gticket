@@ -15,6 +15,14 @@
 
 		<ui:define name="conteudo">
 			<b:container fluid="true">
+
+				<ol class="breadcrumb">
+					<li><b:navLink value="Home" outcome="home" /></li>
+					<li><b:navLink value="Lista de Usuários"
+							outcome="lista_usuarios" /></li>
+					<li class="active">Cadastro de Usuário</li>
+				</ol>
+
 				<b:panel title="Cadastro de Usuário">
 					<b:messages />
 					<h:form id="formUsuario" prependId="false">

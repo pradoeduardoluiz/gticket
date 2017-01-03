@@ -11,9 +11,12 @@
 
 		<ui:define name="conteudo">
 
-			<h1>Lista de Usuários</h1>
-
 			<b:container fluid="true">
+
+				<ol class="breadcrumb">
+					<li><b:navLink value="Home" outcome="home" /></li>
+					<li class="active">Lista de Usuários</li>
+				</ol>
 
 				<h:form>
 					<b:dataTable value="#{usuarioMB.usuarios}" var="usuario"

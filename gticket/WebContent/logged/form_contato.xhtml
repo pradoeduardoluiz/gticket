@@ -14,7 +14,16 @@
 	<ui:composition template="../template/template.xhtml">
 
 		<ui:define name="conteudo">
+
 			<b:container fluid="true">
+
+				<ol class="breadcrumb">
+					<li><b:navLink value="Home" outcome="home" /></li>
+					<li><b:navLink value="Lista de Contatos"
+							outcome="lista_contatos" /></li>
+					<li class="active">Cadastro de Contatos</li>
+				</ol>
+
 				<b:panel title="Cadastro de Contato">
 					<b:messages />
 					<h:form id="formContato" prependId="false">
@@ -25,19 +34,23 @@
 						</b:row>
 
 						<b:row>
-							<b:column medium-screen="4">
+							<b:column medium-screen="4" styleClass="autocomplete"
+								rendered="#{contatoMB.editarId==null}">
 
 								<b:inputText label="Cliente" id="cliente"
 									value="#{contatoMB.contato.cliente}" required="true"
 									required-message="Campo Cliente é Obrigatório!"
 									typeahead="true" typeahead-values="#{clienteMB.clientes}"
-									rendered="#{contatoMB.editarId==null}"
 									converter="clienteConverter" />
+
+							</b:column>
+							<b:column medium-screen="4"
+								rendered="#{contatoMB.editarId!=null}">
 
 								<b:inputText label="Cliente" id="cliente_selecionado"
 									disabled="true" value="#{contatoMB.contato.cliente}"
-									placeholder="Nome do empresa do contato"
-									rendered="#{contatoMB.editarId!=null}" />
+									placeholder="Nome do empresa do contato" />
+
 
 							</b:column>
 

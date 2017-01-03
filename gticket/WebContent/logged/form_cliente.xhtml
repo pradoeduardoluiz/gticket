@@ -16,6 +16,14 @@
 
 		<ui:define name="conteudo">
 			<b:container fluid="true">
+
+				<ol class="breadcrumb">
+					<li><b:navLink value="Home" outcome="home" /></li>
+					<li><b:navLink value="Lista de Clientes"
+							outcome="lista_clientes" /></li>
+					<li class="active">Cadastro de Cliente</li>
+				</ol>
+
 				<b:panel title="Cadastro de Cliente">
 					<b:messages />
 					<h:form id="formCliente" prependId="false">

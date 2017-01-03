@@ -16,6 +16,14 @@
 
 		<ui:define name="conteudo">
 			<b:container fluid="true">
+
+				<ol class="breadcrumb">
+					<li><b:navLink value="Home" outcome="home" /></li>
+					<li><b:navLink value="Lista de Categorias"
+							outcome="lista_categorias" /></li>
+					<li class="active">Cadastro de Categorias</li>
+				</ol>
+
 				<b:panel title="Cadastro de Categorias">
 					<b:messages />
 					<h:form id="formCategoria" prependId="false">
@@ -28,8 +36,9 @@
 						<b:row>
 							<b:column medium-screen="4">
 								<b:inputText id="nome" name="nome" label="Nome"
-									value="#{categoriaMB.categoria.nome}" placeholder="Nome do módulo"
-									required="true" required-message="Campo Nome é Obrigatório!" />
+									value="#{categoriaMB.categoria.nome}"
+									placeholder="Nome do módulo" required="true"
+									required-message="Campo Nome é Obrigatório!" />
 							</b:column>
 						</b:row>
 
