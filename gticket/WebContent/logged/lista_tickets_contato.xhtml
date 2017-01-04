@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:body>
+
+	<ui:composition template="../template/template.xhtml">
+
+		<ui:define name="conteudo">
+
+			<b:container fluid="true">
+
+				<ol class="breadcrumb">
+					<li><b:navLink value="Home" outcome="home" /></li>
+					<li class="active">Lista de Tickets de Contato</li>
+				</ol>
+
+				<h:form>
+
+					<b:dataTable value="#{ticketContatoMB.tickets}" var="ticket"
+						border="false" select="true"
+						customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
+
+						<b:dataTableColumn label="Id" value="#{ticket.id}" />
+						<b:dataTableColumn label="Cliente"
+							value="#{ticket.cliente.razaoSocial}" />
+						<b:dataTableColumn label="Contato" value="#{ticket.contato.nome}" />
+
+						<h:column label="Data de Inclusao">
+
+							<h:outputText value="#{ticket.dataDeInclusao}">
+
+								<f:convertDateTime pattern="dd/MM/yyyy - h:mm " />
+
+							</h:outputText>
+
+						</h:column>
+
+						<b:dataTableColumn label="Tópico" value="#{ticket.topico}" />
+
+
+						<b:dataTableColumn label="Editar"
+							content-style="width:5px; text-align:center;">
+
+							<h:link outcome="/logged/form_ticket_contato">
+								<b:iconAwesome name="pencil" size="2x" />
+								<f:param name="id" value="#{ticket.id}" />
+							</h:link>
+
+						</b:dataTableColumn>
+
+						<b:dataTableColumn label="Excluir"
+							content-style="width:5px;text-align:center;">
+
+							<h:commandLink
+								onclick="return confirm('Tem certeza da exclusão do Modulo #{Modulo.nome}');"
+								action="#{ticketContatoMB.excluir(ticket.id)}">
+								<b:iconAwesome name="trash" size="2x" />
+							</h:commandLink>
+
+						</b:dataTableColumn>
+
+					</b:dataTable>
+
+				</h:form>
+
+				<h:link outcome="form_ticket_contato">
+					<b:iconAwesome name="plus-circle" size="2x"
+						tooltip="Adicionar Ticket de Contato" />
+				</h:link>
+
+			</b:container>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

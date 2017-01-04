@@ -11,6 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.ComponentSystemEvent;
 
 import br.com.gticket.bo.TicketContatoBO;
 import br.com.gticket.bo.exception.ValorEmBrancoException;
@@ -75,7 +76,7 @@ public class TicketContatoMB implements Serializable {
 	}
 
 	public List<TicketContato> getTickets() {
-		return tickets;
+		return bo.listar();
 	}
 
 	public void setTickets(List<TicketContato> tickets) {
@@ -112,6 +113,14 @@ public class TicketContatoMB implements Serializable {
 		if (ticket.getCliente() != null) {
 			contatos = ticket.getCliente().getContatos();
 		}
+	}
+
+	public void carregarTicket(ComponentSystemEvent event) {
+		if (editarId == null) {
+			return;
+		}
+
+		ticket = bo.buscarPorId(editarId);
 	}
 
 }

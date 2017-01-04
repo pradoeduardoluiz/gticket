@@ -7,6 +7,12 @@
 
 <h:body>
 
+	<f:metadata>
+		<f:viewParam name="id" value="#{ticketContatoMB.editarId}" />
+		<f:event listener="#{ticketContatoMB.carregarTicket}"
+			type="preRenderView" />
+	</f:metadata>
+
 	<ui:composition template="../template/template.xhtml">
 
 		<ui:define name="conteudo">
@@ -16,7 +22,7 @@
 				<ol class="breadcrumb">
 					<li><b:navLink value="Home" outcome="home" /></li>
 					<li><b:navLink value="Lista de Tickets de Contatos"
-							outcome="lista_modulos" /></li>
+							outcome="form_ticket_contato" /></li>
 					<li class="active">Cadastro de Ticket Contato</li>
 				</ol>
 

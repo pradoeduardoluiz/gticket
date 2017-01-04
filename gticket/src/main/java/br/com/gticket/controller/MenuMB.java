@@ -28,7 +28,7 @@ public class MenuMB implements Serializable {
 	private final String LISTACONTATOS = "lista_contatos" + facesRedirect;
 
 	// Opções do menu Ticket
-	private final String LISTATICKETS = "lista_clientes";
+	private final String LISTATICKETS = "lista_tickets_contato" + facesRedirect;
 
 	public void menuAdmnistracaoAberto() {
 
