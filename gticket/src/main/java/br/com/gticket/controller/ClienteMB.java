@@ -58,7 +58,7 @@ public class ClienteMB implements Serializable {
 		this.clientes = clientes;
 	}
 
-	public void salvar() {
+	public String salvar() {
 
 		try {
 
@@ -67,11 +67,15 @@ public class ClienteMB implements Serializable {
 
 			FacesUtil.addInfoMessage("Cadastro Salvo com Sucesso");
 
+			return "lista_clientes?faces-redirect=true";
+
 		} catch (Exception e) {
 
 			FacesUtil.addErrorMessage(e.getMessage());
 			e.printStackTrace();
 		}
+
+		return "";
 
 	}
 
@@ -79,7 +83,7 @@ public class ClienteMB implements Serializable {
 
 		bo.excluir(id);
 
-		return "/lista_clientes";
+		return "lista_clientes?faces-redirect=true";
 
 	}
 

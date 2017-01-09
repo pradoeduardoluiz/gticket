@@ -1,5 +1,6 @@
 package br.com.gticket.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
@@ -54,11 +55,14 @@ public class LoginMB implements Serializable {
 
 	}
 
-	public String logout() {
+	public void logout() {
 
-		SessionUtil.invalidate();
-
-		return "index?faces-redirect=true";
+		try {
+			SessionUtil.invalidate();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

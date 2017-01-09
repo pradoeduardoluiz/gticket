@@ -22,7 +22,7 @@
 				<ol class="breadcrumb">
 					<li><b:navLink value="Home" outcome="home" /></li>
 					<li><b:navLink value="Lista de Tickets de Contatos"
-							outcome="form_ticket_contato" /></li>
+							outcome="lista_tickets_contato" /></li>
 					<li class="active">Cadastro de Ticket Contato</li>
 				</ol>
 
@@ -31,19 +31,32 @@
 
 					<h:form id="formTicketContato" prependId="false">
 
+						<b:poll interval="5000" update="tempoAtendimento"
+							execute="tempoAtendimento"
+							action="#{ticketContatoMB.calcularTempoAtendimento()}" />
+
 						<b:row>
 							<b:column medium-screen="2">
-								<b:inputText id="id" label="Ticket"
-									value="#{ticketContatoMB.ticket.id}" disabled="true" />
+								<h:outputLabel value="Ticket" for="id"
+									styleClass="control-label bf-required" />
 							</b:column>
+							<b:column medium-screen="2">
+								<b:inputText id="id" value="#{ticketContatoMB.ticket.id}"
+									disabled="true" />
+							</b:column>
+						</b:row>
 
-							<b:column medium-screen="3" offset="5">
-
-								<h:outputLabel for="dataInclusao" value="Data de Inclusão" />
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Data de Inclusão" for="dataInclusao"
+									styleClass="control-label bf-required" />
+							</b:column>
+							<b:column medium-screen="3">
 								<h:inputText id="dataInclusao"
 									value="#{ticketContatoMB.ticket.dataDeInclusao}"
 									class="form-control" disabled="true">
-									<f:convertDateTime pattern="dd/MM/yyyy - h:mm " />
+									<f:convertDateTime pattern="dd/MM/yyyy - HH:mm "
+										timeZone="America/Sao_Paulo" />
 								</h:inputText>
 
 							</b:column>
@@ -51,10 +64,14 @@
 						</b:row>
 
 						<b:row>
+							<b:column medium-screen="2" styleClass="autocomplete">
+								<h:outputLabel value="Cliente" for="cliente"
+									styleClass="control-label bf-required" />
+							</b:column>
 
-							<b:column medium-screen="10" styleClass="autocomplete">
+							<b:column medium-screen="6" styleClass="autocomplete">
 
-								<b:inputText label="Cliente" id="cliente"
+								<b:inputText id="cliente"
 									value="#{ticketContatoMB.ticket.cliente}" required="true"
 									required-message="Campo Cliente é Obrigatório!"
 									typeahead="true" typeahead-values="#{clienteMB.clientes}"
@@ -65,14 +82,24 @@
 										listener="#{ticketContatoMB.carregarContatos}" />
 
 								</b:inputText>
+								
+								<b:inputText id="cliente1"
+									value="#{ticketContatoMB.ticket.cliente}" disabled="true"
+									rendered="#{ticketContatoMB.editarId!=null}" />
+
+
 							</b:column>
 
 						</b:row>
 
 						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Contato" for="contatoTicket"
+									styleClass="control-label bf-required" />
+							</b:column>
 
-							<b:column medium-screen="4">
-								<b:selectOneMenu id="contatoTicket" label="Contato"
+							<b:column medium-screen="6">
+								<b:selectOneMenu id="contatoTicket"
 									value="#{ticketContatoMB.ticket.contato}" required="true"
 									requiredMessage="Selecione um contato válido!" update="">
 									<f:selectItem itemLabel="Selecione..." itemValue="" />
@@ -84,19 +111,23 @@
 
 								</b:selectOneMenu>
 							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Telefones" for="telefone" />
+							</b:column>
 
 							<b:column medium-screen="3">
-
-								<b:inputText id="telefone" label="Telefone"
+								<b:inputText id="telefone"
 									value="#{ticketContatoMB.ticket.contato.telefone}"
 									disabled="true" />
 
 							</b:column>
 
-
 							<b:column medium-screen="3">
 
-								<b:inputText id="celular" label="Celular"
+								<b:inputText id="celular"
 									value="#{ticketContatoMB.ticket.contato.celular}"
 									disabled="true" />
 
@@ -105,9 +136,12 @@
 						</b:row>
 
 						<b:row>
-
+							<b:column medium-screen="2">
+								<h:outputLabel value="Situação" for="situacao"
+									styleClass="control-label bf-required" />
+							</b:column>
 							<b:column medium-screen="4">
-								<b:selectOneMenu id="situacao" label="Situação"
+								<b:selectOneMenu id="situacao"
 									value="#{ticketContatoMB.ticket.situacao}" required="true"
 									requiredMessage="Selecione uma situação válida!">
 									<f:selectItem itemLabel="Selecione..." itemValue="" />
@@ -117,8 +151,14 @@
 
 							</b:column>
 
+						</b:row>
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Categoria" for="categoria"
+									styleClass="control-label bf-required" />
+							</b:column>
 							<b:column medium-screen="3">
-								<b:selectOneMenu id="categoria" label="Categoria"
+								<b:selectOneMenu id="categoria"
 									value="#{ticketContatoMB.ticket.categoria}" required="true"
 									requiredMessage="Selecione uma categoria válida!">
 									<f:selectItem itemLabel="Selecione..." itemValue="" />
@@ -127,8 +167,15 @@
 								</b:selectOneMenu>
 							</b:column>
 
+						</b:row>
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Topico" for="topico"
+									styleClass="control-label bf-required" />
+							</b:column>
+
 							<b:column medium-screen="3">
-								<b:inputText id="topico" label="Topico"
+								<b:inputText id="topico"
 									value="#{ticketContatoMB.ticket.topico}" placeholder="Tópico"
 									required="true" requiredMessage="Campo Tópico é Obrigatório!" />
 							</b:column>
@@ -136,8 +183,12 @@
 						</b:row>
 
 						<b:row>
-							<b:column medium-screen="10">
-								<b:inputTextarea id="assunto" label="Assunto"
+							<b:column medium-screen="2">
+								<h:outputLabel value="Assunto" for="assunto"
+									styleClass="control-label bf-required" />
+							</b:column>
+							<b:column medium-screen="6">
+								<b:inputTextarea id="assunto"
 									value="#{ticketContatoMB.ticket.assunto}" required="true"
 									required-message="Campo assunto é obrigatório!"
 									placeholder="Descreva o assunto referente o ticket" />
@@ -145,42 +196,48 @@
 						</b:row>
 
 						<b:row>
-
-							<b:column medium-screen="3">
-
-								<b:selectBooleanCheckbox id="finalizado"
-									caption="Ticket Finalizado"
-									value="#{ticketContatoMB.ticket.ticketFinalizado}">
-
-									<f:ajax event="change" render="@form" />
-
-								</b:selectBooleanCheckbox>
-
+							<b:column medium-screen="2">
+								<h:outputLabel value="Resolução" for="resolucao"
+									styleClass="control-label bf-required" />
 							</b:column>
-
-						</b:row>
-
-						<b:row>
-							<b:column medium-screen="10">
-								<b:inputTextarea id="resolucao" label="Resolução"
-									value="#{ticketContatoMB.ticket.resolucao}"
-									rendered="#{ticketContatoMB.ticket.ticketFinalizado==true}"
-									required="true"
-									required-message="Campo resolução é obrigatório!" />
+							<b:column medium-screen="6">
+								<b:inputTextarea id="resolucao"
+									value="#{ticketContatoMB.ticket.resolucao}" required="true"
+									required-message="Campo resolução é obrigatório!"
+									placeholder="Descreva a resolução referente o ticket" />
 							</b:column>
 						</b:row>
 
 						<b:row>
-							<b:column medium-screen="5">
+							<b:column medium-screen="2">
+								<h:outputLabel value="Tempo de Atendimento"
+									for="tempoAtendimento" />
+							</b:column>
+							<b:column medium-screen="2">
+								<b:inputText id="tempoAtendimento"
+									value="#{ticketContatoMB.tempoAtendimento}" readonly="true">
+								</b:inputText>
+
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2" offset="2"
+								rendered="#{ticketContatoMB.editarId==null}">
+								<b:commandButton look="success btn-block" value="Finalizar"
+									action="#{ticketContatoMB.salvar}" />
+							</b:column>
+							<b:column medium-screen="2" offset="2"
+								rendered="#{ticketContatoMB.editarId!=null}">
 								<b:commandButton look="success btn-block" value="Salvar"
 									action="#{ticketContatoMB.salvar}" />
 							</b:column>
-							<b:column medium-screen="5">
-								<b:button value="Voltar" outcome="" look="danger btn-block" />
+							<b:column medium-screen="2">
+								<b:button value="Voltar" outcome="lista_tickets_contato"
+									look="danger btn-block" />
 							</b:column>
 						</b:row>
 					</h:form>
-
 				</b:panel>
 			</b:container>
 

@@ -34,8 +34,12 @@
 						</b:row>
 
 						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Nome" for="nome"
+									styleClass="control-label bf-required" />
+							</b:column>
 							<b:column medium-screen="4">
-								<b:inputText id="nome" name="nome" label="Nome"
+								<b:inputText id="nome" name="nome"
 									value="#{categoriaMB.categoria.nome}"
 									placeholder="Nome do módulo" required="true"
 									required-message="Campo Nome é Obrigatório!" />
@@ -43,7 +47,7 @@
 						</b:row>
 
 						<b:row>
-							<b:column medium-screen="2">
+							<b:column medium-screen="2" offset="2">
 								<b:commandButton look="success btn-block" value="Salvar"
 									action="#{categoriaMB.salvar}" />
 							</b:column>

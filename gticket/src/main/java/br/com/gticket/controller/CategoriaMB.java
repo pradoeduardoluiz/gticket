@@ -29,7 +29,7 @@ public class CategoriaMB implements Serializable {
 		bo = new CategoriaBO();
 	}
 
-	public void salvar() {
+	public String salvar() {
 
 		try {
 			bo.salvar(categoria);
@@ -38,17 +38,21 @@ public class CategoriaMB implements Serializable {
 
 			FacesUtil.addInfoMessage("Cadastro Salvo com Sucesso");
 
+			return "lista_categorias?faces-redirect=true";
+
 		} catch (Exception e) {
 			FacesUtil.addErrorMessage(e.getMessage());
 			e.printStackTrace();
 		}
+
+		return "";
 
 	}
 
 	public String excluir(Integer id) {
 		bo.excluir(id);
 
-		return "/lista_categorias";
+		return "lista_categorias?faces-redirect=true";
 	}
 
 	public void carregar(ComponentSystemEvent event) {

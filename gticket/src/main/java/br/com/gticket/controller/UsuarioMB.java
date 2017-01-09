@@ -32,7 +32,7 @@ public class UsuarioMB implements Serializable {
 		bo = new UsuarioBO();
 	}
 
-	public void salvar() {
+	public String salvar() {
 
 		try {
 			bo.salvar(usuario);
@@ -41,12 +41,16 @@ public class UsuarioMB implements Serializable {
 
 			FacesUtil.addInfoMessage("Cadastro Salvo com Sucesso");
 
+			return "lista_usuarios?faces-redirect=true";
+
 		} catch (Exception e) {
 
 			FacesUtil.addErrorMessage(e.getMessage());
 
 			e.printStackTrace();
 		}
+
+		return "";
 
 	}
 
@@ -61,7 +65,7 @@ public class UsuarioMB implements Serializable {
 	public String excluir(Integer id) {
 		bo.excluirUsuario(id);
 
-		return "/lista_usuarios";
+		return "lista_usuarios?faces-redirect=true";
 	}
 
 	public String editar(Integer id) {

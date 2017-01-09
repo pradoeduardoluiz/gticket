@@ -7,57 +7,32 @@
 	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+	<title>Gticket</title>
 
-	<h:outputStylesheet name="/css/gticket.css" />
-
-	<style type="text/css">
-.col-md-2.col-sm-3 {
-	padding-left: 0;
-}
-
-.panel-group {
-	margin-bottom: 5px;
-}
-
-.sidebar {
-	margin-top: 0px;
-	position: fixed;
-	background-color: #fff;
-}
-
-.main {
-	
-}
-
-.navbar {
-	margin-bottom: 0px;
-}
-
-.dropbox-ticket {
-	text-align: center;
-	width: 100%;
-	padding-top: 5px;
-	padding-bottom: 10px;
-}
-</style>
+	<h:outputStylesheet name="/css/gticket.css" position="last" />
 
 </h:head>
 
-<h:body style="padding-top: 60px">
+<h:body>
 
 	<b:navBar brand="FKN Informática" brandHref="#" fluid="true"
 		fixed="top">
 		<h:form>
 			<b:navbarLinks pull="right" styleClass="hidden-xs">
-				<b:dropMenu value="Opções">
-					<b:navCommandLink value="Logoff" icon-awesome="fa fa-power-off"
+				<b:dropMenu icon-awesome="fa-user-circle" icon-size="1x"
+					value="#{loginMB.email}">
+					<b:navCommandLink value="Mudar Dados" icon-awesome="fa-lock"
+						outcome="form_usuario?id=#{loginMB.usuarioLogado.id}" />
+					<b:navCommandLink value="Alterar Senha" icon-awesome="fa-lock"
+						action="#{loginMB.logout()}" />
+					<b:navCommandLink value="Logoff" icon-awesome="fa-power-off"
 						action="#{loginMB.logout()}" />
 				</b:dropMenu>
 			</b:navbarLinks>
 		</h:form>
 	</b:navBar>
 
-	<b:container fluid="true">
+	<b:container fluid="true" style="padding-top: 50px">
 		<b:row>
 			<b:column col-sm="3" col-md="2" styleClass="sidebar">
 
@@ -66,9 +41,9 @@
 					<div class="dropbox-ticket">
 						<b:dropButton value="Novo Ticket" size="lg" look="primary">
 							<b:navLink value="Ticket de Contato"
-								outcome="form_ticket_contato.xhtml" icon-awesome="fa fa-ticket" />
+								outcome="form_ticket_contato" icon-awesome="fa-ticket" />
 							<b:navLink value="Ticket de Desenvolvimento" href="#"
-								icon-awesome="fa fa-gears" />
+								icon-awesome="fa-gears" />
 						</b:dropButton>
 					</div>
 
@@ -103,6 +78,9 @@
 							collapsed="#{menuMB.menuTicketCollapsed}"
 							showCollapseLink="false" style="margin-bottom: 0px">
 							<b:listLinks>
+								<b:navCommandLink value="Tickets de contato"
+									icon-awesome="fa-ticket" iconAlign="left"
+									action="#{menuMB.listaTickets()}" />
 							</b:listLinks>
 						</b:panel>
 					</h:form>
@@ -113,9 +91,11 @@
 			<b:column col-sm="9" offset-sm="3" col-md="10" offset="2"
 				styleClass="main">
 
-				<ui:insert name="conteudo">
+				<div class="conteudo">
+					<ui:insert name="conteudo">
 
-				</ui:insert>
+					</ui:insert>
+				</div>
 
 			</b:column>
 		</b:row>

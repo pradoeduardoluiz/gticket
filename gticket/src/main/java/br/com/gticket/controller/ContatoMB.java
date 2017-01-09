@@ -38,7 +38,7 @@ public class ContatoMB implements Serializable {
 		boCliente = new ClienteBO();
 	}
 
-	public void salvar() {
+	public String salvar() {
 
 		try {
 
@@ -46,11 +46,15 @@ public class ContatoMB implements Serializable {
 
 			FacesUtil.addInfoMessage("Cadastro Salvo com Sucesso");
 
+			return "lista_contatos?faces-redirect=true";
+
 		} catch (Exception e) {
 
 			FacesUtil.addErrorMessage(e.getMessage());
 
 		}
+
+		return "";
 
 	}
 
@@ -66,7 +70,7 @@ public class ContatoMB implements Serializable {
 
 		bo.excluir(id);
 
-		return "/lista_contatos";
+		return "lista_contatos?faces-redirect=true";
 
 	}
 

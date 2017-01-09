@@ -18,43 +18,54 @@
 					<li class="active">Lista de Usuários</li>
 				</ol>
 
-				<h:form>
-					<b:dataTable value="#{usuarioMB.usuarios}" var="usuario"
-						border="false" select="true"
-						customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
+				<b:messages />
 
-						<b:dataTableColumn label="Nome" value="#{usuario.nome}" />
-						<b:dataTableColumn label="Email" value="#{usuario.email}" />
-						<b:dataTableColumn label="Perfil" value="#{usuario.perfil}" />
+				<b:row style="float:right;padding-bottom: 10px;">
+					<b:column>
+						<b:button icon-awesome="plus-circle" value="Adicionar Usuário"
+							look="primary" outcome="form_usuario" />
+					</b:column>
+				</b:row>
 
-						<b:dataTableColumn label="Editar"
-							content-style="width:5px;text-align:center;">
+				<b:row>
+					<b:column>
 
-							<h:link outcome="/logged/form_usuario">
-								<b:iconAwesome name="pencil" size="2x" />
-								<f:param name="id" value="#{usuario.id}" />
-							</h:link>
-						</b:dataTableColumn>
+						<h:form>
+							<b:dataTable value="#{usuarioMB.usuarios}" var="usuario"
+								border="false" select="true"
+								customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
 
-						<b:dataTableColumn label="Excluir"
-							content-style="width:5px;text-align:center;">
+								<b:dataTableColumn label="Nome" value="#{usuario.nome}" />
+								<b:dataTableColumn label="Email" value="#{usuario.email}" />
+								<b:dataTableColumn label="Perfil" value="#{usuario.perfil}" />
 
-							<h:commandLink
-								onclick="return confirm('Tem certeza da exclusão do usuário #{usuario.nome}');"
-								action="#{usuarioMB.excluir(usuario.id)}">
-								<b:iconAwesome name="trash" size="2x" />
-							</h:commandLink>
+								<b:dataTableColumn label="Editar"
+									content-style="width:5px;text-align:center;">
 
-						</b:dataTableColumn>
+									<h:link outcome="/logged/form_usuario">
+										<b:iconAwesome name="pencil" size="2x" />
+										<f:param name="id" value="#{usuario.id}" />
+									</h:link>
+								</b:dataTableColumn>
 
-					</b:dataTable>
+								<b:dataTableColumn label="Excluir"
+									content-style="width:5px;text-align:center;">
 
-				</h:form>
+									<h:commandLink
+										onclick="return confirm('Tem certeza da exclusão do usuário #{usuario.nome}');"
+										action="#{usuarioMB.excluir(usuario.id)}">
+										<b:iconAwesome name="trash" size="2x" />
+									</h:commandLink>
 
-				<h:link outcome="form_usuario">
-					<b:iconAwesome name="plus-circle" size="2x"
-						tooltip="Adicionar usuário" />
-				</h:link>
+								</b:dataTableColumn>
+
+							</b:dataTable>
+
+						</h:form>
+
+					</b:column>
+
+				</b:row>
 
 			</b:container>
 

@@ -1,7 +1,9 @@
 package br.com.gticket.util;
 
+import java.io.IOException;
 import java.io.Serializable;
 
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -28,8 +30,11 @@ public class SessionUtil implements Serializable {
 		getSession().removeAttribute(key);
 	}
 
-	public static void invalidate() {
+	public static void invalidate() throws IOException {
+		ExternalContext ec = FacesContext.getCurrentInstance()
+				.getExternalContext();
 		getSession().invalidate();
+		ec.redirect(ec.getRequestContextPath() + "/index.xhtml");
 	}
 
 }

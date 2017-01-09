@@ -1,5 +1,6 @@
 package br.com.gticket.bo;
 
+import java.util.Date;
 import java.util.List;
 
 import br.com.gticket.bo.exception.ValorEmBrancoException;
@@ -21,6 +22,10 @@ public class TicketContatoBO extends BO implements ValidaFormulario {
 
 		validaCamposObrigatorios(ticket);
 
+		if (inclusao(ticket)) {
+			ticket.setAtivo(true);
+			ticket.setDataDeFinalizacao(new Date());
+		}
 		dao.salvar(ticket);
 
 	}
@@ -75,7 +80,8 @@ public class TicketContatoBO extends BO implements ValidaFormulario {
 
 	@Override
 	public boolean inclusao(Object object) {
-		return false;
+		TicketContato ticket = (TicketContato) object;
+		return ticket.getId() == null || ticket.getId() == 0;
 	}
 
 	public TicketContato buscarPorId(Integer id) {

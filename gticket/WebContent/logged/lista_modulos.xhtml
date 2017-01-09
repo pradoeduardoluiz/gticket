@@ -18,43 +18,53 @@
 					<li class="active">Lista de Módulos</li>
 				</ol>
 
-				<h:form>
+				<b:messages />
 
-					<b:dataTable value="#{moduloMB.modulos}" var="modulo"
-						border="false" select="true"
-						customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
+				<b:row style="float:right;padding-bottom: 10px;">
+					<b:column>
+						<b:button icon-awesome="plus-circle" value="Adicionar Módulo"
+							look="primary" outcome="form_modulo" />
+					</b:column>
+				</b:row>
 
-						<b:dataTableColumn label="Nome" value="#{modulo.nome}" />
+				<b:row>
+					<b:column>
+						<h:form>
 
-						<b:dataTableColumn label="Editar"
-							content-style="width:5px; text-align:center;">
+							<b:dataTable value="#{moduloMB.modulos}" var="modulo"
+								border="false" select="true"
+								customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
 
-							<h:link outcome="/logged/form_modulo">
-								<b:iconAwesome name="pencil" size="2x" />
-								<f:param name="id" value="#{modulo.id}" />
-							</h:link>
+								<b:dataTableColumn label="Nome" value="#{modulo.nome}" />
 
-						</b:dataTableColumn>
+								<b:dataTableColumn label="Editar"
+									content-style="width:5px; text-align:center;">
 
-						<b:dataTableColumn label="Excluir"
-							content-style="width:5px;text-align:center;">
+									<h:link outcome="/logged/form_modulo">
+										<b:iconAwesome name="pencil" size="2x" />
+										<f:param name="id" value="#{modulo.id}" />
+									</h:link>
 
-							<h:commandLink
-								onclick="return confirm('Tem certeza da exclusão do Modulo #{Modulo.nome}');"
-								action="#{moduloMB.excluir(modulo.id)}">
-								<b:iconAwesome name="trash" size="2x" />
-							</h:commandLink>
+								</b:dataTableColumn>
 
-						</b:dataTableColumn>
+								<b:dataTableColumn label="Excluir"
+									content-style="width:5px;text-align:center;">
 
-					</b:dataTable>
+									<h:commandLink
+										onclick="return confirm('Tem certeza da exclusão do Modulo #{Modulo.nome}');"
+										action="#{moduloMB.excluir(modulo.id)}">
+										<b:iconAwesome name="trash" size="2x" />
+									</h:commandLink>
 
-				</h:form>
+								</b:dataTableColumn>
 
-				<h:link outcome="form_modulo">
-					<b:iconAwesome name="plus-circle" size="2x"
-						tooltip="Adicionar Modulo" />
-				</h:link>
+							</b:dataTable>
+
+						</h:form>
+
+					</b:column>
+				</b:row>
+
 
 			</b:container>
 

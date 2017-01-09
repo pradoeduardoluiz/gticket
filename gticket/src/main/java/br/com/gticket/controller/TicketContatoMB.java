@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -21,6 +22,7 @@ import br.com.gticket.model.Contato;
 import br.com.gticket.model.SituacaoTicket;
 import br.com.gticket.model.TicketContato;
 import br.com.gticket.util.FacesUtil;
+import br.com.gticket.util.Util;
 
 @ManagedBean
 @ViewScoped
@@ -34,6 +36,7 @@ public class TicketContatoMB implements Serializable {
 	private Integer editarId;
 	private List<Contato> contatos;
 	private SituacaoTicket[] situacoes;
+	private String tempoAtendimento;
 
 	@PostConstruct
 	public void init() {
@@ -43,28 +46,33 @@ public class TicketContatoMB implements Serializable {
 		ticket.setDataDeInclusao(new Date());
 		bo = new TicketContatoBO();
 		contatos = new ArrayList<Contato>();
+		tempoAtendimento = "00:00:00";
 
 	}
 
-	public void salvar() {
+	public String salvar() {
 
 		try {
 			bo.salvar(ticket);
 
 			FacesUtil.addInfoMessage("Cadastro Salvo com Sucesso");
 
+			return "lista_tickets_contato?faces-redirect=true";
+
 		} catch (ValorEmBrancoException | ValorZeradoException
 				| ValorInvalidoException e) {
 
 			FacesUtil.addErrorMessage(e.getMessage());
+
 		}
+
+		return "";
 
 	}
 
-	public void excluir(Integer id) {
-
+	public String excluir(Integer id) {
 		bo.excluir(id);
-
+		return "lista_tickets_contato?faces-redirect=true";
 	}
 
 	public TicketContato getTicket() {
@@ -108,6 +116,14 @@ public class TicketContatoMB implements Serializable {
 		this.situacoes = situacoes;
 	}
 
+	public String getTempoAtendimento() {
+		return tempoAtendimento;
+	}
+
+	public void setTempoAtendimento(String tempoAtendimento) {
+		this.tempoAtendimento = tempoAtendimento;
+	}
+
 	public void carregarContatos(AjaxBehaviorEvent event) {
 
 		if (ticket.getCliente() != null) {
@@ -123,4 +139,15 @@ public class TicketContatoMB implements Serializable {
 		ticket = bo.buscarPorId(editarId);
 	}
 
+	public void calcularTempoAtendimento() {
+
+		if (ticket.getId() == null || ticket.getId() == 0) {
+			tempoAtendimento = Util.calcularDiferencaHora(
+					ticket.getDataDeInclusao(), new Date());
+		} else {
+			tempoAtendimento = Util.calcularDiferencaHora(
+					ticket.getDataDeInclusao(), ticket.getDataDeFinalizacao());
+		}
+
+	}
 }

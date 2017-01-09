@@ -3,7 +3,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:b="http://bootsfaces.net/ui">
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:body>
 
@@ -18,60 +19,98 @@
 					<li class="active">Lista de Tickets de Contato</li>
 				</ol>
 
-				<h:form>
+				<b:messages />
 
-					<b:dataTable value="#{ticketContatoMB.tickets}" var="ticket"
-						border="false" select="true"
-						customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
+				<b:row style="float:right;padding-bottom: 10px;">
+					<b:column>
+						<b:button icon-awesome="plus-circle" value="Adicionar Ticket"
+							look="primary" outcome="form_ticket_contato" />
+					</b:column>
+				</b:row>
 
-						<b:dataTableColumn label="Id" value="#{ticket.id}" />
-						<b:dataTableColumn label="Cliente"
-							value="#{ticket.cliente.razaoSocial}" />
-						<b:dataTableColumn label="Contato" value="#{ticket.contato.nome}" />
+				<b:row>
+					<b:column>
+						<h:form>
 
-						<h:column label="Data de Inclusao">
+							<b:dataTable value="#{ticketContatoMB.tickets}" var="ticket"
+								order="desc" data-order="#{ticket.dataDeInclusao}"
+								border="false" select="true"
+								customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
 
-							<h:outputText value="#{ticket.dataDeInclusao}">
+								<b:dataTableColumn label="Id" value="#{ticket.id}" />
+								<b:dataTableColumn label="Cliente"
+									value="#{ticket.cliente.razaoSocial}" />
+								<b:dataTableColumn label="Contato"
+									value="#{ticket.contato.nome}" />
 
-								<f:convertDateTime pattern="dd/MM/yyyy - h:mm " />
+								<h:column label="Data de Inclusao">
 
-							</h:outputText>
+									<h:outputText value="#{ticket.dataDeInclusao}">
 
-						</h:column>
+										<f:convertDateTime pattern="dd/MM/yyyy - HH:mm "
+											timeZone="America/Sao_Paulo" />
 
-						<b:dataTableColumn label="Tópico" value="#{ticket.topico}" />
+									</h:outputText>
+
+								</h:column>
+
+								<h:column label="Data de Finalização">
+
+									<h:outputText value="#{ticket.dataDeFinalizacao}">
+
+										<f:convertDateTime pattern="dd/MM/yyyy - HH:mm "
+											timeZone="America/Sao_Paulo" />
+
+									</h:outputText>
+
+								</h:column>
+
+								<b:dataTableColumn label="Duração"
+									value="#{ticket.tempoAtendimento}" />
+
+								<h:column label="Situação">
+
+									<h:outputText value="#{ticket.situacao}"
+										styleClass="label label-danger"
+										rendered="#{ticket.situacao == 'URGENTE'}" />
+
+									<h:outputText value="#{ticket.situacao}"
+										styleClass="label label-warning"
+										rendered="#{ticket.situacao == 'PRIORIDADE'}" />
+
+									<h:outputText value="#{ticket.situacao}"
+										styleClass="label label-success"
+										rendered="#{ticket.situacao == 'NORMAL'}" />
 
 
-						<b:dataTableColumn label="Editar"
-							content-style="width:5px; text-align:center;">
+								</h:column>
 
-							<h:link outcome="/logged/form_ticket_contato">
-								<b:iconAwesome name="pencil" size="2x" />
-								<f:param name="id" value="#{ticket.id}" />
-							</h:link>
+								<b:dataTableColumn label="Tópico" value="#{ticket.topico}" />
+								<b:dataTableColumn label="Categoria" value="#{ticket.categoria}" />
+								<b:dataTableColumn label="Editar"
+									content-style="width:5px; text-align:center;">
 
-						</b:dataTableColumn>
+									<h:link outcome="/logged/form_ticket_contato">
+										<b:iconAwesome name="pencil" size="2x" />
+										<f:param name="id" value="#{ticket.id}" />
+									</h:link>
 
-						<b:dataTableColumn label="Excluir"
-							content-style="width:5px;text-align:center;">
+								</b:dataTableColumn>
+								<b:dataTableColumn label="Excluir"
+									content-style="width:5px;text-align:center;">
 
-							<h:commandLink
-								onclick="return confirm('Tem certeza da exclusão do Modulo #{Modulo.nome}');"
-								action="#{ticketContatoMB.excluir(ticket.id)}">
-								<b:iconAwesome name="trash" size="2x" />
-							</h:commandLink>
+									<h:commandLink
+										onclick="return confirm('Tem certeza da exclusão do Ticket de Contato id: #{ticket.id}');"
+										action="#{ticketContatoMB.excluir(ticket.id)}">
+										<b:iconAwesome name="trash" size="2x" />
+									</h:commandLink>
 
-						</b:dataTableColumn>
+								</b:dataTableColumn>
+							</b:dataTable>
 
-					</b:dataTable>
-
-				</h:form>
-
-				<h:link outcome="form_ticket_contato">
-					<b:iconAwesome name="plus-circle" size="2x"
-						tooltip="Adicionar Ticket de Contato" />
-				</h:link>
-
+						</h:form>
+					</b:column>
+				</b:row>
 			</b:container>
 
 		</ui:define>

@@ -25,7 +25,7 @@
 				</ol>
 
 				<b:panel title="Cadastro de Cliente">
-					<b:messages />
+					<b:messages showDetail="true" />
 					<h:form id="formCliente" prependId="false">
 
 						<b:tabView
@@ -40,8 +40,12 @@
 								</b:row>
 
 								<b:row>
+									<b:column medium-screen="2">
+										<h:outputLabel value="Razão Social" for="razaoSocial"
+											styleClass="control-label bf-required" />
+									</b:column>
 									<b:column medium-screen="4">
-										<b:inputText id="razaoSocial" label="Razão Social"
+										<b:inputText id="razaoSocial"
 											value="#{clienteMB.cliente.razaoSocial}"
 											placeholder="Razão Social" required="true"
 											required-message="Campo Razão Social é Obrigatório!" />
@@ -49,8 +53,12 @@
 								</b:row>
 
 								<b:row>
+									<b:column medium-screen="2">
+										<h:outputLabel value="Nome Fantasia" for="nomeFantasia"
+											styleClass="control-label bf-required" />
+									</b:column>
 									<b:column medium-screen="4">
-										<b:inputText id="nomeFantasia" label="Nome Fantasia"
+										<b:inputText id="nomeFantasia"
 											value="#{clienteMB.cliente.nomeFantasia}"
 											placeholder="Nome Fantasia" required="true"
 											required-message="Campo Nome Fantasia é Obrigatório!" />
@@ -58,16 +66,24 @@
 								</b:row>
 
 								<b:row>
+									<b:column medium-screen="2">
+										<h:outputLabel value="CNPJ" for="cnpj"
+											styleClass="control-label bf-required" />
+									</b:column>
 									<b:column medium-screen="4">
-										<b:inputText id="cnpj" label="CNPJ"
-											value="#{clienteMB.cliente.cnpj}" placeholder="CNPJ"
-											required="true" requiredMessage="Campo CNPJ é Obrigatório!" />
+										<b:inputText id="cnpj" value="#{clienteMB.cliente.cnpj}"
+											placeholder="CNPJ" required="true"
+											requiredMessage="Campo CNPJ é Obrigatório!" />
 									</b:column>
 								</b:row>
 
 								<b:row>
+									<b:column medium-screen="2">
+										<h:outputLabel value="Telefone 1" for="telefone1"
+											styleClass="control-label bf-required" />
+									</b:column>
 									<b:column medium-screen="4">
-										<b:inputText id="telefone1" label="Telefone 1"
+										<b:inputText id="telefone1"
 											value="#{clienteMB.cliente.telefone1}"
 											placeholder="Telefone Comercial" required="true"
 											requiredMessage="Campo Telefone 1 é Obrigatório!" />
@@ -75,31 +91,61 @@
 								</b:row>
 
 								<b:row>
+									<b:column medium-screen="2">
+										<h:outputLabel value="Telefone 2" for="telefone2"
+											styleClass="control-label bf-required" />
+									</b:column>
 									<b:column medium-screen="4">
-										<b:inputText id="telefone2" label="Telefone 2"
+										<b:inputText id="telefone2"
 											value="#{clienteMB.cliente.telefone2}"
 											placeholder="Telefone Comercial" />
 									</b:column>
 								</b:row>
 
 								<b:row>
+									<b:column medium-screen="2">
+										<h:outputLabel value="Fax" for="fax"
+											styleClass="control-label bf-required" />
+									</b:column>
 									<b:column medium-screen="4">
-										<b:inputText id="fax" label="Fax"
-											value="#{clienteMB.cliente.fax}" placeholder="Fax" />
+										<b:inputText id="fax" value="#{clienteMB.cliente.fax}"
+											placeholder="Fax" />
 									</b:column>
 								</b:row>
 
 								<b:row>
+									<b:column medium-screen="2">
+										<h:outputLabel value="Observação" for="observacao"
+											styleClass="control-label bf-required" />
+									</b:column>
 									<b:column medium-screen="4">
-										<b:inputText id="cep" label="CEP"
+										<b:inputTextarea id="observacao"
+											value="#{clienteMB.cliente.obsercacao}" />
+									</b:column>
+								</b:row>
+
+							</b:tab>
+							<b:tab title="Dados de Endereço">
+
+								<b:row>
+									<b:column medium-screen="2">
+										<h:outputLabel value="CEP" for="cep"
+											styleClass="control-label bf-required" />
+									</b:column>
+									<b:column medium-screen="4">
+										<b:inputText id="cep"
 											value="#{clienteMB.cliente.endereco.cep}" placeholder="CEP"
 											required="true" requiredMessage="Campo CEP é Obrigatório!" />
 									</b:column>
 								</b:row>
 
 								<b:row>
+									<b:column medium-screen="2">
+										<h:outputLabel value="Rua" for="rua"
+											styleClass="control-label bf-required" />
+									</b:column>
 									<b:column medium-screen="4">
-										<b:inputText id="rua" label="Rua"
+										<b:inputText id="rua"
 											value="#{clienteMB.cliente.endereco.rua}"
 											placeholder="Rua/Avenida/Rodovia" required="true"
 											required-message="Campo Rua é Obrigatório!" />
@@ -107,8 +153,12 @@
 								</b:row>
 
 								<b:row>
+									<b:column medium-screen="2">
+										<h:outputLabel value="Número" for="numero"
+											styleClass="control-label bf-required" />
+									</b:column>
 									<b:column medium-screen="4">
-										<b:inputText id="numero" label="Número"
+										<b:inputText id="numero"
 											value="#{clienteMB.cliente.endereco.numero}"
 											placeholder="Número do Endereço" required="true"
 											required-message="Campo Número é Obrigatório!" />
@@ -116,32 +166,48 @@
 								</b:row>
 
 								<b:row>
+									<b:column medium-screen="2">
+										<h:outputLabel value="Complemento" for="complemento"
+											styleClass="control-label bf-required" />
+									</b:column>
 									<b:column medium-screen="4">
-										<b:inputText id="complemento" label="Complemento"
+										<b:inputText id="complemento"
 											value="#{clienteMB.cliente.endereco.complemento}"
 											placeholder="Complemento" />
 									</b:column>
 								</b:row>
 
 								<b:row>
+									<b:column medium-screen="2">
+										<h:outputLabel value="Bairro" for="bairro"
+											styleClass="control-label bf-required" />
+									</b:column>
 									<b:column medium-screen="4">
-										<b:inputText id="bairro" label="Bairro"
+										<b:inputText id="bairro"
 											value="#{clienteMB.cliente.endereco.bairro}"
 											placeholder="Bairro" />
 									</b:column>
 								</b:row>
 
 								<b:row>
+									<b:column medium-screen="2">
+										<h:outputLabel value="Cidade" for="cidade"
+											styleClass="control-label bf-required" />
+									</b:column>
 									<b:column medium-screen="4">
-										<b:inputText id="cidade" label="Cidade"
+										<b:inputText id="cidade"
 											value="#{clienteMB.cliente.endereco.cidade}"
 											placeholder="Cidade" />
 									</b:column>
 								</b:row>
 
 								<b:row>
+									<b:column medium-screen="2">
+										<h:outputLabel value="Estado" for="estado"
+											styleClass="control-label bf-required" />
+									</b:column>
 									<b:column medium-screen="4">
-										<b:selectOneMenu id="estado" label="Estado"
+										<b:selectOneMenu id="estado"
 											value="#{clienteMB.cliente.endereco.estado}" required="true"
 											requiredMessage="Selecione um estado válido!">
 											<f:selectItem itemLabel="Selecione..." itemValue="" />
@@ -150,12 +216,6 @@
 									</b:column>
 								</b:row>
 
-								<b:row>
-									<b:column medium-screen="4">
-										<b:inputTextarea id="observacao" label="Observação"
-											value="#{clienteMB.cliente.obsercacao}" />
-									</b:column>
-								</b:row>
 
 							</b:tab>
 
@@ -164,8 +224,12 @@
 								<b:panel title="Dados de Contrato">
 
 									<b:row>
+										<b:column medium-screen="2">
+											<h:outputLabel value="Número de Contrato"
+												for="numeroContrato" styleClass="control-label bf-required" />
+										</b:column>
 										<b:column medium-screen="4">
-											<b:inputText id="numeroContrato" label="Número de Contrato"
+											<b:inputText id="numeroContrato"
 												value="#{clienteMB.cliente.contrato.numeroContrato}"
 												placeholder="Número do Contrato" required="true"
 												required-message="Campo Número do Contrato é Obrigatório!"
@@ -174,8 +238,13 @@
 									</b:row>
 
 									<b:row>
+										<b:column medium-screen="2">
+											<h:outputLabel value="Número de Licenças"
+												for="numeroDeLicencas"
+												styleClass="control-label bf-required" />
+										</b:column>
 										<b:column medium-screen="4">
-											<b:inputText id="numeroDeLicencas" label="Número de Licenças"
+											<b:inputText id="numeroDeLicencas"
 												value="#{clienteMB.cliente.contrato.numeroDeLicencas}"
 												placeholder="Número do Licenças" required="true"
 												required-message="Campo Número do Licenças é Obrigatório!"
@@ -184,8 +253,12 @@
 									</b:row>
 
 									<b:row>
+										<b:column medium-screen="2">
+											<h:outputLabel value="Número de Filiais"
+												for="numeroDeFiliais" styleClass="control-label bf-required" />
+										</b:column>
 										<b:column medium-screen="4">
-											<b:inputText id="numeroDeFiliais" label="Número de Filiais"
+											<b:inputText id="numeroDeFiliais"
 												value="#{clienteMB.cliente.contrato.numeroDeFiliais}"
 												placeholder="Número de Filiais" required="true"
 												required-message="Campo Número do Filiais é Obrigatório!"
@@ -194,7 +267,7 @@
 									</b:row>
 
 									<b:row>
-										<b:column medium-screen="4">
+										<b:column medium-screen="4" offset="2">
 											<b:selectBooleanCheckbox
 												value="#{clienteMB.cliente.contrato.contratoPremium}"
 												caption="Contrato Premium" />
@@ -203,7 +276,7 @@
 									</b:row>
 
 									<b:row>
-										<b:column medium-screen="4">
+										<b:column medium-screen="4" offset="2">
 											<b:selectBooleanCheckbox
 												value="#{clienteMB.cliente.contrato.contratoRecebido}"
 												caption="Contrato Recebido" />
@@ -211,9 +284,13 @@
 									</b:row>
 
 									<b:row>
-										<b:column medium-screen="4">
+										<b:column medium-screen="2">
+											<h:outputLabel value="Data Inicio de Contrato"
+												for="dataInicioContrato"
+												styleClass="control-label bf-required" />
+										</b:column>
+										<b:column medium-screen="4" style="padding-bottom:12px;">
 											<b:dateTimePicker id="dataInicioContrato"
-												label="Data Inicio de Contrato"
 												value="#{clienteMB.cliente.contrato.dataInicio}"
 												show-date="true" show-time="false" required="true"
 												format="DD-MM-YYYY"
@@ -222,9 +299,13 @@
 									</b:row>
 
 									<b:row>
-										<b:column medium-screen="4">
+										<b:column medium-screen="2">
+											<h:outputLabel value="Data Fim de Contrato"
+												for="dataTerminoContrato"
+												styleClass="control-label bf-required" />
+										</b:column>
+										<b:column medium-screen="4" style="padding-bottom:12px;">
 											<b:dateTimePicker id="dataTerminoContrato"
-												label="Data Fim de Contrato"
 												value="#{clienteMB.cliente.contrato.dataTermino}"
 												show-date="true" show-time="false" format="DD/MM/YYYY" />
 										</b:column>
@@ -236,8 +317,8 @@
 
 						</b:tabView>
 
-						<b:row>
-							<b:column medium-screen="2">
+						<b:row style="padding-top:12px;">
+							<b:column medium-screen="2" offset="2">
 								<b:commandButton look="success btn-block" value="Salvar"
 									action="#{clienteMB.salvar}" />
 							</b:column>

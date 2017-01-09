@@ -29,7 +29,7 @@ public class ModuloMB implements Serializable {
 		bo = new ModuloBO();
 	}
 
-	public void salvar() {
+	public String salvar() {
 
 		try {
 			bo.salvar(modulo);
@@ -37,6 +37,8 @@ public class ModuloMB implements Serializable {
 			modulo = new Modulo();
 
 			FacesUtil.addInfoMessage("Cadastro Salvo com Sucesso");
+
+			return "lista_modulos?faces-redirect=true";
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -46,12 +48,14 @@ public class ModuloMB implements Serializable {
 			e.printStackTrace();
 		}
 
+		return "";
+
 	}
 
 	public String excluir(Integer id) {
 		bo.excluir(id);
 
-		return "/lista_modulos";
+		return "lista_modulos?faces-redirect=true";
 	}
 
 	public void carregarModulo(ComponentSystemEvent event) {

@@ -2,35 +2,41 @@ package br.com.gticket.model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 @Entity(name = "ticket")
 @Inheritance(strategy = InheritanceType.JOINED)
+@SQLDelete(sql = "update ticket set ativo = 0 where id = ?")
+@Where(clause = "ativo = 1")
 public class Ticket {
 
 	@Id
 	@GeneratedValue
 	private Integer id;
-	@OneToOne(cascade = { CascadeType.ALL })
+	@OneToOne
 	private Cliente cliente;
-	@OneToOne(cascade = { CascadeType.ALL })
+	@OneToOne(fetch = FetchType.EAGER)
 	private Contato contato;
 	private String assunto;
 	private SituacaoTicket situacao;
-	@OneToOne(cascade = { CascadeType.ALL })
+	@OneToOne
 	private Categoria categoria;
 	private String topico;
-	@OneToOne(cascade = { CascadeType.ALL })
+	@OneToOne
 	private Usuario usuarioInclusao;
 	private Date dataDeInclusao;
 	private Date dataDeFinalizacao;
 	private Boolean ticketFinalizado;
+	private Boolean ativo;
 
 	public Integer getId() {
 		return id;
@@ -118,6 +124,14 @@ public class Ticket {
 
 	public void setTicketFinalizado(Boolean ticketFinalizado) {
 		this.ticketFinalizado = ticketFinalizado;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 }

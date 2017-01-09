@@ -18,49 +18,57 @@
 					<li class="active">Lista de Clientes</li>
 				</ol>
 
-				<h:form>
-					<b:dataTable value="#{clienteMB.clientes}" var="cliente"
-						border="false" select="true"
-						customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
+				<b:messages />
 
-						<b:dataTableColumn label="Contrato"
-							value="#{cliente.contrato.numeroContrato}" />
-						<b:dataTableColumn label="Razão Social"
-							value="#{cliente.razaoSocial}" />
-						<b:dataTableColumn label="Nome Fantasia"
-							value="#{cliente.nomeFantasia}" />
+				<b:row style="float:right;padding-bottom: 10px;">
+					<b:column>
+						<b:button icon-awesome="plus-circle" value="Adicionar Cliente"
+							look="primary" outcome="form_cliente" />
+					</b:column>
+				</b:row>
 
-						<b:dataTableColumn label="CNPJ" value="#{cliente.cnpj}" />
+				<b:row>
+					<b:column>
+						<h:form>
+							<b:dataTable value="#{clienteMB.clientes}" var="cliente"
+								border="false" select="true"
+								customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
+
+								<b:dataTableColumn label="Contrato"
+									value="#{cliente.contrato.numeroContrato}" />
+								<b:dataTableColumn label="Razão Social"
+									value="#{cliente.razaoSocial}" />
+								<b:dataTableColumn label="Nome Fantasia"
+									value="#{cliente.nomeFantasia}" />
+
+								<b:dataTableColumn label="CNPJ" value="#{cliente.cnpj}" />
 
 
-						<b:dataTableColumn label="Editar"
-							content-style="width:5px;text-align:center;">
+								<b:dataTableColumn label="Editar"
+									content-style="width:5px;text-align:center;">
 
-							<h:link outcome="/logged/form_cliente">
-								<b:iconAwesome name="pencil" size="2x" />
-								<f:param name="id" value="#{cliente.id}" />
-							</h:link>
-						</b:dataTableColumn>
+									<h:link outcome="/logged/form_cliente">
+										<b:iconAwesome name="pencil" size="2x" />
+										<f:param name="id" value="#{cliente.id}" />
+									</h:link>
+								</b:dataTableColumn>
 
-						<b:dataTableColumn label="Excluir"
-							content-style="width:5px;text-align:center;">
+								<b:dataTableColumn label="Excluir"
+									content-style="width:5px;text-align:center;">
 
-							<h:commandLink
-								onclick="return confirm('Tem certeza da exclusão do cliente #{cliente.razaoSocial}');"
-								action="#{clienteMB.excluir(cliente.id)}">
-								<b:iconAwesome name="trash" size="2x" />
-							</h:commandLink>
+									<h:commandLink
+										onclick="return confirm('Tem certeza da exclusão do cliente #{cliente.razaoSocial}');"
+										action="#{clienteMB.excluir(cliente.id)}">
+										<b:iconAwesome name="trash" size="2x" />
+									</h:commandLink>
 
-						</b:dataTableColumn>
+								</b:dataTableColumn>
 
-					</b:dataTable>
+							</b:dataTable>
 
-				</h:form>
-
-				<h:link outcome="form_cliente">
-					<b:iconAwesome name="plus-circle" size="2x"
-						tooltip="Adicionar Cliente" />
-				</h:link>
+						</h:form>
+					</b:column>
+				</b:row>
 
 			</b:container>
 

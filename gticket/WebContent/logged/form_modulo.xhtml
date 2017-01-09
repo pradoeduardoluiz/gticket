@@ -36,23 +36,31 @@
 						</b:row>
 
 						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Nome" for="nome"
+									styleClass="control-label bf-required" />
+							</b:column>
 							<b:column medium-screen="4">
-								<b:inputText id="nome" name="nome" label="Nome"
+								<b:inputText id="nome" name="nome"
 									value="#{moduloMB.modulo.nome}" placeholder="Nome do módulo"
 									required="true" required-message="Campo Nome é Obrigatório!" />
 							</b:column>
 						</b:row>
 
 						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Descrição" for="descricao"
+									styleClass="control-label bf-required" />
+							</b:column>
 							<b:column medium-screen="4">
 								<b:inputTextarea id="descricao" name="descricao"
-									label="Descrição" value="#{moduloMB.modulo.descricao}"
+									value="#{moduloMB.modulo.descricao}"
 									placeholder="Descrição breve do módulo" />
 							</b:column>
 						</b:row>
 
 						<b:row>
-							<b:column medium-screen="2">
+							<b:column medium-screen="2" offset="2">
 								<b:commandButton look="success btn-block" value="Salvar"
 									action="#{moduloMB.salvar}" />
 							</b:column>
