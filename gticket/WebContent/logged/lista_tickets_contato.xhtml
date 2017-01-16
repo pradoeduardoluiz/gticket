@@ -54,17 +54,6 @@
 
 								</h:column>
 
-								<h:column label="Data de Finalização">
-
-									<h:outputText value="#{ticket.dataDeFinalizacao}">
-
-										<f:convertDateTime pattern="dd/MM/yyyy - HH:mm "
-											timeZone="America/Sao_Paulo" />
-
-									</h:outputText>
-
-								</h:column>
-
 								<b:dataTableColumn label="Duração"
 									value="#{ticket.tempoAtendimento}" />
 

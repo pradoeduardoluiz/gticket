@@ -53,11 +53,22 @@ public class TicketContatoMB implements Serializable {
 	public String salvar() {
 
 		try {
-			bo.salvar(ticket);
+			TicketContato retorno;
 
-			FacesUtil.addInfoMessage("Cadastro Salvo com Sucesso");
+			retorno = bo.salvar(ticket);
 
-			return "lista_tickets_contato?faces-redirect=true";
+			String msg = "";
+
+			if (ticket.getId() == null || ticket.getId() == 0) {
+				msg = "Ticket #" + retorno.getId() + " incluído com sucesso.";
+
+			} else {
+				msg = "Ticket #" + retorno.getId() + " alterado com sucesso.";
+			}
+
+			FacesUtil.addInfoMessage(msg);
+
+			return "lista_tickets_contato";
 
 		} catch (ValorEmBrancoException | ValorZeradoException
 				| ValorInvalidoException e) {

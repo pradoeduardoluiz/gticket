@@ -20,7 +20,7 @@ public class Cliente extends PessoaJuridica {
 	@OneToOne(cascade = { CascadeType.ALL })
 	private Contrato contrato;
 
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
 	private List<Contato> contatos;
 
 	public Cliente() {
@@ -57,12 +57,11 @@ public class Cliente extends PessoaJuridica {
 		contatos.add(contato);
 
 	}
-	
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return super.toString();
 	}
-	
 
 }

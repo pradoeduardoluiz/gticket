@@ -17,7 +17,7 @@ public class TicketContatoBO extends BO implements ValidaFormulario {
 		dao = new TicketContatoDAO();
 	}
 
-	public void salvar(TicketContato ticket) throws ValorEmBrancoException,
+	public TicketContato salvar(TicketContato ticket) throws ValorEmBrancoException,
 			ValorZeradoException, ValorInvalidoException {
 
 		validaCamposObrigatorios(ticket);
@@ -26,7 +26,7 @@ public class TicketContatoBO extends BO implements ValidaFormulario {
 			ticket.setAtivo(true);
 			ticket.setDataDeFinalizacao(new Date());
 		}
-		dao.salvar(ticket);
+		return dao.salvar(ticket);
 
 	}
 

@@ -8,8 +8,13 @@ import br.com.gticket.model.TicketContato;
 
 public class TicketContatoDAO extends DAO {
 
-	public void salvar(TicketContato ticket) {
-		getEntityManager().merge(ticket);
+	public TicketContato salvar(TicketContato ticket) {
+
+		TicketContato ticketRetorno;
+		ticketRetorno = getEntityManager().merge(ticket);
+		getEntityManager().flush();
+
+		return ticketRetorno;
 	}
 
 	public TicketContato buscarPorId(Integer id) {
