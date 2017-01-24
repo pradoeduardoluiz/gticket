@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:body>
+
+	<f:metadata>
+		<f:viewParam name="filtro" value="#{ticketDesenvolvimentoMB.filtro}" />
+	</f:metadata>
+
+	<ui:composition template="../template/template.xhtml">
+
+		<ui:define name="conteudo">
+
+			<b:container fluid="true">
+
+				<ol class="breadcrumb">
+					<li><b:navLink value="Home" outcome="home" /></li>
+					<li class="active">Tickets de Desenvolvimento -
+						#{ticketDesenvolvimentoMB.filtro}</li>
+				</ol>
+
+				<b:messages />
+
+				<b:row style="float:right;padding-bottom: 10px;">
+					<b:column>
+						<b:button icon-awesome="plus-circle" value="Adicionar Ticket"
+							look="primary" outcome="form_ticket_desenv" />
+					</b:column>
+				</b:row>
+
+				<b:row>
+					<b:column>
+						<h:form>
+
+							<b:dataTable value="#{ticketDesenvolvimentoMB.tickets}"
+								var="ticket" order="desc" data-order="#{ticket.dataDeInclusao}"
+								border="false" select="true"
+								customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
+
+								<b:dataTableColumn label="Id" value="#{ticket.id}" />
+								<b:dataTableColumn label="Cliente"
+									value="#{ticket.cliente.razaoSocial}" />
+								<h:column label="Data de Inclusao">
+
+									<h:outputText value="#{ticket.dataDeInclusao}">
+
+										<f:convertDateTime pattern="dd/MM/yyyy - HH:mm "
+											timeZone="America/Sao_Paulo" />
+
+									</h:outputText>
+
+								</h:column>
+
+								<h:column label="Situação">
+
+									<h:outputText value="#{ticket.situacao}"
+										styleClass="label label-danger"
+										rendered="#{ticket.situacao == 'URGENTE'}" />
+
+									<h:outputText value="#{ticket.situacao}"
+										styleClass="label label-warning"
+										rendered="#{ticket.situacao == 'PRIORIDADE'}" />
+
+									<h:outputText value="#{ticket.situacao}"
+										styleClass="label label-success"
+										rendered="#{ticket.situacao == 'NORMAL'}" />
+
+
+								</h:column>
+
+								<b:dataTableColumn label="Tópico" value="#{ticket.topico}" />
+								<b:dataTableColumn label="Categoria" value="#{ticket.categoria}" />
+								<b:dataTableColumn label="Status" value="#{ticket.statusTicket}" />
+								<b:dataTableColumn label="Responsável"
+									value="#{ticket.desenvolvedor}" />
+
+
+								<b:dataTableColumn label="Aprovar"
+									content-style="width:5px; text-align:center;"
+									rendered="#{ticketDesenvolvimentoMB.filtro=='pendentes'}">
+
+									<h:link outcome="form_ticket_desenv_aprov">
+										<b:iconAwesome name="fa-check-circle-o" size="2x" />
+										<f:param name="id" value="#{ticket.id}" />
+									</h:link>
+
+								</b:dataTableColumn>
+
+								<b:dataTableColumn label="Trabalhar"
+									content-style="width:5px; text-align:center;"
+									rendered="#{ticketDesenvolvimentoMB.filtro=='aprovados'}">
+
+									<h:commandLink action="#{ticketDesenvolvimentoMB.play(ticket)}">
+										<b:iconAwesome name="fa-play" size="2x"
+											rendered="#{!ticket.emAndamento}" />
+									</h:commandLink>
+
+									<h:commandLink
+										action="#{ticketDesenvolvimentoMB.pause(ticket)}">
+										<b:iconAwesome name="fa-pause" size="2x"
+											rendered="#{ticket.emAndamento}" />
+									</h:commandLink>
+
+								</b:dataTableColumn>
+
+								<b:dataTableColumn label="Concluir"
+									content-style="width:2px; text-align:center;"
+									rendered="#{ticketDesenvolvimentoMB.filtro=='aprovados'}">
+
+									<h:link outcome="form_ticket_desenv_finalizar">
+										<b:iconAwesome name="fa-check-square-o" size="2x" />
+										<f:param name="id" value="#{ticket.id}" />
+									</h:link>
+
+								</b:dataTableColumn>
+
+								<b:dataTableColumn label="Editar"
+									content-style="width:5px; text-align:center;">
+
+									<h:link outcome="form_ticket_desenv">
+										<b:iconAwesome name="pencil" size="2x" />
+										<f:param name="id" value="#{ticket.id}" />
+									</h:link>
+
+								</b:dataTableColumn>
+								<b:dataTableColumn label="Excluir"
+									content-style="width:5px;text-align:center;">
+
+									<h:commandLink
+										onclick="return confirm('Tem certeza da exclusão do Ticket de Contato id: #{ticket.id}');"
+										action="#{ticketDesenvolvimentoMB.excluir(ticket.id)}">
+										<b:iconAwesome name="trash" size="2x" />
+									</h:commandLink>
+
+								</b:dataTableColumn>
+							</b:dataTable>
+
+						</h:form>
+					</b:column>
+				</b:row>
+			</b:container>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

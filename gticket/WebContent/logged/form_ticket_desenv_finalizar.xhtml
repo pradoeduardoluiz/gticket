@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:body>
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{ticketDesenvolvimentoMB.editarId}" />
+		<f:event listener="#{ticketDesenvolvimentoMB.carregarTicket}"
+			type="preRenderView" />
+	</f:metadata>
+
+	<ui:composition template="../template/template.xhtml">
+
+		<ui:define name="conteudo">
+
+			<b:container fluid="true">
+
+				<ol class="breadcrumb">
+					<li><b:navLink value="Home" outcome="home" /></li>
+					<li><b:navLink value="Lista de Tickets de Desenvolvimento"
+							outcome="lista_tickets_desenv" /></li>
+					<li class="active">Finalizar Ticket de Desenvolvimento</li>
+				</ol>
+
+				<b:panel title="Finalizar de Ticket de Desenvolvimento">
+					<b:messages />
+
+					<h:form id="formTicketDesenv" prependId="false">
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Ticket" for="id"
+									styleClass="control-label" />
+							</b:column>
+							<b:column medium-screen="2">
+								<b:inputText id="id"
+									value="#{ticketDesenvolvimentoMB.ticket.id}" disabled="true" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Data de Inclusão" for="dataInclusao"
+									styleClass="control-label" />
+							</b:column>
+							<b:column medium-screen="3">
+								<b:inputText id="dataInclusao"
+									value="#{ticketDesenvolvimentoMB.ticket.dataDeInclusao}"
+									disabled="true">
+									<f:convertDateTime pattern="dd/MM/yyyy - HH:mm "
+										timeZone="America/Sao_Paulo" />
+								</b:inputText>
+
+							</b:column>
+
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Tempo de Desenvolvimento"
+									for="dataInclusao" styleClass="control-label" />
+							</b:column>
+							<b:column medium-screen="3">
+								<b:inputText id="tempoDesenvolvimento"
+									value="#{ticketDesenvolvimentoMB.ticket.strTempoDesenvolvimento}">
+								</b:inputText>
+
+							</b:column>
+
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Assunto" for="assunto"
+									styleClass="control-label" />
+							</b:column>
+							<b:column medium-screen="6">
+								<b:inputTextarea id="assunto"
+									value="#{ticketDesenvolvimentoMB.ticket.assunto}"
+									disabled="true" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Análise" for="assunto"
+									styleClass="control-label" />
+							</b:column>
+							<b:column medium-screen="6">
+								<b:inputTextarea id="analise" disabled="true"
+									value="#{ticketDesenvolvimentoMB.ticket.analise}" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Programas Alterados"
+									for="programasAlterados" styleClass="control-label" />
+							</b:column>
+							<b:column medium-screen="6">
+								<b:inputTextarea id="programasAlterados"
+									value="#{ticketDesenvolvimentoMB.ticket.analise}" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Testes" for="testes"
+									styleClass="control-label" />
+							</b:column>
+							<b:column medium-screen="6">
+								<b:inputTextarea id="testes"
+									value="#{ticketDesenvolvimentoMB.ticket.analise}" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2" offset="2">
+								<b:commandButton look="success btn-block" value="Finalizar"
+									action="#{ticketDesenvolvimentoMB.finalizar()}" />
+							</b:column>
+							<b:column medium-screen="2">
+								<b:button value="Voltar"
+									outcome="lista_tickets_desenv?filtro=aprovados"
+									look="danger btn-block" />
+							</b:column>
+						</b:row>
+
+					</h:form>
+				</b:panel>
+			</b:container>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

@@ -1,43 +1,82 @@
 package br.com.gticket.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class Util {
 
-	public static String calcularDiferencaHora(Date dataInicial, Date datafinal) {
+	public static String calcularDiferencaHora(Date dataInicial, Date dataFinal) {
 
-		if (datafinal == null) {
+		if (dataFinal == null) {
 			return "00:00:00";
 		}
 
-		long tempoMilesegundos = datafinal.getTime() - dataInicial.getTime();
+		long tempoSegundos = calcularTempo(dataInicial, dataFinal);
+
+		return secundosEmHoras(tempoSegundos);
+
+	}
+
+	public static Integer calcularTempoDesenvolvimento(Integer integer,
+			Date dataInicial, Date dataFinal) {
+
+		if (integer == null) {
+			integer = 0;
+		}
+
+		Integer tempo = integer;
+
+		tempo = tempo + calcularTempo(dataInicial, dataFinal);
+
+		return tempo;
+	}
+
+	private static Integer calcularTempo(Date dataInicial, Date dataFinal) {
+
+		long tempoMilesegundos = dataFinal.getTime() - dataInicial.getTime();
 
 		long tempoSegundos = TimeUnit.MILLISECONDS.toSeconds(tempoMilesegundos);
+
+		return (int) tempoSegundos;
+
+	}
+
+	public static String secundosEmHoras(long tempoSegundos) {
 
 		int hora = (int) (tempoSegundos / 3600);
 		int sobra = (int) (tempoSegundos % 3600);
 		int minuto = sobra / 60;
 		int segundo = sobra % 60;
 
-		String horaString = String.valueOf(hora);
-		String minutoString = String.valueOf(minuto);
-		String segundoString = String.valueOf(segundo);
+		String hms = String.format("%02d:%02d", hora, minuto);
 
-		if (segundo < 10) {
-			segundoString = "0" + segundo;
-		}
-
-		if (minuto < 10) {
-			minutoString = "0" + minuto;
-		}
-
-		if (hora < 10) {
-			horaString = "0" + hora;
-		}
-
-		return (horaString + ":" + minutoString + ":" + segundoString);
+		return hms;
 
 	}
 
+	public static Integer horasEmSegundos(String strHora) {
+
+		int posicao = strHora.indexOf(":") - 2;
+
+		String h = strHora.substring(posicao, posicao + 2);
+		String m = strHora.substring(posicao + 3, posicao + 5);
+
+		int hora = Integer.parseInt(h) * 3600;
+		int minutos = Integer.parseInt(m) * 60;
+
+		return hora + minutos;
+
+	}
+
+	public static void validarHora(String StringHora) throws ParseException {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+
+		sdf.setLenient(false);
+
+		Date hora = sdf.parse(StringHora);
+
+	}
 }

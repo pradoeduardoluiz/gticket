@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:body>
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{ticketDesenvolvimentoMB.editarId}" />
+		<f:event listener="#{ticketDesenvolvimentoMB.carregarTicket}"
+			type="preRenderView" />
+	</f:metadata>
+
+	<ui:composition template="../template/template.xhtml">
+
+		<ui:define name="conteudo">
+
+			<b:container fluid="true">
+
+				<ol class="breadcrumb">
+					<li><b:navLink value="Home" outcome="home" /></li>
+					<li><b:navLink value="Lista de Tickets de Desenvolvimento"
+							outcome="lista_tickets_desenv" /></li>
+					<li class="active">Cadastro de Ticket Desenvolvimento</li>
+				</ol>
+
+				<b:panel title="Cadastro de Ticket Desenvolvimento">
+					<b:messages />
+
+					<h:form id="formTicketDesenv" prependId="false">
+
+						<b:row rendered="#{ticketDesenvolvimentoMB.editarId!=null}">
+							<b:column medium-screen="2">
+								<h:outputLabel value="Ticket" for="id"
+									styleClass="control-label bf-required" />
+							</b:column>
+							<b:column medium-screen="2">
+								<b:inputText id="id"
+									value="#{ticketDesenvolvimentoMB.ticket.id}" disabled="true" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Data de Inclusão" for="dataInclusao"
+									styleClass="control-label bf-required" />
+							</b:column>
+							<b:column medium-screen="3">
+								<h:inputText id="dataInclusao"
+									value="#{ticketDesenvolvimentoMB.ticket.dataDeInclusao}"
+									class="form-control" disabled="true">
+									<f:convertDateTime pattern="dd/MM/yyyy - HH:mm "
+										timeZone="America/Sao_Paulo" />
+								</h:inputText>
+
+							</b:column>
+
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2" styleClass="autocomplete">
+								<h:outputLabel value="Cliente" for="cliente"
+									styleClass="control-label bf-required" />
+							</b:column>
+
+							<b:column medium-screen="6" styleClass="autocomplete">
+
+								<b:inputText id="cliente"
+									value="#{ticketDesenvolvimentoMB.ticket.cliente}"
+									required="true" required-message="Campo Cliente é Obrigatório!"
+									typeahead="true" typeahead-values="#{clienteMB.clientes}"
+									rendered="#{ticketDesenvolvimentoMB.editarId==null}"
+									converter="clienteConverter">
+
+									<f:ajax event="blur" render="contatoTicket"
+										listener="#{ticketDesenvolvimentoMB.carregarContatos}" />
+
+								</b:inputText>
+
+								<b:inputText id="cliente1"
+									value="#{ticketDesenvolvimentoMB.ticket.cliente}"
+									disabled="true"
+									rendered="#{ticketDesenvolvimentoMB.editarId!=null}" />
+
+
+							</b:column>
+
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Contato" for="contatoTicket"
+									styleClass="control-label bf-required" />
+							</b:column>
+
+							<b:column medium-screen="6">
+								<b:selectOneMenu id="contatoTicket"
+									value="#{ticketDesenvolvimentoMB.ticket.contato}"
+									required="true" requiredMessage="Selecione um contato válido!"
+									update="">
+									<f:selectItem itemLabel="Selecione..." itemValue="" />
+									<f:selectItems
+										value="#{ticketDesenvolvimentoMB.ticket.cliente.contatos}"
+										var="contato" />
+
+									<f:ajax event="blur" render="telefone celular" />
+
+								</b:selectOneMenu>
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Telefones" for="telefone" />
+							</b:column>
+
+							<b:column medium-screen="3">
+								<b:inputText id="telefone"
+									value="#{ticketDesenvolvimentoMB.ticket.contato.telefone}"
+									disabled="true" />
+
+							</b:column>
+
+							<b:column medium-screen="3">
+
+								<b:inputText id="celular"
+									value="#{ticketDesenvolvimentoMB.ticket.contato.celular}"
+									disabled="true" />
+
+							</b:column>
+
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Situação" for="situacao"
+									styleClass="control-label bf-required" />
+							</b:column>
+							<b:column medium-screen="4">
+								<b:selectOneMenu id="situacao"
+									value="#{ticketDesenvolvimentoMB.ticket.situacao}"
+									required="true"
+									requiredMessage="Selecione uma situação válida!">
+									<f:selectItem itemLabel="Selecione..." itemValue="" />
+									<f:selectItems value="#{ticketDesenvolvimentoMB.situacoes}"
+										var="situacao" />
+								</b:selectOneMenu>
+
+							</b:column>
+
+						</b:row>
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Categoria" for="categoria"
+									styleClass="control-label bf-required" />
+							</b:column>
+							<b:column medium-screen="3">
+								<b:selectOneMenu id="categoria"
+									value="#{ticketDesenvolvimentoMB.ticket.categoria}"
+									required="true"
+									requiredMessage="Selecione uma categoria válida!">
+									<f:selectItem itemLabel="Selecione..." itemValue="" />
+									<f:selectItems value="#{categoriaMB.categorias}"
+										var="categoria" />
+								</b:selectOneMenu>
+							</b:column>
+
+						</b:row>
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Topico" for="topico"
+									styleClass="control-label bf-required" />
+							</b:column>
+
+							<b:column medium-screen="3">
+								<b:inputText id="topico"
+									value="#{ticketDesenvolvimentoMB.ticket.topico}"
+									placeholder="Tópico" required="true"
+									requiredMessage="Campo Tópico é Obrigatório!" />
+							</b:column>
+
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Assunto" for="assunto"
+									styleClass="control-label bf-required" />
+							</b:column>
+							<b:column medium-screen="6">
+								<b:inputTextarea id="assunto"
+									value="#{ticketDesenvolvimentoMB.ticket.assunto}"
+									required="true" required-message="Campo assunto é obrigatório!"
+									placeholder="Descreva o assunto referente o ticket" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2" offset="2">
+								<b:commandButton look="success btn-block" value="Salvar"
+									action="#{ticketDesenvolvimentoMB.salvar}" />
+							</b:column>
+							<b:column medium-screen="2">
+								<b:button value="Voltar"
+									outcome="lista_tickets_desenv?filtro=todos"
+									look="danger btn-block" />
+							</b:column>
+						</b:row>
+					</h:form>
+				</b:panel>
+			</b:container>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

@@ -10,6 +10,7 @@ window.onload = function() {
 			$("#input_data").mask("99/99/9999");
 			$("#input_cpf").mask("999.999.999-99");
 			$("#input_cnpj").mask("99.999.999/9999-99");
+			$("#input_tempoDesenvolvimento").mask("99:99");
 		});
 	});
 }

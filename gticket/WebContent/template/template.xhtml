@@ -42,8 +42,8 @@
 						<b:dropButton value="Novo Ticket" size="lg" look="primary">
 							<b:navLink value="Ticket de Contato"
 								outcome="form_ticket_contato" icon-awesome="fa-ticket" />
-							<b:navLink value="Ticket de Desenvolvimento" href="#"
-								icon-awesome="fa-gears" />
+							<b:navLink value="Ticket de Desenvolvimento"
+								outcome="form_ticket_desenv" icon-awesome="fa-gears" />
 						</b:dropButton>
 					</div>
 
@@ -74,14 +74,37 @@
 							</b:listLinks>
 						</b:panel>
 
-						<b:panel id="painelTicket" look="default" title="Ticket"
+						<b:panel id="painelTicket" look="default" title="Tickets"
 							collapsed="#{menuMB.menuTicketCollapsed}"
 							showCollapseLink="false" style="margin-bottom: 0px">
-							<b:listLinks>
-								<b:navCommandLink value="Tickets de contato"
-									icon-awesome="fa-ticket" iconAlign="left"
-									action="#{menuMB.listaTickets()}" />
-							</b:listLinks>
+
+
+							<b:panel id="painelTicketContato" look="default" title="Contatos"
+								collapsed="#{menuMB.menuTicketContatoCollapsed}"
+								showCollapseLink="false" style="margin-bottom: 0px">
+								<b:listLinks>
+									<b:navCommandLink value="contatos" icon-awesome="fa-ticket"
+										iconAlign="left" action="#{menuMB.listaTicketsContatos()}" />
+								</b:listLinks>
+							</b:panel>
+
+							<b:panel id="painelTicketDesenv" look="default"
+								title="Desenvolvimento"
+								collapsed="#{menuMB.menuTicketDesenvCollapsed}"
+								showCollapseLink="false" style="margin-bottom: 0px">
+								<b:listLinks>
+									<b:navCommandLink value="Todos" icon-awesome="fa-globe"
+										iconAlign="left"
+										action="#{menuMB.listaTicketsDesenv('todos')}" />
+									<b:navCommandLink value="Pendentes" icon-awesome="fa-check-circle-o"
+										iconAlign="left"
+										action="#{menuMB.listaTicketsDesenv('pendentes')}" />
+									<b:navCommandLink value="Aprovados" icon-awesome="fa-play"
+										iconAlign="left"
+										action="#{menuMB.listaTicketsDesenv('aprovados')}" />
+								</b:listLinks>
+							</b:panel>
+
 						</b:panel>
 					</h:form>
 

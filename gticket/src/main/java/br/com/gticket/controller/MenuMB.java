@@ -15,20 +15,24 @@ public class MenuMB implements Serializable {
 	private Boolean menuAdministracaoCollapsed = true;
 	private Boolean menuClientesCollapsed = true;
 	private Boolean menuTicketCollapsed = true;
+	private Boolean menuTicketContatoCollapsed = true;
+	private Boolean menuTicketDesenvCollapsed = true;
 
 	private final String facesRedirect = "?faces-redirect=true";
 
 	// Opções do menu Administração
-	private final String LISTAUSUARIOS = "lista_usuarios" + facesRedirect;
-	private final String LISTAMODULOS = "lista_modulos" + facesRedirect;
-	private final String LISTACATEGORIAS = "lista_categorias" + facesRedirect;
+	private final String LISTAUSUARIOS = "lista_usuarios";
+	private final String LISTAMODULOS = "lista_modulos";
+	private final String LISTACATEGORIAS = "lista_categorias";
 
 	// Opções do menu Clientes e relacionados
-	private final String LISTACLIENTES = "lista_clientes" + facesRedirect;
-	private final String LISTACONTATOS = "lista_contatos" + facesRedirect;
+	private final String LISTACLIENTES = "lista_clientes";
+	private final String LISTACONTATOS = "lista_contatos";
 
 	// Opções do menu Ticket
-	private final String LISTATICKETS = "lista_tickets_contato" + facesRedirect;
+	private final String LISTATICKETSCONTATOS = "lista_tickets_contato";
+
+	private final String LISTATICKETSDESENV = "lista_tickets_desenv";
 
 	public void menuAdmnistracaoAberto() {
 
@@ -48,6 +52,18 @@ public class MenuMB implements Serializable {
 		menuTicketCollapsed = false;
 		menuClientesCollapsed = true;
 		menuAdministracaoCollapsed = true;
+
+	}
+
+	public void menuTicketContatoAberto() {
+		menuTicketContatoCollapsed = false;
+		menuTicketDesenvCollapsed = true;
+
+	}
+
+	public void menuTicketDesenvAberto() {
+		menuTicketDesenvCollapsed = false;
+		menuTicketContatoCollapsed = true;
 
 	}
 
@@ -75,33 +91,70 @@ public class MenuMB implements Serializable {
 		this.menuTicketCollapsed = menuTicketCollapsed;
 	}
 
+	public Boolean getMenuTicketContatoCollapsed() {
+		return menuTicketContatoCollapsed;
+	}
+
+	public void setMenuTicketContatoCollapsed(Boolean menuTicketContatoCollapsed) {
+		this.menuTicketContatoCollapsed = menuTicketContatoCollapsed;
+	}
+
+	public Boolean getMenuTicketDesenvCollapsed() {
+		return menuTicketDesenvCollapsed;
+	}
+
+	public void setMenuTicketDesenvCollapsed(Boolean menuTicketDesenvCollapsed) {
+		this.menuTicketDesenvCollapsed = menuTicketDesenvCollapsed;
+	}
+
 	public String listaUsuarios() {
 		menuAdmnistracaoAberto();
-		return LISTAUSUARIOS;
+		return adicionaFacesRedirect(LISTAUSUARIOS);
 	}
 
 	public String listaModulos() {
 		menuAdmnistracaoAberto();
-		return LISTAMODULOS;
+		return adicionaFacesRedirect(LISTAMODULOS);
 	}
 
 	public String listaCategorias() {
 		menuAdmnistracaoAberto();
-		return LISTACATEGORIAS;
+		return adicionaFacesRedirect(LISTACATEGORIAS);
 	}
 
 	public String listaClientes() {
 		menuClientesAberto();
-		return LISTACLIENTES;
+		return adicionaFacesRedirect(LISTACLIENTES);
 	}
 
 	public String listaContatos() {
 		menuClientesAberto();
-		return LISTACONTATOS;
+		return adicionaFacesRedirect(LISTACONTATOS);
 	}
 
-	public String listaTickets() {
+	public String listaTicketsContatos() {
 		menuTicketAberto();
-		return LISTATICKETS;
+		menuTicketContatoAberto();
+		return adicionaFacesRedirect(LISTATICKETSCONTATOS);
+	}
+
+	public String listaTicketsDesenv(String filtro) {
+		menuTicketAberto();
+		menuTicketDesenvAberto();
+
+		if (filtro == null) {
+			filtro = "";
+		}
+
+		if (!filtro.isEmpty()) {
+			return adicionaFacesRedirect(LISTATICKETSDESENV + "?" + "filtro="
+					+ filtro);
+		} else {
+			return adicionaFacesRedirect(LISTATICKETSDESENV);
+		}
+	}
+
+	private String adicionaFacesRedirect(String link) {
+		return link + facesRedirect;
 	}
 }
