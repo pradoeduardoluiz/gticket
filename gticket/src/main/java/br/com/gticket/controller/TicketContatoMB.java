@@ -14,6 +14,8 @@ import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ComponentSystemEvent;
 
+import org.apache.commons.mail.EmailException;
+
 import br.com.gticket.bo.TicketContatoBO;
 import br.com.gticket.bo.exception.ValorEmBrancoException;
 import br.com.gticket.bo.exception.ValorInvalidoException;
@@ -44,6 +46,7 @@ public class TicketContatoMB implements Serializable {
 		ticket = new TicketContato();
 		ticket.setTicketFinalizado(false);
 		ticket.setDataDeInclusao(new Date());
+		ticket.setEnviarEmail(true);
 		bo = new TicketContatoBO();
 		contatos = new ArrayList<Contato>();
 		tempoAtendimento = "00:00:00";
@@ -70,15 +73,13 @@ public class TicketContatoMB implements Serializable {
 
 			return "lista_tickets_contato";
 
-		} catch (ValorEmBrancoException | ValorZeradoException
-				| ValorInvalidoException e) {
+		} catch (Exception e) {
 
 			FacesUtil.addErrorMessage(e.getMessage());
 
+			return "";
+
 		}
-
-		return "";
-
 	}
 
 	public String excluir(Integer id) {

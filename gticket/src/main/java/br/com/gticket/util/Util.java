@@ -5,6 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import javax.faces.context.FacesContext;
+
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.HtmlEmail;
+
+import br.com.gticket.model.TicketContato;
+import br.com.gticket.model.TicketDesenvolvimento;
+
 public class Util {
 
 	public static String calcularDiferencaHora(Date dataInicial, Date dataFinal) {
@@ -79,4 +87,13 @@ public class Util {
 		Date hora = sdf.parse(StringHora);
 
 	}
+
+
+	public static String dataEmString(Date data) {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
+		return sdf.format(data);
+
+	}
+
 }

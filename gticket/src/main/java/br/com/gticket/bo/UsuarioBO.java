@@ -164,4 +164,12 @@ public class UsuarioBO extends BO implements ValidaFormulario {
 		}
 
 	}
+
+	public List<Usuario> listarDesenvolvedores() {
+		return dao.listarDesenvolvedores();
+	}
+
+	public List<Usuario> listarTesters() {
+		return dao.listarTesters();
+	}
 }

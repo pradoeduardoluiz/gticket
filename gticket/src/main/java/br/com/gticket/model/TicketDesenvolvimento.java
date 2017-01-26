@@ -21,7 +21,6 @@ public class TicketDesenvolvimento extends Ticket {
 	private String analise;
 	private String programas;
 	private String comentariosParaTeste;
-	private String motivoReprovacao;
 	@OneToOne
 	private Usuario desenvolvedor;
 	@OneToOne
@@ -43,14 +42,6 @@ public class TicketDesenvolvimento extends Ticket {
 
 	public void setAnalise(String analise) {
 		this.analise = analise;
-	}
-
-	public String getMotivoReprovacao() {
-		return motivoReprovacao;
-	}
-
-	public void setMotivoReprovacao(String motivoReprovacao) {
-		this.motivoReprovacao = motivoReprovacao;
 	}
 
 	public Usuario getDesenvolvedor() {

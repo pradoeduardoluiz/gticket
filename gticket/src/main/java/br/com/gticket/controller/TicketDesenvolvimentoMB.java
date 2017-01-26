@@ -12,7 +12,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.BehaviorEvent;
 import javax.faces.event.ComponentSystemEvent;
+
+import org.apache.commons.mail.EmailException;
 
 import br.com.gticket.bo.TicketContatoBO;
 import br.com.gticket.bo.TicketDesenvolvimentoBO;
@@ -42,14 +45,17 @@ public class TicketDesenvolvimentoMB implements Serializable {
 	private SituacaoTicket[] situacoes;
 	private StatusTicket[] status;
 	private String filtro = "";
+	private String labelAnalise;
 
 	@PostConstruct
 	public void init() {
 
 		ticket = new TicketDesenvolvimento();
 		ticket.setDataDeInclusao(new Date());
+		ticket.setEnviarEmail(true);
 		bo = new TicketDesenvolvimentoBO();
 		contatos = new ArrayList<Contato>();
+		labelAnalise = "Análise";
 
 	}
 
@@ -74,7 +80,7 @@ public class TicketDesenvolvimentoMB implements Serializable {
 			return "lista_tickets_desenv";
 
 		} catch (ValorEmBrancoException | ValorZeradoException
-				| ValorInvalidoException e) {
+				| ValorInvalidoException | EmailException e) {
 
 			FacesUtil.addErrorMessage(e.getMessage());
 
@@ -105,10 +111,10 @@ public class TicketDesenvolvimentoMB implements Serializable {
 
 			FacesUtil.addInfoMessage(msg);
 
-			return "lista_tickets_desenv";
+			return "lista_tickets_desenv?filtro='pendentes'";
 
 		} catch (ValorEmBrancoException | ValorZeradoException
-				| ValorInvalidoException e) {
+				| ValorInvalidoException | EmailException e) {
 
 			FacesUtil.addErrorMessage(e.getMessage());
 		}
@@ -144,13 +150,26 @@ public class TicketDesenvolvimentoMB implements Serializable {
 
 	}
 
-	public void finalizar() {
+	public String enviarParatestes() {
 
 		try {
-			bo.finalizar(ticket);
-		} catch (ValorInvalidoException e) {
+			bo.enviarParatestes(ticket);
+			return "lista_tickets_desenv?filtro='aprovados'";
+		} catch (ValorInvalidoException | EmailException e) {
 
 			FacesUtil.addErrorMessage(e.getMessage());
+		}
+
+		return null;
+
+	}
+
+	public void atualizarLabel() {
+
+		if (ticket.getStatusTicket() == StatusTicket.REPROVADO) {
+			labelAnalise = "Motivo";
+		} else {
+			labelAnalise = "Análise";
 		}
 
 	}
@@ -239,6 +258,14 @@ public class TicketDesenvolvimentoMB implements Serializable {
 
 	public void setFiltro(String filtro) {
 		this.filtro = filtro;
+	}
+
+	public String getLabelAnalise() {
+		return labelAnalise;
+	}
+
+	public void setLabelAnalise(String labelAnalise) {
+		this.labelAnalise = labelAnalise;
 	}
 
 }

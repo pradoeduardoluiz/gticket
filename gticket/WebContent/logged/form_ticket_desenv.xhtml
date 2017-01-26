@@ -197,6 +197,16 @@
 						</b:row>
 
 						<b:row>
+							<b:column medium-screen="2">
+							</b:column>
+							<b:column medium-screen="2">
+								<b:selectBooleanCheckbox id="enviarEmail"
+									value="#{ticketDesenvolvimentoMB.ticket.enviarEmail}"
+									caption="Enviar e-mail para cliente" />
+							</b:column>
+						</b:row>
+
+						<b:row>
 							<b:column medium-screen="2" offset="2">
 								<b:commandButton look="success btn-block" value="Salvar"
 									action="#{ticketDesenvolvimentoMB.salvar}" />

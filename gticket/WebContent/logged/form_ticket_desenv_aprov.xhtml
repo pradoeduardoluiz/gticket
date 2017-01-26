@@ -93,17 +93,6 @@
 
 						<b:row>
 							<b:column medium-screen="2">
-								<h:outputLabel value="Análise" for="assunto"
-									styleClass="control-label" />
-							</b:column>
-							<b:column medium-screen="6">
-								<b:inputTextarea id="analise"
-									value="#{ticketDesenvolvimentoMB.ticket.analise}" />
-							</b:column>
-						</b:row>
-
-						<b:row>
-							<b:column medium-screen="2">
 								<h:outputLabel value="Status" for="status"
 									styleClass="control-label bf-required" />
 							</b:column>
@@ -111,6 +100,8 @@
 								<b:selectOneMenu id="status"
 									value="#{ticketDesenvolvimentoMB.ticket.statusTicket}"
 									required="true" requiredMessage="Selecione um status válido!">
+									<f:ajax event="change" render="labelAnalise"
+										listener="#{ticketDesenvolvimentoMB.atualizarLabel()}" />
 
 									<f:selectItems value="#{ticketDesenvolvimentoMB.status}"
 										var="status" />
@@ -119,6 +110,18 @@
 
 							</b:column>
 
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel id="labelAnalise"
+									value="#{ticketDesenvolvimentoMB.labelAnalise}" for="analise"
+									styleClass="control-label" />
+							</b:column>
+							<b:column medium-screen="6">
+								<b:inputTextarea id="analise"
+									value="#{ticketDesenvolvimentoMB.ticket.analise}" />
+							</b:column>
 						</b:row>
 
 						<b:row>
@@ -132,7 +135,25 @@
 									value="#{ticketDesenvolvimentoMB.ticket.desenvolvedor}">
 
 									<f:selectItem itemLabel="Selecione..." itemValue="" />
-									<f:selectItems value="#{usuarioMB.usuarios}" var="usuario" />
+									<f:selectItems value="#{usuarioMB.desenvolvedores}"
+										var="desenvolvedores" />
+
+								</b:selectOneMenu>
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Análista de Teste" for="analistaTeste"
+									styleClass="control-label" />
+							</b:column>
+
+							<b:column medium-screen="6">
+								<b:selectOneMenu id="analistaTeste"
+									value="#{ticketDesenvolvimentoMB.ticket.analistaTeste}">
+
+									<f:selectItem itemLabel="Selecione..." itemValue="" />
+									<f:selectItems value="#{usuarioMB.testers}" var="testers" />
 
 								</b:selectOneMenu>
 							</b:column>

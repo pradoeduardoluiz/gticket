@@ -87,7 +87,7 @@
 
 						<b:row>
 							<b:column medium-screen="2">
-								<h:outputLabel value="Análise" for="assunto"
+								<h:outputLabel value="Análise" for="analise"
 									styleClass="control-label" />
 							</b:column>
 							<b:column medium-screen="6">
@@ -99,29 +99,33 @@
 						<b:row>
 							<b:column medium-screen="2">
 								<h:outputLabel value="Programas Alterados"
-									for="programasAlterados" styleClass="control-label" />
+									for="programasAlterados" styleClass="control-label bf-required" />
 							</b:column>
 							<b:column medium-screen="6">
 								<b:inputTextarea id="programasAlterados"
-									value="#{ticketDesenvolvimentoMB.ticket.analise}" />
+									value="#{ticketDesenvolvimentoMB.ticket.programas}"
+									required="true"
+									required-message="Campo programas Alterados é obrigatório!"
+									placeholder="Informe os programas/arquivos alterados referente ao ticket" />
 							</b:column>
 						</b:row>
 
 						<b:row>
 							<b:column medium-screen="2">
-								<h:outputLabel value="Testes" for="testes"
+								<h:outputLabel value="Comentários para teste" for="testes"
 									styleClass="control-label" />
 							</b:column>
 							<b:column medium-screen="6">
 								<b:inputTextarea id="testes"
-									value="#{ticketDesenvolvimentoMB.ticket.analise}" />
+									value="#{ticketDesenvolvimentoMB.ticket.comentariosParaTeste}" />
 							</b:column>
 						</b:row>
 
 						<b:row>
 							<b:column medium-screen="2" offset="2">
-								<b:commandButton look="success btn-block" value="Finalizar"
-									action="#{ticketDesenvolvimentoMB.finalizar()}" />
+								<b:commandButton look="success btn-block"
+									value="Enviar para Testes"
+									action="#{ticketDesenvolvimentoMB.enviarParatestes()}" />
 							</b:column>
 							<b:column medium-screen="2">
 								<b:button value="Voltar"

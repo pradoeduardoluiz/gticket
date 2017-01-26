@@ -82,7 +82,7 @@
 										listener="#{ticketContatoMB.carregarContatos}" />
 
 								</b:inputText>
-								
+
 								<b:inputText id="cliente1"
 									value="#{ticketContatoMB.ticket.cliente}" disabled="true"
 									rendered="#{ticketContatoMB.editarId!=null}" />
@@ -205,6 +205,16 @@
 									value="#{ticketContatoMB.ticket.resolucao}" required="true"
 									required-message="Campo resolução é obrigatório!"
 									placeholder="Descreva a resolução referente o ticket" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+							</b:column>
+							<b:column medium-screen="2">
+								<b:selectBooleanCheckbox id="enviarEmail"
+									value="#{ticketContatoMB.ticket.enviarEmail}"
+									caption="Enviar e-mail para cliente" />
 							</b:column>
 						</b:row>
 

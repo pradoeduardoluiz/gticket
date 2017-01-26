@@ -25,6 +25,8 @@ public class UsuarioMB implements Serializable {
 	private List<Usuario> usuarios;
 	private Perfil[] perfis;
 	private Perfil perfil;
+	private List<Usuario> desenvolvedores;
+	private List<Usuario> testers;
 
 	@PostConstruct
 	public void init() {
@@ -126,5 +128,23 @@ public class UsuarioMB implements Serializable {
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
 	}
+
+	public List<Usuario> getDesenvolvedores() {
+		return bo.listarDesenvolvedores();
+	}
+
+	public void setDesenvolvedores(List<Usuario> desenvolvedores) {
+		this.desenvolvedores = desenvolvedores;
+	}
+
+	public List<Usuario> getTesters() {
+		return bo.listarTesters();
+	}
+
+	public void setTesters(List<Usuario> testers) {
+		this.testers = testers;
+	}
+	
+	
 
 }

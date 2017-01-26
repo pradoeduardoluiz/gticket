@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import br.com.gticket.model.Perfil;
 import br.com.gticket.model.Usuario;
 
 public class UsuarioDAO extends DAO {
@@ -81,6 +82,26 @@ public class UsuarioDAO extends DAO {
 			return null;
 
 		}
+	}
+
+	public List<Usuario> listarDesenvolvedores() {
+
+		Query query = getEntityManager().createQuery(
+				"From usuario where perfil =:parametro", Usuario.class);
+		query.setParameter("parametro", Perfil.DESENVOLVEDOR);
+
+		return (List<Usuario>) query.getResultList();
+
+	}
+
+	public List<Usuario> listarTesters() {
+
+		Query query = getEntityManager().createQuery(
+				"From usuario where perfil =:parametro", Usuario.class);
+		query.setParameter("parametro", Perfil.TESTER);
+
+		return (List<Usuario>) query.getResultList();
+
 	}
 
 }

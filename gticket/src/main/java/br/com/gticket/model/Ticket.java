@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -37,6 +38,8 @@ public class Ticket {
 	private Date dataDeFinalizacao;
 	private Boolean ticketFinalizado;
 	private Boolean ativo;
+	@Transient
+	private Boolean enviarEmail;
 
 	public Integer getId() {
 		return id;
@@ -132,6 +135,14 @@ public class Ticket {
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public Boolean getEnviarEmail() {
+		return enviarEmail;
+	}
+
+	public void setEnviarEmail(Boolean enviarEmail) {
+		this.enviarEmail = enviarEmail;
 	}
 
 }

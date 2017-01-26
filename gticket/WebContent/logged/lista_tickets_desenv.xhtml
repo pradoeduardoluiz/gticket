@@ -79,6 +79,14 @@
 								<b:dataTableColumn label="Responsável"
 									value="#{ticket.desenvolvedor}" />
 
+								<b:dataTableColumn label="Tester"
+									value="#{ticket.analistaTeste}"
+									rendered="#{ticketDesenvolvimentoMB.filtro=='testes'}" />
+
+								<b:dataTableColumn label="
+									Tempo"
+									rendered="#{ticketDesenvolvimentoMB.filtro=='aprovados'}"
+									value="#{ticket.strTempoDesenvolvimento}" />
 
 								<b:dataTableColumn label="Aprovar"
 									content-style="width:5px; text-align:center;"

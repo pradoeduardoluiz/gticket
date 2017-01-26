@@ -64,4 +64,27 @@
 		<param-value>Development</param-value>
 	</context-param>
 
+	<!-- Configuração de e-mail -->
+	<context-param>
+		<param-name>userEmail</param-name>
+		<param-value>luiz@fkn.com.br</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>userPassword</param-name>
+		<param-value>luiz291292</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>userServer</param-name>
+		<param-value>smtp.fkn.com.br</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>userPort</param-name>
+		<param-value>587</param-value>
+	</context-param>
+
+	<!-- Configuração de e-mail -->
+
 </web-app>

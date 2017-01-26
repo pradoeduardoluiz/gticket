@@ -4,13 +4,19 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.mail.EmailException;
+
 import br.com.gticket.bo.exception.ValorEmBrancoException;
 import br.com.gticket.bo.exception.ValorInvalidoException;
 import br.com.gticket.bo.exception.ValorZeradoException;
 import br.com.gticket.dao.TicketDesenvolvimentoDAO;
 import br.com.gticket.model.StatusProgresso;
 import br.com.gticket.model.StatusTicket;
+import br.com.gticket.model.TicketContato;
 import br.com.gticket.model.TicketDesenvolvimento;
+import br.com.gticket.model.Usuario;
+import br.com.gticket.util.EmailUtil;
+import br.com.gticket.util.SessionUtil;
 import br.com.gticket.util.Util;
 
 public class TicketDesenvolvimentoBO extends TicketBO {
@@ -23,15 +29,31 @@ public class TicketDesenvolvimentoBO extends TicketBO {
 
 	public TicketDesenvolvimento salvar(TicketDesenvolvimento ticket)
 			throws ValorEmBrancoException, ValorZeradoException,
-			ValorInvalidoException {
+			ValorInvalidoException, EmailException {
 
 		validaCamposObrigatorios(ticket);
+		TicketDesenvolvimento ticketSalvo = null;
+		boolean inclusao = false;
 
 		if (inclusao(ticket)) {
 			inicializar(ticket);
+			inclusao = true;
 		}
 
-		return dao.salvar(ticket);
+		ticketSalvo = dao.salvar(ticket);
+
+		if (inclusao) {
+			if (ticket.getEnviarEmail()) {
+				try {
+					EmailUtil.enviarEmailTicketAbertura(ticketSalvo);
+				} catch (EmailException e) {
+					throw new EmailException("Ticket #" + ticketSalvo.getId()
+							+ "Foi criado mas não foi possível enviar e-mail!");
+				}
+			}
+		}
+
+		return ticketSalvo;
 
 	}
 
@@ -41,6 +63,8 @@ public class TicketDesenvolvimentoBO extends TicketBO {
 		ticket.setStatusTicket(StatusTicket.PENDENTE);
 		ticket.setStatusProcesso(StatusProgresso.PENDENTE);
 		ticket.setTempoDesenvolvimento(0);
+		ticket.setUsuarioInclusao((Usuario) SessionUtil
+				.getParam("usuarioLogado"));
 	}
 
 	public void excluir(Integer id) {
@@ -58,17 +82,28 @@ public class TicketDesenvolvimentoBO extends TicketBO {
 
 	public void aprovar(TicketDesenvolvimento ticket)
 			throws ValorEmBrancoException, ValorZeradoException,
-			ValorInvalidoException {
+			ValorInvalidoException, EmailException {
 
 		validaCamposObrigatorios(ticket);
 
 		if (reprovado(ticket)) {
 
-			if (campoVazio(ticket.getMotivoReprovacao())) {
+			if (campoVazio(ticket.getAnalise())) {
 
 				throw new ValorEmBrancoException(
 						"Se ticket reprovado é obrigatório informar um motivo!");
 
+			}
+
+			ticket.setStatusProcesso(StatusProgresso.REPROVADA);
+			dao.salvar(ticket);
+
+			try {
+				EmailUtil.enviarEmailTicketReprovado(ticket);
+			} catch (EmailException e) {
+
+				throw new EmailException("Ticket #" + ticket.getId()
+						+ "Foi reprovado mas não foi possível enviar e-mail!");
 			}
 
 		}
@@ -85,11 +120,23 @@ public class TicketDesenvolvimentoBO extends TicketBO {
 						"Se ticket aprovado é obrigatório informar um desenvolvedor!");
 			}
 
+			if (campoVazio(ticket.getAnalistaTeste())) {
+				throw new ValorEmBrancoException(
+						"Se ticket aprovado é obrigatório informar um análista de testes!");
+			}
+
+			ticket.setStatusProcesso(StatusProgresso.DESENVOLVIMENTO);
+			dao.salvar(ticket);
+
+			try {
+				EmailUtil.enviarEmailTicketAprovacao(ticket);
+			} catch (EmailException e) {
+
+				throw new EmailException("Ticket #" + ticket.getId()
+						+ "Foi aprovado mas não foi possível enviar e-mail!");
+			}
+
 		}
-
-		ticket.setStatusProcesso(StatusProgresso.DESENVOLVIMENTO);
-
-		dao.salvar(ticket);
 
 	}
 
@@ -154,8 +201,8 @@ public class TicketDesenvolvimentoBO extends TicketBO {
 		dao.salvar(ticket);
 	}
 
-	public void finalizar(TicketDesenvolvimento ticket)
-			throws ValorInvalidoException {
+	public void enviarParatestes(TicketDesenvolvimento ticket)
+			throws ValorInvalidoException, EmailException {
 
 		try {
 			Util.validarHora(ticket.getStrTempoDesenvolvimento());
@@ -170,6 +217,13 @@ public class TicketDesenvolvimentoBO extends TicketBO {
 		}
 		ticket.setStatusProcesso(StatusProgresso.TESTES);
 		dao.salvar(ticket);
+
+		try {
+			EmailUtil.enviarEmailTicketTestes(ticket);
+		} catch (EmailException e) {
+			throw new EmailException("Ticket #" + ticket.getId()
+					+ "Foi enviado para testes mas não foi possível enviar e-mail!");
+		}
 
 	}
 }
