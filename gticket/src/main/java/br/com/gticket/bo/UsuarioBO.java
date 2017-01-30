@@ -2,12 +2,16 @@ package br.com.gticket.bo;
 
 import java.util.List;
 
+import org.apache.commons.mail.EmailException;
+
 import br.com.gticket.bo.exception.ValorEmBrancoException;
 import br.com.gticket.bo.exception.ValorInvalidoException;
 import br.com.gticket.bo.exception.ValorZeradoException;
 import br.com.gticket.dao.UsuarioDAO;
 import br.com.gticket.model.Usuario;
 import br.com.gticket.util.CriptografaSenha;
+import br.com.gticket.util.EmailUtil;
+import br.com.gticket.util.Util;
 
 public class UsuarioBO extends BO implements ValidaFormulario {
 
@@ -171,5 +175,38 @@ public class UsuarioBO extends BO implements ValidaFormulario {
 
 	public List<Usuario> listarTesters() {
 		return dao.listarTesters();
+	}
+
+	public void gerarNovaSenha(String email, String cpf)
+			throws ValorInvalidoException, EmailException {
+
+		Usuario usuario = null;
+
+		usuario = dao.buscarPorEmail(email);
+
+		if (usuario == null) {
+			throw new ValorInvalidoException(
+					"Não foi encontrado usuário com este e-mail!");
+		} else {
+			if (!usuario.getCpf().equals(cpf)) {
+				throw new ValorInvalidoException(
+						"Cpf não correspondente com o cadastrado!");
+			}
+		}
+
+		String novaSenha = Util.getRandomPassword(8);
+
+		usuario.setSenha(CriptografaSenha.encryptPassword(novaSenha));
+
+		try {
+			EmailUtil.enviarNovaSenha(usuario, novaSenha);
+		} catch (EmailException e) {
+
+			throw new EmailException(
+					"Não foi possível gerar nova senha, tente novamente mais tarde!");
+		}
+
+		dao.salvar(usuario);
+
 	}
 }

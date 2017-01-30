@@ -3,6 +3,7 @@ package br.com.gticket.util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import javax.faces.context.FacesContext;
@@ -88,12 +89,32 @@ public class Util {
 
 	}
 
-
 	public static String dataEmString(Date data) {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
 		return sdf.format(data);
 
+	}
+
+	public static String getRandomPassword(int lenght) {
+
+		char[] chart = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a',
+				'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+				'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y',
+				'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+				'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
+				'X', 'Y', 'Z' };
+
+		char[] password = new char[lenght];
+		int chartLenght = chart.length;
+
+		Random rdm = new Random();
+
+		for (int i = 0; i < lenght; i++) {
+			password[i] = chart[rdm.nextInt(chartLenght)];
+		}
+
+		return new String(password);
 	}
 
 }

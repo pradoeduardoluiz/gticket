@@ -34,6 +34,7 @@ public class LoginFilter implements Filter {
 		if ((session.getAttribute("usuarioLogado") != null)
 				|| (req.getRequestURI().endsWith("index.xhtml"))
 				|| (req.getRequestURI().endsWith("form_usuario.xhtml"))
+				|| (req.getRequestURI().endsWith("esqueceu_senha.xhtml"))
 				|| (req.getRequestURI().contains("javax.faces.resource/"))) {
 
 			filterChain.doFilter(request, response);

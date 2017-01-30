@@ -7,6 +7,7 @@ import org.apache.commons.mail.HtmlEmail;
 
 import br.com.gticket.model.TicketContato;
 import br.com.gticket.model.TicketDesenvolvimento;
+import br.com.gticket.model.Usuario;
 
 public class EmailUtil {
 
@@ -177,6 +178,19 @@ public class EmailUtil {
 				ticket.getAnalistaTeste().getEmail(),
 				"Aprovação de Ticket de Desenvolvimento #"
 						+ String.valueOf(ticket.getId()), htmlMsg);
+
+	}
+
+	public static void enviarNovaSenha(Usuario usuario, String novaSenha) throws EmailException {
+
+		String htmlMsg = "<html>Ola "
+				+ usuario.getNome()
+				+ "<br><br> Segue a abaixo sua nova senha para acessar o sistema"
+				+ "<br> Nova Senha: <b>" + novaSenha + "</b><br><br> att "
+				+ "<br><br>FKN Informática LTDA " + "</html>";
+
+		enviarHtmlEmail(usuario.getEmail(),
+				"Envio de Nova Senha - Sistema GTicket", htmlMsg);
 
 	}
 }

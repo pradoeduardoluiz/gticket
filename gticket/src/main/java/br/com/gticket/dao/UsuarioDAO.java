@@ -104,4 +104,21 @@ public class UsuarioDAO extends DAO {
 
 	}
 
+	public Usuario buscarPorEmail(String email) {
+
+		Query query = getEntityManager().createQuery(
+				"From usuario where email=:email", Usuario.class);
+
+		query.setParameter("email", email);
+
+		try {
+
+			return (Usuario) query.getSingleResult();
+
+		} catch (NoResultException e) {
+			return null;
+		}
+
+	}
+
 }

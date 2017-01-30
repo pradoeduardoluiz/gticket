@@ -7,6 +7,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.apache.commons.mail.EmailException;
+
 import br.com.gticket.bo.UsuarioBO;
 import br.com.gticket.bo.exception.ValorInvalidoException;
 import br.com.gticket.model.Usuario;
@@ -20,6 +22,7 @@ public class LoginMB implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String email;
+	private String cpf;
 	private String senha;
 	private boolean erro;
 
@@ -75,6 +78,24 @@ public class LoginMB implements Serializable {
 
 	}
 
+	public String gerarNovaSenha() {
+
+		try {
+			bo.gerarNovaSenha(email, cpf);
+
+			FacesUtil
+					.addInfoMessage("Nova senha gerada com sucesso, foi enviada para seu e-mail!");
+
+		} catch (ValorInvalidoException | EmailException e) {
+
+			FacesUtil.addErrorMessage(e.getMessage());
+			return null;
+
+		}
+
+		return "index";
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -105,6 +126,14 @@ public class LoginMB implements Serializable {
 
 	public void setErro(boolean erro) {
 		this.erro = erro;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 }

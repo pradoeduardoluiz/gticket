@@ -30,6 +30,13 @@
 				</b:inputSecret>
 				<b:commandButton look="primary btn-block" value="Acessar"
 					icon="log-in" size="lg" action="#{loginMB.login}" />
+
+				<div class="esqueceuSenha">
+
+					<b:navCommandLink value="Esqueceu a senha?"
+						outcome="esqueceu_senha" />
+
+				</div>
 			</b:panel>
 		</h:form>
 		<b:messages />

@@ -4,6 +4,16 @@ body {
 	background-color: #E8E8E8;
 }
 
+.esqueceuSenha {
+	padding-left: 25%;
+	padding-top: 5px;
+}
+
+.form-forget-password {
+	padding-left: 25%;
+	padding-right: 25%;
+}
+
 .form-signin {
 	margin: 0 auto;
 	max-width: 330px;

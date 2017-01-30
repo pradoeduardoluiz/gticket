@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<f:facet name="last">
+		<h:outputStylesheet position="last" name="/css/login.css" />
+	</f:facet>
+</h:head>
+<h:body>
+	<b:container fluid="true" class="form-forget-password">
+		<b:row>
+			<b:panel title="Esqueceu sua Senha">
+				<b:messages />
+				<h:form id="formUsuario" prependId="false">
+					<b:row>
+						<b:column medium-screen="2" offset="1">
+							<h:outputLabel value="Email" for="email"
+								styleClass="bf-no-message has-success bf-required control-label" />
+						</b:column>
+						<b:column medium-screen="6">
+							<b:inputText id="email" value="#{loginMB.email}"
+								placeholder="Email" required="true"
+								required-message="Campo Email é Obrigatório!" />
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column medium-screen="2" offset="1">
+							<h:outputLabel value="CPF" for="cpf"
+								styleClass="bf-no-message has-success bf-required control-label" />
+						</b:column>
+						<b:column medium-screen="6">
+							<b:inputText id="cpf" value="#{loginMB.cpf}" placeholder="CPF"
+								required="true" requiredMessage="Campo CPF é Obrigatório!" />
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column medium-screen="3" offset="3">
+							<b:commandButton look="success btn-block"
+								value="Gerar Nova Senha" action="#{loginMB.gerarNovaSenha()}" />
+						</b:column>
+						<b:column medium-screen="3">
+							<b:button value="Voltar" outcome="index" look="danger btn-block" />
+						</b:column>
+					</b:row>
+				</h:form>
+			</b:panel>
+		</b:row>
+	</b:container>
+
+	<h:outputScript name="/lib/jquery.maskedinput.js" />
+	<h:outputScript name="/js/mask.js" />
+
+</h:body>
+</html>
