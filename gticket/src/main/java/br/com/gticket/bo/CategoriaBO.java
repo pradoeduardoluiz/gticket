@@ -16,19 +16,19 @@ public class CategoriaBO extends BO implements ValidaFormulario {
 		dao = new CategoriaDAO();
 	}
 
-	public void salvar(Categoria modulo) throws ValorEmBrancoException,
+	public void salvar(Categoria categoria) throws ValorEmBrancoException,
 			ValorInvalidoException, ValorZeradoException {
 
-		validaCamposObrigatorios(modulo);
-		validaCamposUnicos(modulo);
+		validaCamposObrigatorios(categoria);
+		validaCamposUnicos(categoria);
 
-		if (inclusao(modulo)) {
+		if (inclusao(categoria)) {
 
-			validaCamposNaInclusao(modulo);
+			validaCamposNaInclusao(categoria);
 
 		}
 
-		dao.salvar(modulo);
+		dao.salvar(categoria);
 
 	}
 

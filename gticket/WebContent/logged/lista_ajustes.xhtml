@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{ticketDesenvolvimentoMB.editarId}" />
+		<f:event listener="#{ticketDesenvolvimentoMB.carregarTicket}"
+			type="preRenderView" />
+	</f:metadata>
+
+	<ui:composition template="../template/template.xhtml">
+
+		<ui:define name="conteudo">
+
+			<b:container fluid="true">
+
+				<ol class="breadcrumb">
+					<li><b:navLink value="Home" outcome="home" /></li>
+					<li class="active">Lista de Ajustes</li>
+				</ol>
+
+				<b:row style="float:right;padding-bottom: 10px;">
+					<b:column>
+						<b:column>
+							<h:form>
+								<b:button icon-awesome="plus-circle" value="Adicionar Ajuste"
+									look="primary" outcome="form_ajuste">
+									<f:param name="ticket"
+										value="#{ticketDesenvolvimentoMB.ticket.id}" />
+								</b:button>
+							</h:form>
+
+						</b:column>
+					</b:column>
+				</b:row>
+
+				<b:row>
+					<b:column>
+						<h:form>
+
+							<b:dataTable value="#{ticketDesenvolvimentoMB.ticket.ajustes}"
+								var="ajuste" border="false" select="true"
+								customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
+
+								<b:dataTableColumn label="Comentário"
+									value="#{ajuste.comentario}" />
+								<b:dataTableColumn label="Programas" value="#{ajuste.programas}" />
+								<b:dataTableColumn label="Infração" value="#{ajuste.infracao}" />
+
+							</b:dataTable>
+
+						</h:form>
+					</b:column>
+				</b:row>
+			</b:container>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

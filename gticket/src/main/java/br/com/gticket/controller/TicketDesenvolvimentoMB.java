@@ -22,6 +22,7 @@ import br.com.gticket.bo.TicketDesenvolvimentoBO;
 import br.com.gticket.bo.exception.ValorEmBrancoException;
 import br.com.gticket.bo.exception.ValorInvalidoException;
 import br.com.gticket.bo.exception.ValorZeradoException;
+import br.com.gticket.model.Ajuste;
 import br.com.gticket.model.Contato;
 import br.com.gticket.model.SituacaoTicket;
 import br.com.gticket.model.StatusTicket;
@@ -46,6 +47,7 @@ public class TicketDesenvolvimentoMB implements Serializable {
 	private StatusTicket[] status;
 	private String filtro = "";
 	private String labelAnalise;
+	private Ajuste ajuste;
 
 	@PostConstruct
 	public void init() {

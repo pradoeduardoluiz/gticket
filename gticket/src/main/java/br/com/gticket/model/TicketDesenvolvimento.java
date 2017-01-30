@@ -1,10 +1,13 @@
 package br.com.gticket.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Transient;
@@ -35,6 +38,9 @@ public class TicketDesenvolvimento extends Ticket {
 	@Transient
 	private String strTempoDesenvolvimento;
 	private Boolean emAndamento;
+
+	@OneToMany(mappedBy = "ticket", fetch = FetchType.EAGER)
+	private List<Ajuste> ajustes;
 
 	public String getAnalise() {
 		return analise;
@@ -134,6 +140,14 @@ public class TicketDesenvolvimento extends Ticket {
 
 	public void setComentariosParaTeste(String comentariosParaTeste) {
 		this.comentariosParaTeste = comentariosParaTeste;
+	}
+
+	public List<Ajuste> getAjustes() {
+		return ajustes;
+	}
+
+	public void setAjustes(List<Ajuste> ajustes) {
+		this.ajustes = ajustes;
 	}
 
 }
