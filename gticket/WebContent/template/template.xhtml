@@ -23,8 +23,8 @@
 					value="#{loginMB.email}">
 					<b:navCommandLink value="Mudar Dados" icon-awesome="fa-lock"
 						outcome="form_usuario?id=#{loginMB.usuarioLogado.id}" />
-					<b:navCommandLink value="Alterar Senha" icon-awesome="fa-lock"
-						action="#{loginMB.logout()}" />
+					<b:navCommandLink value="Alterar Senha" icon-awesome="fa-pencil"
+						outcome="form_alt_senha?id=#{loginMB.usuarioLogado.id}" />
 					<b:navCommandLink value="Logoff" icon-awesome="fa-power-off"
 						action="#{loginMB.logout()}" />
 				</b:dropMenu>

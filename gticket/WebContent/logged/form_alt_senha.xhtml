@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+<h:body>
+	<f:metadata>
+		<f:viewParam name="id" value="#{usuarioMB.editarId}" />
+		<f:event listener="#{usuarioMB.carregarUsuario}" type="preRenderView" />
+	</f:metadata>
+
+	<ui:composition template="../template/template.xhtml">
+
+		<ui:define name="conteudo">
+			<b:container fluid="true">
+
+				<ol class="breadcrumb">
+					<li><b:navLink value="Home" outcome="home" /></li>
+					<li><b:navLink value="Lista de Usuários"
+							outcome="lista_usuarios" /></li>
+					<li class="active">Alterar Senha</li>
+				</ol>
+
+				<b:panel title="Cadastro de Usuário">
+					<b:messages />
+					<h:form id="formUsuario" prependId="false">
+						<b:row>
+							<b:column medium-screen="4">
+								<h:inputHidden value="#{usuarioMB.usuario.id}" />
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Nome" for="nomeUsuario"
+									styleClass="control-label bf-required" />
+							</b:column>
+							<b:column medium-screen="4">
+								<b:inputText id="nomeUsuario" value="#{usuarioMB.usuario.nome}"
+									placeholder="Nome" required="true"
+									required-message="Campo Nome é Obrigatório!" readonly="true" />
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Senha Atual" for="senhaAtual"
+									styleClass="
+									bf-no-message has-success bf-required control-label" />
+							</b:column>
+							<b:column medium-screen="4">
+								<b:inputSecret id="senhaAtual" value="#{usuarioMB.senhaAtual}"
+									placeholder="Senha Atual" required="true"
+									required-message="Campo Senha é Obrigatório!" />
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Nova Senha" for="novaSenha"
+									styleClass="
+									bf-no-message has-success bf-required control-label" />
+							</b:column>
+							<b:column medium-screen="4">
+								<b:inputSecret id="novaSenha" value="#{usuarioMB.novaSenha}"
+									placeholder="Senha" required="true"
+									required-message="Campo Nova Senha é Obrigatório!" />
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Confirmação de Senha"
+									for="confirmacaoSenha"
+									styleClass="
+									bf-no-message has-success bf-required control-label" />
+							</b:column>
+							<b:column medium-screen="4">
+								<b:inputSecret id="confirmacaoSenha"
+									value="#{usuarioMB.confSenha}"
+									placeholder="Confirmação de Senha" required="true"
+									required-message="Campo Confirmação de Senha é Obrigatório!" />
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="2" offset="2">
+								<b:commandButton look="success btn-block" value="Alterar"
+									action="#{usuarioMB.alterarSenha}" />
+							</b:column>
+							<b:column medium-screen="2">
+								<b:button value="Voltar" outcome="home" look="danger btn-block" />
+							</b:column>
+						</b:row>
+					</h:form>
+				</b:panel>
+			</b:container>
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>
+

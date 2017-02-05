@@ -14,7 +14,7 @@ public class Ajuste {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name = "ticket_id")
 	private TicketDesenvolvimento ticket;
 	private String comentario;

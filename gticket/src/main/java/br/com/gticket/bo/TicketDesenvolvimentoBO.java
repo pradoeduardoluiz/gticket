@@ -221,8 +221,10 @@ public class TicketDesenvolvimentoBO extends TicketBO {
 		try {
 			EmailUtil.enviarEmailTicketTestes(ticket);
 		} catch (EmailException e) {
-			throw new EmailException("Ticket #" + ticket.getId()
-					+ "Foi enviado para testes mas não foi possível enviar e-mail!");
+			throw new EmailException(
+					"Ticket #"
+							+ ticket.getId()
+							+ "Foi enviado para testes mas não foi possível enviar e-mail!");
 		}
 
 	}

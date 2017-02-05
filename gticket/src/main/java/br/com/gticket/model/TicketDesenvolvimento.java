@@ -3,6 +3,7 @@ package br.com.gticket.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -39,7 +40,7 @@ public class TicketDesenvolvimento extends Ticket {
 	private String strTempoDesenvolvimento;
 	private Boolean emAndamento;
 
-	@OneToMany(mappedBy = "ticket", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "ticket", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Ajuste> ajustes;
 
 	public String getAnalise() {

@@ -9,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ComponentSystemEvent;
 
 import br.com.gticket.bo.UsuarioBO;
+import br.com.gticket.bo.exception.ValorInvalidoException;
 import br.com.gticket.model.Perfil;
 import br.com.gticket.model.Usuario;
 import br.com.gticket.util.FacesUtil;
@@ -27,6 +28,9 @@ public class UsuarioMB implements Serializable {
 	private Perfil perfil;
 	private List<Usuario> desenvolvedores;
 	private List<Usuario> testers;
+	private String senhaAtual;
+	private String novaSenha;
+	private String confSenha;
 
 	@PostConstruct
 	public void init() {
@@ -73,6 +77,19 @@ public class UsuarioMB implements Serializable {
 	public String editar(Integer id) {
 		usuario = bo.buscarPorId(id);
 		return "/form_usuario";
+	}
+
+	public String alterarSenha() {
+
+		try {
+			bo.alterarSenha(usuario, senhaAtual, novaSenha, confSenha);
+
+		} catch (ValorInvalidoException e) {
+			FacesUtil.addErrorMessage(e.getMessage());
+			return null;
+		}
+
+		return "home";
 	}
 
 	public Usuario getUsuario() {
@@ -144,7 +161,29 @@ public class UsuarioMB implements Serializable {
 	public void setTesters(List<Usuario> testers) {
 		this.testers = testers;
 	}
-	
-	
+
+	public String getSenhaAtual() {
+		return senhaAtual;
+	}
+
+	public void setSenhaAtual(String senhaAtual) {
+		this.senhaAtual = senhaAtual;
+	}
+
+	public String getNovaSenha() {
+		return novaSenha;
+	}
+
+	public void setNovaSenha(String novaSenha) {
+		this.novaSenha = novaSenha;
+	}
+
+	public String getConfSenha() {
+		return confSenha;
+	}
+
+	public void setConfSenha(String confSenha) {
+		this.confSenha = confSenha;
+	}
 
 }

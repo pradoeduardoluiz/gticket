@@ -1,10 +1,14 @@
 package br.com.gticket.bo;
 
+import java.util.List;
+
 import br.com.gticket.bo.exception.ValorEmBrancoException;
 import br.com.gticket.bo.exception.ValorInvalidoException;
 import br.com.gticket.bo.exception.ValorZeradoException;
 import br.com.gticket.dao.AjusteDAO;
 import br.com.gticket.model.Ajuste;
+import br.com.gticket.model.Categoria;
+import br.com.gticket.model.TicketDesenvolvimento;
 
 public class AjusteBO extends BO implements ValidaFormulario {
 
@@ -20,6 +24,10 @@ public class AjusteBO extends BO implements ValidaFormulario {
 			ValorZeradoException, ValorInvalidoException {
 
 		validaCamposObrigatorios(ajuste);
+
+		if (inclusao(ajuste)) {
+			ajuste.setConcluido(false);
+		}
 
 		dao.salvar(ajuste);
 
@@ -56,13 +64,48 @@ public class AjusteBO extends BO implements ValidaFormulario {
 	}
 
 	@Override
-	public boolean inclusao(Object object) {
-		return false;
+	public boolean inclusao(Object objeto) {
+
+		Ajuste ajuste = (Ajuste) objeto;
+
+		return ajuste.getId() == null || ajuste.getId() == 0;
+
 	}
 
 	public Ajuste buscarPorId(Integer editarId) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return dao.buscarPorId(editarId);
+	}
+
+	public void excluir(Integer id) {
+
+		dao.excluir(id);
+
+	}
+
+	public List<Ajuste> listar(TicketDesenvolvimento ticket) {
+
+		return dao.listar(ticket);
+	}
+
+	public void finalizar(Integer id) {
+
+		mudarConclusao(id, true);
+
+	}
+
+	public void reabrir(Integer id) {
+
+		mudarConclusao(id, false);
+
+	}
+
+	private void mudarConclusao(Integer id, boolean b) {
+		Ajuste ajuste = dao.buscarPorId(id);
+
+		ajuste.setConcluido(b);
+
+		dao.salvar(ajuste);
 	}
 
 }

@@ -8,9 +8,13 @@
 <h:body>
 
 	<f:metadata>
-		<f:viewParam name="id" value="#{ticketDesenvolvimentoMB.editarId}" />
-		<f:event listener="#{ticketDesenvolvimentoMB.carregarTicket}"
-			type="preRenderView" />
+
+		<f:viewParam name="id" value="#{ajusteMB.editarId}" />
+		<f:event listener="#{ajusteMB.carregarAjuste}" type="preRenderView" />
+
+		<f:viewParam name="ticket" value="#{ajusteMB.editarIdTicket}" />
+		<f:event listener="#{ajusteMB.carregarTicket}" type="preRenderView" />
+
 	</f:metadata>
 
 	<ui:composition template="../template/template.xhtml">
@@ -21,42 +25,89 @@
 
 				<ol class="breadcrumb">
 					<li><b:navLink value="Home" outcome="home" /></li>
+					<li><b:navLink value="Tickets de Teste"
+							outcome="lista_tickets_desenv?filtro=testes" /></li>
 					<li class="active">Lista de Ajustes</li>
 				</ol>
 
-				<b:row style="float:right;padding-bottom: 10px;">
-					<b:column>
-						<b:column>
-							<h:form>
-								<b:button icon-awesome="plus-circle" value="Adicionar Ajuste"
-									look="primary" outcome="form_ajuste">
-									<f:param name="ticket"
-										value="#{ticketDesenvolvimentoMB.ticket.id}" />
-								</b:button>
-							</h:form>
-
-						</b:column>
-					</b:column>
-				</b:row>
+				<ui:include src="form_ajuste.xhtml" />
 
 				<b:row>
 					<b:column>
 						<h:form>
 
-							<b:dataTable value="#{ticketDesenvolvimentoMB.ticket.ajustes}"
-								var="ajuste" border="false" select="true"
+							<b:dataTable value="#{ajusteMB.ticket.ajustes}" var="ajuste"
+								border="false" select="true"
 								customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json">
 
 								<b:dataTableColumn label="Comentário"
 									value="#{ajuste.comentario}" />
 								<b:dataTableColumn label="Programas" value="#{ajuste.programas}" />
-								<b:dataTableColumn label="Infração" value="#{ajuste.infracao}" />
+
+
+								<h:column label="Infração">
+
+									<h:outputText value="#{ajuste.infracao}"
+										styleClass="label label-danger"
+										rendered="#{ajuste.infracao == 'GRAVE'}" />
+
+									<h:outputText value="#{ajuste.infracao}"
+										styleClass="label label-warning"
+										rendered="#{ajuste.infracao == 'MEDIA'}" />
+
+									<h:outputText value="#{ajuste.infracao}"
+										styleClass="label label-success"
+										rendered="#{ajuste.infracao == 'LEVE'}" />
+
+									<h:outputText value="#{ajuste.infracao}"
+										styleClass="label label-primary"
+										rendered="#{ajuste.infracao == 'NULA'}" />
+
+								</h:column>
+
+								<b:dataTableColumn label="Concluído"
+									content-style="width:5px; text-align:center;">
+
+									<h:commandLink action="#{ajusteMB.finalizar(ajuste.id)}"
+										rendered="#{ajuste.concluido==false}">
+										<b:iconAwesome name="fa-check-square-o" size="2x" />
+									</h:commandLink>
+
+									<h:commandLink action="#{ajusteMB.reabrir(ajuste.id)}"
+										rendered="#{ajuste.concluido==true}">
+										<b:iconAwesome name="fa-square-o" size="2x" />
+									</h:commandLink>
+
+								</b:dataTableColumn>
+
+								<b:dataTableColumn label="Editar"
+									content-style="width:5px; text-align:center;">
+
+									<h:link outcome="lista_ajustes">
+										<b:iconAwesome name="pencil" size="2x" />
+										<f:param name="ticket" value="#{ajusteMB.ticket.id}" />
+										<f:param name="id" value="#{ajuste.id}" />
+									</h:link>
+
+								</b:dataTableColumn>
+
+								<b:dataTableColumn label="Excluir"
+									content-style="width:5px;text-align:center;">
+
+									<h:commandLink
+										onclick="return confirm('Tem certeza da exclusão da ocorrência de ajuste?');"
+										action="#{ajusteMB.excluir(ajuste.id)}">
+										<b:iconAwesome name="trash" size="2x" />
+									</h:commandLink>
+
+								</b:dataTableColumn>
 
 							</b:dataTable>
 
 						</h:form>
 					</b:column>
 				</b:row>
+
 			</b:container>
 
 		</ui:define>

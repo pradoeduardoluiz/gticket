@@ -5,8 +5,12 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ComponentSystemEvent;
+
+import org.apache.commons.mail.EmailException;
+import org.primefaces.context.RequestContext;
 
 import br.com.gticket.bo.AjusteBO;
 import br.com.gticket.bo.TicketDesenvolvimentoBO;
@@ -44,7 +48,8 @@ public class AjusteMB implements Serializable {
 
 	public String salvar() {
 
-		ajuste.setTicket(ticket);
+		if (ajuste.getId() == null)
+			ajuste.setTicket(ticket);
 
 		try {
 			bo.salvar(ajuste);
@@ -55,10 +60,19 @@ public class AjusteMB implements Serializable {
 				| ValorInvalidoException e) {
 
 			FacesUtil.addErrorMessage(e.getMessage());
-			return null;
+
 		}
 
-		return "lista_ajustes?id=" + ticket.getId();
+		limpar();
+
+		return "lista_ajustes?ticket=" + ticket.getId()
+				+ "&faces-redirect=true";
+
+	}
+
+	public void limpar() {
+
+		ajuste = new Ajuste();
 
 	}
 
@@ -78,6 +92,33 @@ public class AjusteMB implements Serializable {
 		ticket = boTicket.buscarPorId(editarIdTicket);
 	}
 
+	public String excluir(Integer id) {
+
+		bo.excluir(id);
+
+		return "lista_ajustes?ticket=" + ticket.getId()
+				+ "&faces-redirect=true";
+
+	}
+
+	public String finalizar(Integer id) {
+
+		bo.finalizar(id);
+
+		return "lista_ajustes?ticket=" + ticket.getId()
+				+ "&faces-redirect=true";
+
+	}
+
+	public String reabrir(Integer id) {
+
+		bo.reabrir(id);
+
+		return "lista_ajustes?ticket=" + ticket.getId()
+				+ "&faces-redirect=true";
+
+	}
+
 	public Ajuste getAjuste() {
 		return ajuste;
 	}
@@ -87,7 +128,7 @@ public class AjusteMB implements Serializable {
 	}
 
 	public List<Ajuste> getAjustes() {
-		return ajustes;
+		return bo.listar(ticket);
 	}
 
 	public void setAjustes(List<Ajuste> ajustes) {
@@ -101,7 +142,7 @@ public class AjusteMB implements Serializable {
 	public void setEditarId(Integer editarId) {
 		this.editarId = editarId;
 	}
-	
+
 	public Integer getEditarIdTicket() {
 		return editarIdTicket;
 	}

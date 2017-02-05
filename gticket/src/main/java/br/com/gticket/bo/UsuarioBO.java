@@ -1,5 +1,6 @@
 package br.com.gticket.bo;
 
+import java.security.CryptoPrimitive;
 import java.util.List;
 
 import org.apache.commons.mail.EmailException;
@@ -205,6 +206,41 @@ public class UsuarioBO extends BO implements ValidaFormulario {
 			throw new EmailException(
 					"Não foi possível gerar nova senha, tente novamente mais tarde!");
 		}
+
+		dao.salvar(usuario);
+
+	}
+
+	public void alterarSenha(Usuario usuario, String senhaAtual,
+			String novaSenha, String confirmacaoSenha)
+			throws ValorInvalidoException {
+
+		if (!usuario.getSenha().equals(
+				CriptografaSenha.encryptPassword(senhaAtual))) {
+
+			throw new ValorInvalidoException(
+					"Senha Atual não confere com senha cadastradal!");
+
+		}
+
+		if (usuario.getSenha().equals(
+				CriptografaSenha.encryptPassword(novaSenha))) {
+
+			throw new ValorInvalidoException(
+					"Nova Senha não pode ser igual a anterior!");
+		}
+
+		if (senhaAtual.isEmpty()) {
+			throw new ValorInvalidoException("Campo Nova Senha é Obrigatório!!");
+		}
+
+		if (senhaAtual.equals(confirmacaoSenha)) {
+
+			throw new ValorInvalidoException(
+					"Campo Nova Senha não confere com a confirmação de senha!");
+		}
+
+		usuario.setSenha(CriptografaSenha.encryptPassword(novaSenha));
 
 		dao.salvar(usuario);
 
