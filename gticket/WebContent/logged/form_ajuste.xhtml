@@ -1,79 +1,100 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
 
 <h:body>
 
-	<b:panel>
-		<b:messages />
-		<h:form id="formAjuste" prependId="false">
+	<f:metadata>
 
-			<b:row>
-				<b:column medium-screen="2">
-					<h:outputLabel value="Comentario" for="comentario"
-						styleClass="control-label bf-required" />
-				</b:column>
-				<b:column medium-screen="6">
-					<b:inputTextarea id="comentario" name="comentario"
-						value="#{ajusteMB.ajuste.comentario}"
-						placeholder="Comentário sobre o ajuste" required="true"
-						required-message="Campo comentário é obrigatório!" />
-				</b:column>
-			</b:row>
+		<f:viewParam name="id" value="#{ajusteMB.editarId}" />
+		<f:event listener="#{ajusteMB.carregarAjuste}" type="preRenderView" />
 
-			<b:row>
-				<b:column medium-screen="2">
-					<h:outputLabel value="Programas" for="programas"
-						styleClass="control-label bf-required" />
-				</b:column>
-				<b:column medium-screen="6">
-					<b:inputTextarea id="programas" name="programas"
-						value="#{ajusteMB.ajuste.programas}"
-						placeholder="Programas referente ao ajuste" required="true"
-						required-message="Campo programas é obrigatório!" />
-				</b:column>
-			</b:row>
-			<b:row>
-				<b:column medium-screen="2">
-					<h:outputLabel value="Infração" for="infracao"
-						styleClass="bf-no-message has-success bf-required control-label" />
-				</b:column>
-				<b:column medium-screen="6">
-					<b:selectOneMenu id="infracao" value="#{ajusteMB.ajuste.infracao}"
-						required="true" requiredMessage="Selecione uma infração válido!">
-						<f:selectItems value="#{ajusteMB.infracoes}" var="infracao" />
-					</b:selectOneMenu>
-				</b:column>
-			</b:row>
+		<f:viewParam name="ticket" value="#{ajusteMB.editarIdTicket}" />
+		<f:event listener="#{ajusteMB.carregarTicket}" type="preRenderView" />
 
-			<b:row>
-				<b:column medium-screen="3" offset="2">
+	</f:metadata>
 
-					<b:commandButton look="success btn-block" value="Salvar"
-						action="#{ajusteMB.salvar()}" />
-				</b:column>
-				<b:column medium-screen="3">
 
-					<b:button look="danger btn-block" value="Limpar"
-						outcome="lista_ajustes?ticket=#{ajusteMB.ticket.id}&faces-redirect;" />
-				</b:column>
+	<ui:composition template="../template/template.xhtml">
 
-			</b:row>
+		<ui:define name="conteudo">
+			<b:container fluid="true">
 
-			<b:row style="padding-top:5px">
+				<ol class="breadcrumb">
+					<li><b:navLink value="Home" outcome="home" /></li>
+					<li><b:navLink value="Tickets de Teste"
+							outcome="lista_tickets_desenv?filtro=testes" /></li>
+					<li><b:navLink value="Lista de Ajustes"
+							outcome="lista_ajustes?ticket=#{ajusteMB.ticket.id}&faces-redirect;" /></li>
+					<li class="active">Cadastro de Ajustes</li>
+				</ol>
 
-				<b:column medium-screen="6" offset="2">
-					<b:commandButton look="primary btn-block" value="Finalizar testes"
-						action="#{ajusteMB.salvar()}" />
-				</b:column>
+				<b:panel title="Cadastro de Ajustes">
+					<b:messages />
+					<h:form id="formAjuste" prependId="false">
 
-			</b:row>
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Comentario" for="comentario"
+									styleClass="control-label bf-required" />
+							</b:column>
+							<b:column medium-screen="6">
+								<b:inputTextarea id="comentario" name="comentario"
+									value="#{ajusteMB.ajuste.comentario}"
+									placeholder="Comentário sobre o ajuste" required="true"
+									required-message="Campo comentário é obrigatório!" />
+							</b:column>
+						</b:row>
 
-		</h:form>
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Programas" for="programas"
+									styleClass="control-label bf-required" />
+							</b:column>
+							<b:column medium-screen="6">
+								<b:inputTextarea id="programas" name="programas"
+									value="#{ajusteMB.ajuste.programas}"
+									placeholder="Programas referente ao ajuste" required="true"
+									required-message="Campo programas é obrigatório!" />
+							</b:column>
+						</b:row>
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Infração" for="infracao"
+									styleClass="bf-no-message has-success bf-required control-label" />
+							</b:column>
+							<b:column medium-screen="6">
+								<b:selectOneMenu id="infracao"
+									value="#{ajusteMB.ajuste.infracao}" required="true"
+									requiredMessage="Selecione uma infração válido!">
+									<f:selectItems value="#{ajusteMB.infracoes}" var="infracao" />
+								</b:selectOneMenu>
+							</b:column>
+						</b:row>
 
-	</b:panel>
+						<b:row>
+							<b:column medium-screen="3" offset="2">
+
+								<b:commandButton look="success btn-block" value="Salvar"
+									action="#{ajusteMB.salvar()}" />
+							</b:column>
+							<b:column medium-screen="3">
+
+								<b:button look="danger btn-block" value="Limpar"
+									outcome="lista_ajustes?ticket=#{ajusteMB.ticket.id}&faces-redirect;" />
+							</b:column>
+
+						</b:row>
+
+					</h:form>
+
+				</b:panel>
+
+			</b:container>
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>

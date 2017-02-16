@@ -30,7 +30,46 @@
 					<li class="active">Lista de Ajustes</li>
 				</ol>
 
-				<ui:include src="form_ajuste.xhtml" />
+				<h:form>
+
+					<b:messages />
+
+					<b:row style="float:left;padding-bottom: 10px;padding-right: 10px">
+						<b:column medium-screen="2">
+							<b:commandButton icon-awesome="fa-check" value="Finalizar Testes"
+								look="success" action="#{ajusteMB.finalizarTestes()}">
+							</b:commandButton>
+						</b:column>
+					</b:row>
+
+					<b:row style="float:left;padding-bottom: 10px;padding-right: 10px">
+						<b:column medium-screen="2">
+							<b:commandButton icon-awesome="fa-exclamation"
+								value="Notificar Desenvolvedor" look="warning"
+								action="#{ajusteMB.notificarDesenv()}">
+							</b:commandButton>
+						</b:column>
+					</b:row>
+
+					<b:row style="float:left;padding-bottom: 10px;">
+						<b:column medium-screen="2">
+							<b:commandButton icon-awesome="fa-comment"
+								value="Notificar Tester" look="info"
+								action="#{ajusteMB.notificarTester()}">
+							</b:commandButton>
+						</b:column>
+					</b:row>
+
+					<b:row style="float:right;padding-bottom: 10px;">
+						<b:column>
+							<b:button icon-awesome="plus-circle" value="Adicionar Ajuste"
+								look="primary"
+								outcome="form_ajuste?ticket=#{ajusteMB.ticket.id}&faces-redirect;">
+							</b:button>
+						</b:column>
+					</b:row>
+
+				</h:form>
 
 				<b:row>
 					<b:column>
@@ -70,12 +109,12 @@
 
 									<h:commandLink action="#{ajusteMB.finalizar(ajuste.id)}"
 										rendered="#{ajuste.concluido==false}">
-										<b:iconAwesome name="fa-check-square-o" size="2x" />
+										<b:iconAwesome name="fa-square-o" size="2x" />
 									</h:commandLink>
 
 									<h:commandLink action="#{ajusteMB.reabrir(ajuste.id)}"
 										rendered="#{ajuste.concluido==true}">
-										<b:iconAwesome name="fa-square-o" size="2x" />
+										<b:iconAwesome name="fa-check-square-o" size="2x" />
 									</h:commandLink>
 
 								</b:dataTableColumn>
@@ -83,7 +122,7 @@
 								<b:dataTableColumn label="Editar"
 									content-style="width:5px; text-align:center;">
 
-									<h:link outcome="lista_ajustes">
+									<h:link outcome="form_ajuste">
 										<b:iconAwesome name="pencil" size="2x" />
 										<f:param name="ticket" value="#{ajusteMB.ticket.id}" />
 										<f:param name="id" value="#{ajuste.id}" />

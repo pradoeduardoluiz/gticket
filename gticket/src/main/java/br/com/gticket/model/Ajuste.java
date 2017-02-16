@@ -1,5 +1,6 @@
 package br.com.gticket.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,7 +15,7 @@ public class Ajuste {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	@ManyToOne()
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "ticket_id")
 	private TicketDesenvolvimento ticket;
 	private String comentario;
@@ -70,7 +71,5 @@ public class Ajuste {
 	public void setInfracao(InfracaoAjuste infracao) {
 		this.infracao = infracao;
 	}
-	
-	
 
 }

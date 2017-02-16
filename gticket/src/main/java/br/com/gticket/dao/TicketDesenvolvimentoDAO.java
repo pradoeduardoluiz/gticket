@@ -41,6 +41,12 @@ public class TicketDesenvolvimentoDAO extends DAO {
 		} else if (filtro.contains("testes")) {
 			query = montaQueryStatusProcesso();
 			query.setParameter("parametro", StatusProgresso.TESTES);
+		} else if (filtro.contains("ajustes")) {
+			query = montaQueryStatusProcesso();
+			query.setParameter("parametro", StatusProgresso.AJUSTES);
+		} else if (filtro.contains("finalizados")) {
+			query = montaQueryStatusProcesso();
+			query.setParameter("parametro", StatusProgresso.FINALIZADO);
 		} else {
 
 			query = getEntityManager().createQuery(

@@ -181,7 +181,8 @@ public class EmailUtil {
 
 	}
 
-	public static void enviarNovaSenha(Usuario usuario, String novaSenha) throws EmailException {
+	public static void enviarNovaSenha(Usuario usuario, String novaSenha)
+			throws EmailException {
 
 		String htmlMsg = "<html>Ola "
 				+ usuario.getNome()
@@ -191,6 +192,62 @@ public class EmailUtil {
 
 		enviarHtmlEmail(usuario.getEmail(),
 				"Envio de Nova Senha - Sistema GTicket", htmlMsg);
+
+	}
+
+	public static void enviarEmailNotificarDesenv(TicketDesenvolvimento ticket)
+			throws EmailException {
+
+		String htmlMsg = "<html>Ola " + ticket.getDesenvolvedor().getNome()
+
+		+ "<br><br> Foram reportados ajustes referente ao ticket #"
+				+ ticket.getId() + " testados por "
+				+ ticket.getAnalistaTeste().getNome()
+				+ ". Por favor verificar e realizar ajustes"
+				+ "</b><br><br> att " + "<br><br>FKN Informática LTDA "
+				+ "</html>";
+
+		enviarHtmlEmail(ticket.getDesenvolvedor().getEmail(),
+				"Notificação de Ajuste - Sistema GTicket", htmlMsg);
+
+	}
+
+	public static void enviarEmailNotificarTester(TicketDesenvolvimento ticket)
+			throws EmailException {
+
+		String htmlMsg = "<html>Ola " + ticket.getAnalistaTeste().getNome()
+
+		+ "<br><br> Foram realizados os ajustes referente ao ticket #"
+				+ ticket.getId() + " ajustados por por "
+				+ ticket.getDesenvolvedor().getNome()
+				+ ". Por favor verificar e realizar os testes"
+				+ "</b><br><br> att " + "<br><br>FKN Informática LTDA "
+				+ "</html>";
+
+		enviarHtmlEmail(ticket.getAnalistaTeste().getEmail(),
+				"Notificação de Ajuste - Sistema GTicket", htmlMsg);
+
+	}
+
+	public static void enviarEmailTicketFinalizado(TicketDesenvolvimento ticket)
+			throws EmailException {
+
+		String htmlMsg = "<html>Ola " + ticket.getContato().getNome()
+				+ "<br><br> Foi finalizado o ticket #"
+				+ String.valueOf(ticket.getId()) + " em "
+				+ Util.dataEmString(ticket.getDataDeInclusao())
+				+ " e em breve estará sendo enviado para você. "
+				+ "<br><br>Situação: " + ticket.getSituacao()
+				+ "<br><br>Categoria: " + ticket.getCategoria().getNome()
+				+ "<br><br>Topico: " + ticket.getTopico() + "<br><br>Assunto: "
+				+ ticket.getAssunto() + "<br><br> Atendito por: "
+				+ ticket.getUsuarioInclusao() + "<br><br> att "
+				+ "<br><br>FKN Informática LTDA " + "</html>";
+
+		enviarHtmlEmail(
+				ticket.getContato().getEmail(),
+				"Abertura de Ticket de Desenvolvimento #"
+						+ String.valueOf(ticket.getId()), htmlMsg);
 
 	}
 }

@@ -76,6 +76,8 @@
 								<b:dataTableColumn label="Tópico" value="#{ticket.topico}" />
 								<b:dataTableColumn label="Categoria" value="#{ticket.categoria}" />
 								<b:dataTableColumn label="Status" value="#{ticket.statusTicket}" />
+								<b:dataTableColumn label="Processo"
+									value="#{ticket.statusProcesso}" />
 								<b:dataTableColumn label="Responsável"
 									value="#{ticket.desenvolvedor}" />
 
@@ -138,11 +140,23 @@
 
 								</b:dataTableColumn>
 
+								<b:dataTableColumn label="Ajustar"
+									content-style="width:2px; text-align:center;"
+									rendered="#{ticketDesenvolvimentoMB.filtro=='ajustes'}">
+
+									<h:link outcome="lista_ajustes">
+										<b:iconAwesome name="fa-bug" size="2x" />
+										<f:param name="ticket" value="#{ticket.id}" />
+									</h:link>
+
+								</b:dataTableColumn>
+
 
 								<b:dataTableColumn label="Editar"
 									content-style="width:5px; text-align:center;">
 
-									<h:link outcome="form_ticket_desenv">
+									<h:link outcome="form_ticket_desenv"
+										disabled="#{ticket.statusProcesso=='FINALIZADO'}">
 										<b:iconAwesome name="pencil" size="2x" />
 										<f:param name="id" value="#{ticket.id}" />
 									</h:link>
@@ -153,7 +167,8 @@
 
 									<h:commandLink
 										onclick="return confirm('Tem certeza da exclusão do Ticket de Contato id: #{ticket.id}');"
-										action="#{ticketDesenvolvimentoMB.excluir(ticket.id)}">
+										action="#{ticketDesenvolvimentoMB.excluir(ticket.id)}"
+										disabled="#{ticket.statusProcesso=='FINALIZADO'}">
 										<b:iconAwesome name="trash" size="2x" />
 									</h:commandLink>
 

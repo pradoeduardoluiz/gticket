@@ -63,8 +63,6 @@ public class AjusteMB implements Serializable {
 
 		}
 
-		limpar();
-
 		return "lista_ajustes?ticket=" + ticket.getId()
 				+ "&faces-redirect=true";
 
@@ -117,6 +115,52 @@ public class AjusteMB implements Serializable {
 		return "lista_ajustes?ticket=" + ticket.getId()
 				+ "&faces-redirect=true";
 
+	}
+
+	public String finalizarTestes() {
+
+		try {
+			boTicket.finalizarTestes(ticket);
+
+			FacesUtil.addInfoMessage("ticket " + ticket.getId()
+					+ " finalizado com sucesso!");
+
+		} catch (Exception e) {
+			FacesUtil.addErrorMessage(e.getMessage());
+		}
+
+		return "lista_desenv?filtro='testes'";
+
+	}
+
+	public String notificarDesenv() {
+
+		try {
+			boTicket.notificarDesenv(ticket);
+
+			FacesUtil.addInfoMessage("Notificação enviada com sucesso!");
+
+		} catch (Exception e) {
+			FacesUtil.addErrorMessage(e.getMessage());
+		}
+
+		return null;
+	}
+
+	public String notificarTester() {
+
+		try {
+			boTicket.notificarTester(ticket);
+
+			FacesUtil.addInfoMessage("Notificação enviada com sucesso!");
+
+		} catch (Exception e) {
+
+			FacesUtil.addErrorMessage(e.getMessage());
+
+		}
+
+		return null;
 	}
 
 	public Ajuste getAjuste() {

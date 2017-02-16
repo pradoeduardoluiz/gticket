@@ -8,6 +8,7 @@ import br.com.gticket.bo.exception.ValorZeradoException;
 import br.com.gticket.dao.AjusteDAO;
 import br.com.gticket.model.Ajuste;
 import br.com.gticket.model.Categoria;
+import br.com.gticket.model.StatusProgresso;
 import br.com.gticket.model.TicketDesenvolvimento;
 
 public class AjusteBO extends BO implements ValidaFormulario {

@@ -10,6 +10,7 @@ import br.com.gticket.bo.exception.ValorEmBrancoException;
 import br.com.gticket.bo.exception.ValorInvalidoException;
 import br.com.gticket.bo.exception.ValorZeradoException;
 import br.com.gticket.dao.TicketDesenvolvimentoDAO;
+import br.com.gticket.model.Ajuste;
 import br.com.gticket.model.StatusProgresso;
 import br.com.gticket.model.StatusTicket;
 import br.com.gticket.model.TicketContato;
@@ -228,4 +229,91 @@ public class TicketDesenvolvimentoBO extends TicketBO {
 		}
 
 	}
+
+	public void notificarDesenv(TicketDesenvolvimento ticket) throws Exception {
+
+		boolean temAjuste = temAjuste(ticket.getAjustes());
+
+		if (!temAjuste) {
+			throw new Exception(
+					"Para enviar notificação para desenvolvedor é necessário ter pelo menos um ajuste pendente!");
+		}
+
+		ticket.setStatusProcesso(StatusProgresso.AJUSTES);
+		dao.salvar(ticket);
+
+		try {
+
+			EmailUtil.enviarEmailNotificarDesenv(ticket);
+
+		} catch (EmailException e) {
+			throw new EmailException(
+					"Ticket #"
+							+ ticket.getId()
+							+ "Foi enviado para ajustes mas não foi possível enviar e-mail!");
+		}
+
+	}
+
+	private boolean temAjuste(List<Ajuste> ajustes) {
+
+		boolean temAjuste = false;
+
+		for (Ajuste ajuste : ajustes) {
+			if (!ajuste.getConcluido()) {
+				temAjuste = true;
+			}
+		}
+		return temAjuste;
+	}
+
+	public void notificarTester(TicketDesenvolvimento ticket) throws Exception {
+
+		boolean temAjuste = temAjuste(ticket.getAjustes());
+
+		if (temAjuste) {
+			throw new Exception(
+					"Para enviar notificação para tester é necessário concluír todos os ajuste pendente!");
+		}
+
+		ticket.setStatusProcesso(StatusProgresso.TESTES);
+		dao.salvar(ticket);
+
+		try {
+
+			EmailUtil.enviarEmailNotificarTester(ticket);
+
+		} catch (EmailException e) {
+			throw new EmailException(
+					"Ticket #"
+							+ ticket.getId()
+							+ "Foi enviado para testes mas não foi possível enviar e-mail!");
+		}
+
+	}
+
+	public void finalizarTestes(TicketDesenvolvimento ticket) throws Exception {
+
+		boolean temAjuste = temAjuste(ticket.getAjustes());
+
+		if (temAjuste) {
+			throw new Exception(
+					"Para finalizar ticket é necessário concluír todos os ajuste pendente!");
+		}
+
+		ticket.setStatusProcesso(StatusProgresso.FINALIZADO);
+		ticket.setDataDeFinalizacao(new Date());
+		dao.salvar(ticket);
+
+		try {
+
+			EmailUtil.enviarEmailTicketFinalizado(ticket);
+
+		} catch (EmailException e) {
+			throw new EmailException("Ticket #" + ticket.getId()
+					+ "Foi finalizado mas não foi possível enviar e-mail!");
+		}
+
+	}
+
 }
