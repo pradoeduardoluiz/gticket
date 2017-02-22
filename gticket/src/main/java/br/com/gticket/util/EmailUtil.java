@@ -5,6 +5,7 @@ import javax.faces.context.FacesContext;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 
+import br.com.gticket.model.Agenda;
 import br.com.gticket.model.TicketContato;
 import br.com.gticket.model.TicketDesenvolvimento;
 import br.com.gticket.model.Usuario;
@@ -248,6 +249,21 @@ public class EmailUtil {
 				ticket.getContato().getEmail(),
 				"Abertura de Ticket de Desenvolvimento #"
 						+ String.valueOf(ticket.getId()), htmlMsg);
+
+	}
+
+	public static void enviarEmailAgenda(Agenda agenda) throws EmailException {
+
+		String htmlMsg = "<html>Ola " + agenda.getUsuario().getNome()
+				+ "<br><br> Foi criada uma agenda para dia "
+				+ Util.dataEmString(agenda.getDataInicio()) + " a "
+				+ Util.dataEmString(agenda.getDataFim()) + "<br><br>Título: "
+				+ agenda.getTitulo() + "<br><br>Descrição: "
+				+ agenda.getDescricao() + "<br><br> att "
+				+ "<br><br>FKN Informática LTDA " + "</html>";
+
+		enviarHtmlEmail(agenda.getUsuario().getEmail(), "Agenda realizada",
+				htmlMsg);
 
 	}
 }

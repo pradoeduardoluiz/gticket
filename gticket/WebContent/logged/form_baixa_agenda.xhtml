@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:body>
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{agendaMB.editarId}" />
+		<f:event listener="#{agendaMB.carregar}" type="preRenderView" />
+	</f:metadata>
+
+	<ui:composition template="../template/template.xhtml">
+
+		<ui:define name="conteudo">
+			<b:container fluid="true">
+
+				<ol class="breadcrumb">
+					<li><b:navLink value="Home" outcome="home" /></li>
+					<li><b:navLink value="Minhas Agendas" outcome="lista_agendas" /></li>
+					<li class="active">Cadastro de Agenda</li>
+				</ol>
+
+				<b:panel title="Conclusão de Agenda">
+					<b:messages />
+
+					<h:form id="formDialog" prependId="false">
+						<b:row>
+							<h:inputHidden value="#{agendaMB.agenda.id}" />
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Título" for="titulo"
+									styleClass="bf-no-message has-success bf-required control-label" />
+							</b:column>
+							<b:column medium-screen="4" style="text-align:left;">
+								<b:inputText id="titulo" name="titulo"
+									value="#{agendaMB.agenda.titulo}" required="true"
+									requiredMessage="Campo título é obrigatório" readonly="true" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Data Inicio" for="dataInicio"
+									styleClass="bf-no-message has-success bf-required control-label" />
+							</b:column>
+							<b:column medium-screen="4" style="padding-bottom:12px;">
+								<b:dateTimePicker id="dataInicio"
+									value="#{agendaMB.agenda.dataInicio}" show-date="true"
+									show-time="true" format="DD/MM/YYYY HH:mm"
+									required-message="Campo Data inicio é Obrigatório!"
+									readonly="true" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Data Fim" for="dataFim"
+									styleClass="bf-no-message has-success bf-required control-label" />
+							</b:column>
+							<b:column medium-screen="4" style="padding-bottom:12px;">
+								<b:dateTimePicker id="dataFim"
+									value="#{agendaMB.agenda.dataFim}" show-date="true"
+									show-time="true" format="DD/MM/YYYY HH:mm"
+									allow-input-toggle="true"
+									required-message="Campo Data Fim é Obrigatório!"
+									readonly="true" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2" styleClass="autocomplete">
+								<h:outputLabel value="Cliente" for="cliente"
+									styleClass="control-label bf-required" />
+							</b:column>
+
+							<b:column medium-screen="4" styleClass="autocomplete">
+
+								<b:inputText id="cliente1" value="#{agendaMB.agenda.cliente}"
+									readonly="true" rendered="#{agendaMB.agenda.id!=null}" />
+
+							</b:column>
+
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="TIpo" for="tipo"
+									styleClass="bf-no-message has-success bf-required control-label" />
+							</b:column>
+							<b:column medium-screen="4">
+								<b:selectOneMenu id="tipo" value="#{agendaMB.agenda.tipo}"
+									required="true" requiredMessage="Selecione um tipo válido!"
+									disabled="true">
+									<f:selectItem itemLabel="Selecione..." itemValue="" />
+									<f:selectItems value="#{agendaMB.tipos}" var="tipo" />
+								</b:selectOneMenu>
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Descrição" for="descricao"
+									styleClass="bf-no-message has-success bf-required control-label" />
+							</b:column>
+							<b:column medium-screen="4" style="text-align:left;">
+								<b:inputTextarea id="descricao"
+									value="#{agendaMB.agenda.descricao}" required="true"
+									requiredMessage="Campo descrição é obrigatório" readonly="true" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Usuário" for="usuario"
+									styleClass="bf-no-message has-success bf-required control-label" />
+							</b:column>
+
+							<b:column medium-screen="4">
+								<b:selectOneMenu id="usuario" value="#{agendaMB.agenda.usuario}"
+									disabled="true">
+
+									<f:selectItem itemLabel="Selecione..." itemValue="" />
+									<f:selectItems value="#{usuarioMB.usuarios}" var="usuario" />
+
+								</b:selectOneMenu>
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Resultado" for="resultado"
+									styleClass="bf-no-message has-success bf-required control-label" />
+							</b:column>
+							<b:column medium-screen="4" style="text-align:left;">
+								<b:inputTextarea id="resultado"
+									value="#{agendaMB.agenda.resultado}" required="true"
+									requiredMessage="Campo resultado é obrigatório" />
+							</b:column>
+						</b:row>
+
+
+						<b:row>
+							<b:column medium-screen="2" offset="2">
+								<b:commandButton look="success btn-block" value="Concluir"
+									action="#{agendaMB.finalizar()}" />
+							</b:column>
+							<b:column medium-screen="2">
+								<b:button value="Voltar" outcome="lista_agendas"
+									look="danger btn-block" />
+							</b:column>
+						</b:row>
+
+					</h:form>
+
+
+				</b:panel>
+			</b:container>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

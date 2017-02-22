@@ -10,12 +10,13 @@
 	<title>Gticket</title>
 
 	<h:outputStylesheet name="/css/gticket.css" position="last" />
+	<h:outputScript name="/js/primefaces.js" position="last" />
 
 </h:head>
 
 <h:body>
 
-	<b:navBar brand="FKN Informática" brandHref="#" fluid="true"
+	<b:navBar brand="FKN Informática" brandHref="home.xhtml" fluid="true"
 		fixed="top">
 		<h:form>
 			<b:navbarLinks pull="right" styleClass="hidden-xs">
@@ -115,6 +116,19 @@
 							</b:panel>
 
 						</b:panel>
+
+						<b:panel id="painelAgenda" look="default" title="Agenda"
+							collapsed="#{menuMB.menuAgendaCollapsed}"
+							showCollapseLink="false" style="margin-bottom: 0px">
+							<b:listLinks>
+								<b:navCommandLink value="Agenda" icon-awesome="fa-calendar-o"
+									iconAlign="left" action="#{menuMB.listaAgendas()}" />
+								<b:navCommandLink value="Minhas agendas"
+									icon-awesome="fa-calendar" iconAlign="left"
+									action="#{menuMB.listaMinhasAgendas()}" />
+							</b:listLinks>
+						</b:panel>
+
 					</h:form>
 
 				</div>

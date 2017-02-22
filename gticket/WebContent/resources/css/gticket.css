@@ -60,3 +60,23 @@ body {
 	float: right;
 	padding-bottom: 30px;
 }
+
+.agendaTreinamento .fc-event a {
+	background: blue;
+	border-color: blue;
+}
+
+.agendaReuniao .fc-event a {
+	background: red;
+	border-color: red;
+}
+
+.agendaCurso .fc-event a {
+	background: green;
+	border-color: green;
+}
+
+.agendaFolga .fc-event a {
+	background: yellow;
+	border-color: green;
+}

@@ -17,6 +17,7 @@ public class MenuMB implements Serializable {
 	private Boolean menuTicketCollapsed = true;
 	private Boolean menuTicketContatoCollapsed = true;
 	private Boolean menuTicketDesenvCollapsed = true;
+	private Boolean menuAgendaCollapsed = true;
 
 	private final String facesRedirect = "?faces-redirect=true";
 
@@ -31,20 +32,25 @@ public class MenuMB implements Serializable {
 
 	// Opções do menu Ticket
 	private final String LISTATICKETSCONTATOS = "lista_tickets_contato";
-
 	private final String LISTATICKETSDESENV = "lista_tickets_desenv";
+
+	// Opções de Agenda
+	private final String LISTAAGENDAS = "agenda";
+	private final String LISTAMINHASAGENDAS = "lista_agendas";
 
 	public void menuAdmnistracaoAberto() {
 
 		menuAdministracaoCollapsed = false;
 		menuClientesCollapsed = true;
 		menuTicketCollapsed = true;
+		menuAgendaCollapsed = true;
 	}
 
 	public void menuClientesAberto() {
 		menuClientesCollapsed = false;
 		menuAdministracaoCollapsed = true;
 		menuTicketCollapsed = false;
+		menuAgendaCollapsed = true;
 
 	}
 
@@ -52,6 +58,7 @@ public class MenuMB implements Serializable {
 		menuTicketCollapsed = false;
 		menuClientesCollapsed = true;
 		menuAdministracaoCollapsed = true;
+		menuAgendaCollapsed = true;
 
 	}
 
@@ -64,6 +71,14 @@ public class MenuMB implements Serializable {
 	public void menuTicketDesenvAberto() {
 		menuTicketDesenvCollapsed = false;
 		menuTicketContatoCollapsed = true;
+
+	}
+
+	public void menuAgendaAberto() {
+		menuAgendaCollapsed = false;
+		menuTicketCollapsed = true;
+		menuClientesCollapsed = true;
+		menuAdministracaoCollapsed = true;
 
 	}
 
@@ -105,6 +120,14 @@ public class MenuMB implements Serializable {
 
 	public void setMenuTicketDesenvCollapsed(Boolean menuTicketDesenvCollapsed) {
 		this.menuTicketDesenvCollapsed = menuTicketDesenvCollapsed;
+	}
+
+	public Boolean getMenuAgendaCollapsed() {
+		return menuAgendaCollapsed;
+	}
+
+	public void setMenuAgendaCollapsed(Boolean menuAgendaCollapsed) {
+		this.menuAgendaCollapsed = menuAgendaCollapsed;
 	}
 
 	public String listaUsuarios() {
@@ -152,6 +175,16 @@ public class MenuMB implements Serializable {
 		} else {
 			return adicionaFacesRedirect(LISTATICKETSDESENV);
 		}
+	}
+
+	public String listaAgendas() {
+		menuAgendaAberto();
+		return adicionaFacesRedirect(LISTAAGENDAS);
+	}
+
+	public String listaMinhasAgendas() {
+		menuAgendaAberto();
+		return adicionaFacesRedirect(LISTAMINHASAGENDAS);
 	}
 
 	private String adicionaFacesRedirect(String link) {

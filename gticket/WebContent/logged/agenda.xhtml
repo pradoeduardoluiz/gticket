@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+
+	<style rel="stylesheet" type="text/css">
+.agendaTreinamento .fc-event a {
+	background: blue;
+	border-color: blue;
+}
+
+.agendaReuniao .fc-event a {
+	background: red;
+	border-color: red;
+}
+
+.agendaCurso .fc-event a {
+	background: green;
+	border-color: green;
+}
+
+.agendaFolga .fc-event a {
+	background: yellow;
+	border-color: green;
+}
+</style>
+
+</h:head>
+
+<h:body>
+	<f:metadata>
+		<f:viewParam name="id" value="#{contatoMB.editarId}" />
+		<f:event listener="#{contatoMB.carregar}" type="preRenderView" />
+	</f:metadata>
+
+	<ui:composition template="../template/template.xhtml">
+
+		<ui:define name="conteudo">
+
+			<b:container fluid="true">
+
+				<ol class="breadcrumb">
+					<li><b:navLink value="Home" outcome="home" /></li>
+					<li class="active">Agenda</li>
+				</ol>
+
+				<p:schedule id="schedule" value="#{agendaMB.eventModel}"
+					widgetVar="myschedule" timeZone="America/Sao_Paulo" locale="pt"
+					resizable="false">
+
+					<p:ajax event="dateSelect" listener="#{agendaMB.onDateSelect}"
+						update="formDialog" oncomplete="PF('eventDialog').show();" />
+					<p:ajax event="eventSelect" listener="#{agendaMB.onEventSelect}"
+						update="formDialog" oncomplete="PF('eventDialog').show();" />
+					<p:ajax event="eventMove" listener="#{agendaMB.onEventMove}" />
+					<p:ajax event="eventResize" listener="#{agendaMB.onEventResize}" />
+
+
+				</p:schedule>
+
+				<p:dialog widgetVar="eventDialog" header="Detalhes da agenda"
+					showEffect="clip" hideEffect="clip" height="500px" width="600px"
+					resizable="false" dynamic="true">
+
+					<b:messages id="growl" />
+
+					<h:form id="formDialog" prependId="false">
+						<b:row>
+							<h:inputHidden value="#{agendaMB.agenda.id}" />
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Título" for="titulo"
+									styleClass="bf-no-message has-success bf-required control-label" />
+							</b:column>
+							<b:column medium-screen="8" style="text-align:left;">
+								<b:inputText id="titulo" name="titulo"
+									value="#{agendaMB.agenda.titulo}" required="true"
+									requiredMessage="Campo título é obrigatório" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Data Inicio" for="dataInicio"
+									styleClass="bf-no-message has-success bf-required control-label" />
+							</b:column>
+							<b:column medium-screen="8" style="padding-bottom:12px;">
+								<b:dateTimePicker id="dataInicio"
+									value="#{agendaMB.agenda.dataInicio}" show-date="true"
+									show-time="true" format="DD/MM/YYYY HH:mm"
+									required-message="Campo Data inicio é Obrigatório!" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Data Fim" for="dataFim"
+									styleClass="bf-no-message has-success bf-required control-label" />
+							</b:column>
+							<b:column medium-screen="8" style="padding-bottom:12px;">
+								<b:dateTimePicker id="dataFim"
+									value="#{agendaMB.agenda.dataFim}" show-date="true"
+									show-time="true" format="DD/MM/YYYY HH:mm"
+									allow-input-toggle="true"
+									required-message="Campo Data Fim é Obrigatório!" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2" styleClass="autocomplete">
+								<h:outputLabel value="Cliente" for="cliente"
+									styleClass="control-label bf-required" />
+							</b:column>
+
+							<b:column medium-screen="8" styleClass="autocomplete">
+
+								<b:inputText id="cliente" value="#{agendaMB.agenda.cliente}"
+									typeahead="true" typeahead-values="#{clienteMB.clientes}"
+									rendered="#{agendaMB.agenda.id==null}"
+									converter="clienteConverter"
+									placeholder="Informe um cliente caso seja algum evento relacionado">
+
+								</b:inputText>
+
+								<b:inputText id="cliente1" value="#{agendaMB.agenda.cliente}"
+									disabled="true" rendered="#{agendaMB.agenda.id!=null}" />
+
+							</b:column>
+
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="TIpo" for="tipo"
+									styleClass="bf-no-message has-success bf-required control-label" />
+							</b:column>
+							<b:column medium-screen="8">
+								<b:selectOneMenu id="tipo" value="#{agendaMB.agenda.tipo}"
+									required="true" requiredMessage="Selecione um tipo válido!">
+									<f:selectItem itemLabel="Selecione..." itemValue="" />
+									<f:selectItems value="#{agendaMB.tipos}" var="tipo" />
+								</b:selectOneMenu>
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Descrição" for="descricao"
+									styleClass="bf-no-message has-success bf-required control-label" />
+							</b:column>
+							<b:column medium-screen="8" style="text-align:left;">
+								<b:inputTextarea id="descricao"
+									value="#{agendaMB.agenda.descricao}" required="true"
+									requiredMessage="Campo descrição é obrigatório" />
+							</b:column>
+						</b:row>
+
+						<b:row>
+							<b:column medium-screen="2">
+								<h:outputLabel value="Usuário" for="usuario"
+									styleClass="bf-no-message has-success bf-required control-label" />
+							</b:column>
+
+							<b:column medium-screen="8">
+								<b:selectOneMenu id="usuario" value="#{agendaMB.agenda.usuario}">
+
+									<f:selectItem itemLabel="Selecione..." itemValue="" />
+									<f:selectItems value="#{usuarioMB.usuarios}" var="usuario" />
+
+								</b:selectOneMenu>
+							</b:column>
+						</b:row>
+
+
+						<b:row>
+							<b:column medium-screen="4" offset="2">
+
+								<p:commandLink look="success btn-block" value="Salvar"
+									actionListener="#{agendaMB.salvar()}" update="growl"
+									oncomplete="handleAgendaRequest(xhr, status, args)"
+									styleClass="btn btn-success btn-block" style="color: white" />
+
+							</b:column>
+							<b:column medium-screen="4">
+								<b:button value="Voltar" outcome="agenda"
+									look="danger btn-block" />
+							</b:column>
+						</b:row>
+
+						<b:row rendered="#{agendaMB.agenda.id!=null}">
+							<b:column medium-screen="8" offset="2" style="padding-top:20px">
+
+								<b:commandButton look="warning btn-block" value="Excluir"
+									action="#{agendaMB.excluir(agendaMB.agenda.id)}"
+									onclick="return confirm('Tem certeza da exclusão da Agenda #{agendaMB.agenda.titulo} ?');" />
+							</b:column>
+						</b:row>
+					</h:form>
+
+					<script type="text/javascript">
+    					function handleAgendaRequest(xhr, status, args) {
+        					if(args.validationFailed || !args.agendaOk) {
+            					PF('eventDialog').jq.effect("shake", {times:5}, 100);
+        					}
+        					else {
+            					PF('eventDialog').hide();
+            					location.reload();
+        						}
+    						}
+						
+					</script>
+				</p:dialog>
+			</b:container>
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>
+
+
