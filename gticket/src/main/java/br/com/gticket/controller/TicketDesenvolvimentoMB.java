@@ -57,7 +57,7 @@ public class TicketDesenvolvimentoMB implements Serializable {
 		ticket.setEnviarEmail(true);
 		bo = new TicketDesenvolvimentoBO();
 		contatos = new ArrayList<Contato>();
-		labelAnalise = "Análise";
+		labelAnalise = "";
 
 	}
 
@@ -167,6 +167,12 @@ public class TicketDesenvolvimentoMB implements Serializable {
 	}
 
 	public void atualizarLabel() {
+
+		if (ticket.getStatusTicket() == StatusTicket.PENDENTE) {
+
+			labelAnalise = "";
+
+		} else
 
 		if (ticket.getStatusTicket() == StatusTicket.REPROVADO) {
 			labelAnalise = "Motivo";

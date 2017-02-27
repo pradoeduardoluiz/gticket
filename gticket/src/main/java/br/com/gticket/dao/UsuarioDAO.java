@@ -55,7 +55,11 @@ public class UsuarioDAO extends DAO {
 			return false;
 		}
 
-		if (id != 0) {
+		if (id == null) {
+			return true;
+		}
+
+		if (id != 0 && id != null) {
 			if (usuario.getId() == id) {
 				return false;
 			}

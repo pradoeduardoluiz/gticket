@@ -59,7 +59,7 @@ public class Util {
 		int minuto = sobra / 60;
 		int segundo = sobra % 60;
 
-		String hms = String.format("%02d:%02d", hora, minuto);
+		String hms = String.format("%02d:%02d:%02d", hora, minuto, segundo);
 
 		return hms;
 

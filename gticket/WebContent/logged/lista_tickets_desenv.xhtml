@@ -105,7 +105,9 @@
 									content-style="width:5px; text-align:center;"
 									rendered="#{ticketDesenvolvimentoMB.filtro=='aprovados'}">
 
-									<h:commandLink action="#{ticketDesenvolvimentoMB.play(ticket)}">
+									<h:commandLink
+										disabled="#{ticket.desenvolvedor.id!=loginMB.usuarioLogado.id}"
+										action="#{ticketDesenvolvimentoMB.play(ticket)}">
 										<b:iconAwesome name="fa-play" size="2x"
 											rendered="#{!ticket.emAndamento}" />
 									</h:commandLink>
@@ -122,7 +124,9 @@
 									content-style="width:2px; text-align:center;"
 									rendered="#{ticketDesenvolvimentoMB.filtro=='aprovados'}">
 
-									<h:link outcome="form_ticket_desenv_finalizar">
+									<h:link
+										disabled="#{ticket.desenvolvedor.id!=loginMB.usuarioLogado.id}"
+										outcome="form_ticket_desenv_finalizar">
 										<b:iconAwesome name="fa-check-square-o" size="2x" />
 										<f:param name="id" value="#{ticket.id}" />
 									</h:link>

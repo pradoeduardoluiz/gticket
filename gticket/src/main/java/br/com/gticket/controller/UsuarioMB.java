@@ -9,7 +9,9 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ComponentSystemEvent;
 
 import br.com.gticket.bo.UsuarioBO;
+import br.com.gticket.bo.exception.ValorEmBrancoException;
 import br.com.gticket.bo.exception.ValorInvalidoException;
+import br.com.gticket.bo.exception.ValorZeradoException;
 import br.com.gticket.model.Perfil;
 import br.com.gticket.model.Usuario;
 import br.com.gticket.util.FacesUtil;
@@ -49,7 +51,8 @@ public class UsuarioMB implements Serializable {
 
 			return "lista_usuarios?faces-redirect=true";
 
-		} catch (Exception e) {
+		} catch (ValorEmBrancoException | ValorInvalidoException
+				| ValorZeradoException e) {
 
 			FacesUtil.addErrorMessage(e.getMessage());
 

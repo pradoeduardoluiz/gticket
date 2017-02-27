@@ -93,7 +93,7 @@
 								<b:row>
 									<b:column medium-screen="2">
 										<h:outputLabel value="Telefone 2" for="telefone2"
-											styleClass="control-label bf-required" />
+											styleClass="control-label " />
 									</b:column>
 									<b:column medium-screen="4">
 										<b:inputText id="telefone2"
@@ -105,7 +105,7 @@
 								<b:row>
 									<b:column medium-screen="2">
 										<h:outputLabel value="Fax" for="fax"
-											styleClass="control-label bf-required" />
+											styleClass="control-label" />
 									</b:column>
 									<b:column medium-screen="4">
 										<b:inputText id="fax" value="#{clienteMB.cliente.fax}"
@@ -168,7 +168,7 @@
 								<b:row>
 									<b:column medium-screen="2">
 										<h:outputLabel value="Complemento" for="complemento"
-											styleClass="control-label bf-required" />
+											styleClass="control-label " />
 									</b:column>
 									<b:column medium-screen="4">
 										<b:inputText id="complemento"
@@ -293,7 +293,7 @@
 											<b:dateTimePicker id="dataInicioContrato"
 												value="#{clienteMB.cliente.contrato.dataInicio}"
 												show-date="true" show-time="false" required="true"
-												format="DD-MM-YYYY"
+												format="DD/MM/YYYY"
 												required-message="Campo Data de Inicio de Contrato é Obrigatório!" />
 										</b:column>
 									</b:row>
@@ -301,8 +301,7 @@
 									<b:row>
 										<b:column medium-screen="2">
 											<h:outputLabel value="Data Fim de Contrato"
-												for="dataTerminoContrato"
-												styleClass="control-label bf-required" />
+												for="dataTerminoContrato" styleClass="control-label " />
 										</b:column>
 										<b:column medium-screen="4" style="padding-bottom:12px;">
 											<b:dateTimePicker id="dataTerminoContrato"

@@ -129,7 +129,7 @@ public class AjusteMB implements Serializable {
 			FacesUtil.addErrorMessage(e.getMessage());
 		}
 
-		return "lista_desenv?filtro='testes'";
+		return "lista_tickets_desenv?filtro='testes'";
 
 	}
 

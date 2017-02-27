@@ -100,7 +100,8 @@
 								<b:selectOneMenu id="status"
 									value="#{ticketDesenvolvimentoMB.ticket.statusTicket}"
 									required="true" requiredMessage="Selecione um status válido!">
-									<f:ajax event="change" render="labelAnalise"
+									<f:ajax event="change"
+										render="labelAnalise analise desenvolvedor analistaTeste botaoSalvar"
 										listener="#{ticketDesenvolvimentoMB.atualizarLabel()}" />
 
 									<f:selectItems value="#{ticketDesenvolvimentoMB.status}"
@@ -120,7 +121,8 @@
 							</b:column>
 							<b:column medium-screen="6">
 								<b:inputTextarea id="analise"
-									value="#{ticketDesenvolvimentoMB.ticket.analise}" />
+									value="#{ticketDesenvolvimentoMB.ticket.analise}"
+									disabled="#{ticketDesenvolvimentoMB.labelAnalise==''}" />
 							</b:column>
 						</b:row>
 
@@ -132,7 +134,8 @@
 
 							<b:column medium-screen="6">
 								<b:selectOneMenu id="desenvolvedor"
-									value="#{ticketDesenvolvimentoMB.ticket.desenvolvedor}">
+									value="#{ticketDesenvolvimentoMB.ticket.desenvolvedor}"
+									disabled="#{ticketDesenvolvimentoMB.labelAnalise!='Análise'}">
 
 									<f:selectItem itemLabel="Selecione..." itemValue="" />
 									<f:selectItems value="#{usuarioMB.desenvolvedores}"
@@ -150,7 +153,8 @@
 
 							<b:column medium-screen="6">
 								<b:selectOneMenu id="analistaTeste"
-									value="#{ticketDesenvolvimentoMB.ticket.analistaTeste}">
+									value="#{ticketDesenvolvimentoMB.ticket.analistaTeste}"
+									disabled="#{ticketDesenvolvimentoMB.labelAnalise!='Análise'}">
 
 									<f:selectItem itemLabel="Selecione..." itemValue="" />
 									<f:selectItems value="#{usuarioMB.testers}" var="testers" />
@@ -162,7 +166,8 @@
 						<b:row>
 							<b:column medium-screen="2" offset="2">
 								<b:commandButton look="success btn-block" value="Salvar"
-									action="#{ticketDesenvolvimentoMB.aprovar}" />
+									id="botaoSalvar" action="#{ticketDesenvolvimentoMB.aprovar}"
+									disabled="#{ticketDesenvolvimentoMB.labelAnalise==''}" />
 							</b:column>
 							<b:column medium-screen="2">
 								<b:button value="Voltar"
